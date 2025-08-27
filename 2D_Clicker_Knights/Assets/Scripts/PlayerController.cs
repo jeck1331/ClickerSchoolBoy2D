@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private float StartDamage;
     private IKnightEnemy _currentEnemyInfo;
+    private bool _isAttacked = false;
 
     private void Awake()
     {
@@ -34,9 +35,18 @@ public class PlayerController : MonoBehaviour
     {
         if (attackAction.WasPressedThisFrame())
         {
+            _isAttacked = true;
             int score = int.Parse(TXT_Score.GetParsedText());
             TXT_Score.SetText((score+StartDamage).ToString());
-            currentEnemyAnimator.SetTrigger("Hurt");
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (_isAttacked)
+        {
+            currentEnemyAnimator.SetBool("isHurt", true);
+            _isAttacked = false;
         }
     }
 }
