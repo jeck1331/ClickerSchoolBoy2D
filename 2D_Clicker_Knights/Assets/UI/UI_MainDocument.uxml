@@ -1,4 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/MainStyles.uss?fileID=7433441132597879392&amp;guid=cd21950de8e707241bdac40aeb24a49a&amp;type=3#MainStyles" />
-    <ui:Button text="Button" name="Enemy" style="-unity-text-align: middle-center; white-space: pre; text-overflow: clip;" />
-</ui:UXML>
