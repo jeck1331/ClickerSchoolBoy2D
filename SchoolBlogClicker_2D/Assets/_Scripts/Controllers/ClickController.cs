@@ -1,4 +1,3 @@
-using _Scripts.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +5,9 @@ public class ClickController : MonoBehaviour
 {
     private InputAction _clickAction;
     private InputAction _tapAction;
+
+    [SerializeField] private ULongValue scoreValue;
+    [SerializeField] private UIntValue clickPowerValue;
 
     private void Start()
     {
@@ -23,13 +25,13 @@ public class ClickController : MonoBehaviour
 
         if (Touchscreen.current != null && _tapAction.WasReleasedThisFrame())
         {
-            Vector2 screenPosition = Camera.main.ScreenToWorldPoint(Touchscreen.current.primaryTouch.position.ReadValue());
+            Vector2 screenPosition =
+                Camera.main.ScreenToWorldPoint(Touchscreen.current.primaryTouch.position.ReadValue());
             IncrementCounter(screenPosition);
         }
 
         void IncrementCounter(Vector2 screenPosition)
         {
-            
             RaycastHit2D hitInformation = Physics2D.Raycast(screenPosition, Camera.main.transform.forward);
 
             if (hitInformation.collider != null && hitInformation.collider.name == gameObject.name)
@@ -38,10 +40,8 @@ public class ClickController : MonoBehaviour
 
                 Debug.Log(touchedObject.name);
 
-                ClickerEvents.InvokeClickOrTap();
+                scoreValue!.Value += clickPowerValue!.Value;
             }
         }
     }
-
-
 }

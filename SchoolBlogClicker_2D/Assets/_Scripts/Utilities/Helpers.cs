@@ -1,6 +1,3 @@
-﻿namespace _Scripts.Utilities
+﻿public static class Helpers
 {
-    public static class Helpers
-    {
-    }
 }

@@ -1,6 +1,4 @@
-﻿using _Scripts.Interfaces;
-using System.Collections.Generic;
-using _Scripts.Events;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
@@ -14,8 +12,6 @@ public class Bootstrap : MonoBehaviour
             if (system is IInitialize iSystem) iSystem.Initialize();
             Debug.Log($"init {system.name}");
         }
-
-        GameEvents.InvokeGameInitialized();
         Debug.Log($"End init");
     }
 }

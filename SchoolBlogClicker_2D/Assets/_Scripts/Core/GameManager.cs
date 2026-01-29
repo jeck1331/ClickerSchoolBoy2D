@@ -1,45 +1,53 @@
-using _Scripts.Core;
-using _Scripts.Utilities;
-using _Scripts.Interfaces;
-using _Scripts.Models;
 using System.Collections;
-using _Scripts.Events;
-using _Scripts.ScriptableObjects;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : Singleton<MonoBehaviour>, IInitialize
 {
     private SaveGameSystem _saveGameSystem;
-    [SerializeField] private ulong coins;
-    [SerializeField] private uint clickPower;
-    [SerializeField] private uint passiveIncome;
-    public ulong Coins => coins;
-    public uint ClickPower => clickPower;
-    public uint PassiveIncome => passiveIncome;
 
-    [SerializeField] private ULongObserver scoreObserver;
-    [SerializeField] private UIntObserver clickPowerObserver;
-    [SerializeField] private UIntObserver passiveIncomeObserver;
+    [SerializeField] private ObserverSo scoreObserver;
+    [SerializeField] private ObserverSo powerObserver;
+    
+    [SerializeField] private ULongValue scoreValue;
+    [SerializeField] private UIntValue clickPowerValue;
+    [SerializeField] private UIntValue passiveIncomeValue;
+    [SerializeField] private UpgradeItems_SO upgradeItems;
 
     void IInitialize.Initialize()
     {
         _saveGameSystem = new SaveGameSystem();
         RuntimeSaveGameData rgd = _saveGameSystem.Load();
-        coins = rgd.Coins;
-        clickPower = rgd.ClickPower;
-        passiveIncome = rgd.PassiveIncome;
-
-        GameEvents.InvokeGameInitialized();
+        scoreValue.Value = rgd.Coins;
+        clickPowerValue.Value = rgd.ClickPower;
+        passiveIncomeValue.Value = rgd.PassiveIncome;
+        if (rgd.UpgradeTreeValue != null)
+        {
+            foreach (var utv in  rgd.UpgradeTreeValue)
+            {
+                upgradeItems.Upgrades.First(x => x.Id.ToString() == utv.Key).CurrentLevel = sbyte.Parse(utv.Value);
+            }
+        }
+        else
+        {
+            upgradeItems.Upgrades = upgradeItems.Upgrades.Select(x =>
+            {
+                x.CurrentLevel = 1;
+                return x;
+            }).ToArray();
+        }
     }
 
     private SaveGameData CurrentGameData()
     {
-        return new SaveGameData
+        var sgd = new SaveGameData
         {
-            Coins = coins.ToString(),
-            ClickPower = clickPower.ToString(),
-            PassiveIncome = passiveIncome.ToString()
+            Coins = scoreValue?.Value.ToString(),
+            ClickPower = clickPowerValue?.Value.ToString(),
+            PassiveIncome = passiveIncomeValue?.Value.ToString(),
+            UpgradeTreeValue = upgradeItems.Upgrades.Select(x => $"{x.Id},{x.CurrentLevel}").ToArray()
         };
+        return sgd;
     }
 
     private IEnumerator AutoSave_Coroutine()
@@ -53,15 +61,10 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
 
     private void OnEnable()
     {
-        CoinsEvents.InvokeCoinsChanged(coins);
-        ClickerEvents.OnClickOrTap += onGameStateCountChange;
+        scoreObserver.Changing();
+        powerObserver.Changing();
+        
         StartCoroutine(AutoSave_Coroutine());
-    }
-
-    public void onGameStateCountChange()
-    {
-        coins += clickPower;
-        CoinsEvents.InvokeCoinsChanged(coins, true);
     }
 
     //public void onGameStateIncrementValueChange(uint newIncrementValue)

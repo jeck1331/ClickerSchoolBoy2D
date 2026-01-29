@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 664a59a06d1c4bceb13c3e440bff276c, type: 3}
-  m_Name: ClickPowerObserver
-  m_EditorClassIdentifier: Assembly-CSharp::UIntObserver
+  m_Script: {fileID: 11500000, guid: 44f9b1c805da44a3b8eb735da99bb4aa, type: 3}
+  m_Name: ScoreValue
+  m_EditorClassIdentifier: Assembly-CSharp::ULongValue
+  value: 0
+  observers:
+  - {fileID: 11400000, guid: c7d62fba8abb4b042818ca58d75045cd, type: 2}

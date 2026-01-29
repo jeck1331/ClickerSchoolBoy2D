@@ -1,8 +1,5 @@
-﻿namespace _Scripts.Utilities
+﻿interface ISubscribe
 {
-    interface ISubscribe
-    {
-        void Subscribes();
-        void Unsubscribes();
-    }
+    void Subscribes();
+    void Unsubscribes();
 }

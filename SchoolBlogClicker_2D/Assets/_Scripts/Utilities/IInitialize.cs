@@ -1,7 +1,4 @@
-﻿namespace _Scripts.Interfaces
+﻿public interface IInitialize
 {
-    public interface IInitialize
-    {
-        void Initialize();
-    }
+    void Initialize();
 }

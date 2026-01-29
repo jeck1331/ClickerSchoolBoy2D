@@ -1,11 +1,8 @@
 ﻿using System;
 
-namespace _Scripts.Models
+[Serializable]
+public enum Language
 {
-    [Serializable]
-    public enum Language
-    {
-        Russian,
-        English
-    }
+    Russian,
+    English
 }

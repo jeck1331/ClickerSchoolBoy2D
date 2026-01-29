@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 664a59a06d1c4bceb13c3e440bff276c, type: 3}
   m_Name: PassiveIncomeObserver
-  m_EditorClassIdentifier: Assembly-CSharp::UIntObserver
-  _value: 0
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ScriptableObjects.Observers.UIntObserver

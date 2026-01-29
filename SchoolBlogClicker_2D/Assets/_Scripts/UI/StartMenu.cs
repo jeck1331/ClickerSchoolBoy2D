@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,7 +5,7 @@ public class StartMenu : MonoBehaviour
 {
     public void RunGameScene()
     {
-       SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
     }
 
     public void RunSettings()

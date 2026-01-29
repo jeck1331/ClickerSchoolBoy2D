@@ -1,34 +1,31 @@
 ﻿using UnityEngine;
 
-namespace _Scripts.Utilities
+public abstract class ValueStoreSO<T> : ScriptableObject
 {
-    public abstract class ValueStore<T>:  ScriptableObject
-    {
-        [Header("Значение")][SerializeField] private T _value;
-        [SerializeField] private ScriptableObserver<T>[] _observers;
-            
-        public T Value
-        {
-            get { return _value; }
-            set
-            {
-                if (Equals(_value, value)) return;
-                
-                _value = value;
-                ChangeValue(value);
-                
-                return;
-            }
-        }
+    [Header("Значение")] [SerializeField] private T value;
+    [SerializeField] private ObserverSo[] observers;
 
-        /// <summary>
-        /// Send signal for all observers about changes value
-        /// </summary>
-        /// <param name="value">New value</param>
-        private void ChangeValue(T value)
+    public T Value
+    {
+        get { return value; }
+        set
         {
-            foreach (var observer in _observers)
-                observer.DoThing(value);
+            if (Equals(this.value, value)) return;
+
+            this.value = value;
+            ChangeValue();
+
+            return;
         }
+    }
+
+    /// <summary>
+    /// Send signal for all observers about changes value
+    /// </summary>
+    /// <param name="value">New value</param>
+    private void ChangeValue()
+    {
+        foreach (var observer in observers)
+            observer.Changing();
     }
 }
