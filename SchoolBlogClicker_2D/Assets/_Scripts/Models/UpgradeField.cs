@@ -4,38 +4,33 @@ using UnityEngine;
 [Serializable]
 public class UpgradeField
 {
-    [Header("ID")][SerializeField]private uint id;
+    [Header("ID")] [SerializeField] private uint id;
+    [Header("Title")] [SerializeField] private string title;
+
     [Header("Base Description")] [SerializeField]
     private string description;
 
+    [Header("Power")] [SerializeField] private uint power;
+    [Header("Price")] [SerializeField] private uint price;
+
     [Header("Icon")] [SerializeField] private Sprite sprite;
 
-    [Header("Max level")] [Range(1, 20)] [SerializeField]
-    private sbyte maxLevel;
-    
-    [Header("Current level")] [SerializeField]
-    private sbyte currentLevel = 1;
-
-    [Header("Price Tree")][SerializeField] private uint[] priceTree;
-    [Header("Upgrade Tree")][SerializeField] private uint[] upgradeTree;
-    [Header("Titles Tree")][SerializeField] private string[] titlesTree;
+    [Header("Bought?")] [SerializeField] private bool isBought = false;
+    [Header("Secret?")] [SerializeField] private bool isSecret = true; 
 
     public uint Id => id;
-    public string Title => titlesTree[CurrentLevel-1];
+    public string Title => title;
     public string Description => description;
-    public uint Power => upgradeTree[CurrentLevel - 1];
-    public string PriceTitle => priceTree[CurrentLevel-1]/1000 >= 1 ? $"{(priceTree[CurrentLevel-1] / 1000f).ToString("0.0")}K" : priceTree[CurrentLevel-1].ToString();
-    public uint Price => priceTree[CurrentLevel-1];
+    public uint Power => power;
+
+    public uint Price => price;
+
     public Sprite SpriteAsset => sprite;
-    public sbyte MaxLevel => maxLevel;
-    public sbyte CurrentLevel
-    {
-        get => currentLevel;
-        set
-        {
-            if (value >= maxLevel) currentLevel = maxLevel;
-            
-            currentLevel = value;
-        }
-    }
+
+    public bool IsSecret => isSecret;
+
+    public bool IsBought => isBought;
+
+    public void Buy() => isBought = true;
+    public void Unsecret() => isSecret = false;
 }

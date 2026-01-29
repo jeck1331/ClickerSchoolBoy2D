@@ -8,7 +8,7 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
 
     [SerializeField] private ObserverSo scoreObserver;
     [SerializeField] private ObserverSo powerObserver;
-    
+
     [SerializeField] private ULongValue scoreValue;
     [SerializeField] private UIntValue clickPowerValue;
     [SerializeField] private UIntValue passiveIncomeValue;
@@ -23,18 +23,11 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
         passiveIncomeValue.Value = rgd.PassiveIncome;
         if (rgd.UpgradeTreeValue != null)
         {
-            foreach (var utv in  rgd.UpgradeTreeValue)
+            foreach (var utv in rgd.UpgradeTreeValue)
             {
-                upgradeItems.Upgrades.First(x => x.Id.ToString() == utv.Key).CurrentLevel = sbyte.Parse(utv.Value);
+                if (utv.Value == "1")
+                    upgradeItems.Upgrades.First(x => x.Id.ToString() == utv.Key).Buy();
             }
-        }
-        else
-        {
-            upgradeItems.Upgrades = upgradeItems.Upgrades.Select(x =>
-            {
-                x.CurrentLevel = 1;
-                return x;
-            }).ToArray();
         }
     }
 
@@ -45,7 +38,7 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
             Coins = scoreValue?.Value.ToString(),
             ClickPower = clickPowerValue?.Value.ToString(),
             PassiveIncome = passiveIncomeValue?.Value.ToString(),
-            UpgradeTreeValue = upgradeItems.Upgrades.Select(x => $"{x.Id},{x.CurrentLevel}").ToArray()
+            UpgradeTreeValue = upgradeItems.Upgrades.Select(x => $"{x.Id},{(x.IsBought == false ? 0 : 1)}").ToArray()
         };
         return sgd;
     }
@@ -63,37 +56,9 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
     {
         scoreObserver.Changing();
         powerObserver.Changing();
-        
+
         StartCoroutine(AutoSave_Coroutine());
     }
-
-    //public void onGameStateIncrementValueChange(uint newIncrementValue)
-    //{
-    //    _incrementValue = newIncrementValue;
-    //    Debug.Log(_incrementValue.ToString());
-    //    SaveState(STATE_FIELD_NAME.INCREMENT_VALUE, _incrementValue.ToString());
-    //}
-
-    //public void onGameStateSubsChange(uint subsCount)
-    //{
-    //    _subscribersCount = subsCount;
-    //    _subscribersText.text = _subscribersCount.ToString();
-    //    SaveState(STATE_FIELD_NAME.SUBS_COUNT, _subscribersCount.ToString());
-    //}
-
-    //public void onGameStatePassiveIncomeChange(uint count)
-    //{
-    //    _passiveIncome += count;
-    //    SaveState(STATE_FIELD_NAME.PASSIVE_INCOMVE_COUNT, _passiveIncome.ToString());
-    //}
-
-    //private void onBuyUpgrade(ulong priceValue)
-    //{
-    //    _gameCount -= priceValue;
-    //    _countText.text = _gameCount / 1000 >= 1 ? $"{Mathf.Round(_gameCount / 1000)}K" : _gameCount.ToString();
-    //    SaveState(STATE_FIELD_NAME.GAME_COUNT, _gameCount.ToString());
-    //}
-
 
     private void OnDestroy()
     {
