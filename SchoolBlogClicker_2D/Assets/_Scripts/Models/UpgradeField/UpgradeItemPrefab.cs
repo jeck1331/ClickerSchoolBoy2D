@@ -20,40 +20,54 @@ public class UpgradeItemPrefab : UpgradeBaseItem<UpgradeField>
          descriptionText.text = data.Description;
          powerText.text = data.Power.ToString();
          
+         CheckSecretState();
          UpdateStateButton();
          Debug.Log($"{name}Прикрепил событие к scoreObserver");
          scoreObserver.OnValueChanged += UpdateStateButton;
          powerObserver.OnValueChanged += UpdateStateButton;
+         powerObserver.OnValueChanged += CheckSecretState;
      }
     
 
     protected override void UpdateStateButton()
     {
-        if (_data.IsSecret || _data.IsBought)
+        bool t = !_data.IsBought && !_data.IsSecret && scoreValue.Value >= _data.Price;
+        Debug.Log($"Проверяю хватает ли у игрока денег. {scoreValue.Value} а стоит {_data.Price} ну крч {t}");
+        _button.enabled = !_data.IsBought && !_data.IsSecret && scoreValue.Value >= _data.Price;
+    }
+
+    private void CheckSecretState()
+    {
+        if (_data.IsBought)
         {
             _button.enabled = false;
-            if (_data.IsSecret && !_data.IsBought)
-            {
-                var upgItem = _data.Id > 0 ? upgradeItems.Upgrades.First(x => _data.IsBought && x.Id == _data.Id - 1) : null;
-                if (upgItem != null && upgItem.IsBought) _data.Unsecret();
-            }
-            if (_data.IsSecret)
-            {
-                _image.color = Color.black;
-                priceText.text = "???";
-                powerText.text = "???";
-            }
-            else
-            {
-                _image.color = Color.white;
-                priceText.text = _data.Price.ToString();
-                powerText.text = _data.Power.ToString();
-            }
-        } else if (scoreValue.Value >= _data.Price)
-        {
-            _button.enabled = true;
+            _image.color = Color.white;
+            priceText.text = _data.Price.ToString();
+            powerText.text = _data.Power.ToString();
+            return;
         }
-        Debug.Log($"Проверяю хватает ли у игрока денег. {scoreValue.Value} а стоит {_data.Price} ну крч {_button.enabled}");
+
+        if (_data.IsSecret)
+        {
+            if (upgradeItems.Upgrades.Any(u => u.Id == _data.Id - 1))
+            {
+                var prevItem = upgradeItems.Upgrades.Single(u => u.Id == _data.Id - 1);
+                if (prevItem.IsBought)
+                {
+                    _image.color = Color.white;
+                    priceText.text = _data.Price.ToString();
+                    powerText.text = _data.Power.ToString();
+                    _data.Unsecret();
+                }
+                else
+                {
+                    _image.color = Color.black;
+                    priceText.text = "???";
+                    powerText.text = "???";
+                    _button.enabled = false;
+                }
+            }
+        }
     }
 
     // private void OnDestroy()
@@ -67,6 +81,7 @@ public class UpgradeItemPrefab : UpgradeBaseItem<UpgradeField>
         Debug.Log($"{name}: Откерпил события");
         scoreObserver.OnValueChanged -= UpdateStateButton;
         powerObserver.OnValueChanged -= UpdateStateButton;
+        powerObserver.OnValueChanged -= CheckSecretState;
     }
 
     public override void OnBuyEvent()
@@ -74,9 +89,7 @@ public class UpgradeItemPrefab : UpgradeBaseItem<UpgradeField>
         if (scoreValue.Value < _data.Price) return;
         
         scoreValue.Value -= _data.Price;
+        upgradeItems.Upgrades.Single(u => u.Id == _data.Id).Buy();
         powerValue.Value = _data.Power;
-        upgradeItems.Upgrades.First(u => u.Id == _data.Id).Buy();
-
-        UpdateStateButton();
     }
 }
