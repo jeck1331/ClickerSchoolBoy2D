@@ -1,0 +1,106 @@
+﻿using System.Linq;
+using _Scripts.Models.Upgrade;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace _Scripts.Prefabs
+{
+    public class UpgradeIncomePrefab : UpgradeBaseItem<UpgradeIncomeField>
+    {
+        [SerializeField] private UIntValue incomeValue;
+        [SerializeField] private UpgradeIncomeItemSO upgradeIncomeItem;
+        [SerializeField] private ObserverSO incomeObserver;
+        
+        [SerializeField] private TMP_Text incomeText;
+
+        public override void Initialize(UpgradeIncomeField data)
+        {
+            _data = data;
+
+            titleText.text = data.Title;
+            priceText.text = data.Price.ToString();
+            descriptionText.text = data.Description;
+            incomeText.text = data.Income.ToString();
+
+            UpdateStateButton();
+            Debug.Log($"INCOME {name}Прикрепил событие к scoreObserver");
+            scoreObserver.OnValueChanged += UpdateStateButton;
+            incomeObserver.OnValueChanged += UpdateStateButton;
+            incomeObserver.OnValueChanged += CheckSecretState;
+        }
+
+        private void Awake()
+        {
+            _button = GetComponent<Button>();
+        }
+
+        protected override void UpdateStateButton()
+        {
+            bool t = !_data.IsBought && !_data.IsSecret && scoreValue.Value >= _data.Price;
+            Debug.Log($"INCOME Проверяю хватает ли у игрока денег. {scoreValue.Value} а стоит {_data.Price} ну крч {t}");
+            _button.enabled = !_data.IsBought && !_data.IsSecret && scoreValue.Value >= _data.Price;
+        }
+        
+        private void CheckSecretState()
+        {
+            if (_data.IsBought)
+            {
+                _button.enabled = false;
+                UpdateStateTexts();
+                return;
+            }
+
+            //If the item is secret, check if the previous item has been with IsBought state
+            if (_data.IsSecret)
+            {
+                var prevItem = upgradeIncomeItem.Upgrades.SingleOrDefault(u => u.Id == _data.Id - 1);
+                if (prevItem is not null)
+                {
+                    if (prevItem.IsBought)
+                    {
+                        _data.Unsecret();
+                        UpdateStateButton();
+                    }
+                    else
+                    {
+                        _button.enabled = false;
+                    }
+                    
+                    UpdateStateTexts(!prevItem.IsBought);
+                }
+            }
+        }
+        
+        private void UpdateStateTexts(bool isSecret = false)
+        {
+            _image.color = isSecret ? Color.white : Color.black;
+            priceText.text = isSecret ? "???" : _data.Price.ToString();
+            incomeText.text = isSecret ? "???" : _data.Income.ToString();
+            descriptionText.text = isSecret ? string.Empty : _data.Description;
+        }
+
+        private void OnDestroy()
+        {
+            Debug.Log($"INCOME {name}: Открепил событие к scoreObserver");
+            scoreObserver.OnValueChanged -= UpdateStateButton;
+        }
+
+        private void OnDisable()
+        {
+            Debug.Log($"INCOME {name}: Откерпил событие к scoreObserver");
+            scoreObserver.OnValueChanged -= UpdateStateButton;
+        }
+
+        public override void OnBuyEvent()
+        {
+            if (scoreValue.Value < _data.Price) return;
+
+            scoreValue.Value -= _data.Price;
+            incomeValue.Value += _data.Income;
+            upgradeIncomeItem.Upgrades.First(u => u.Id == _data.Id).Buy();
+
+            UpdateStateButton();
+        }
+    }
+}

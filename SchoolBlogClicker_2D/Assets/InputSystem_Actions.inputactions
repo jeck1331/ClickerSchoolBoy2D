@@ -23,6 +23,15 @@
                     "processors": "",
                     "interactions": "Tap(duration=1.401298E-45,pressPoint=1.401298E-45)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "NavigationMobile",
+                    "type": "Value",
+                    "id": "5893e225-179a-4111-8713-173a4b87a6b5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -111,6 +120,17 @@
                     "processors": "",
                     "groups": ";Touch",
                     "action": "Tap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "21d4c66e-46b9-40fc-a7c8-56401234fe39",
+                    "path": "*/{Back}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse;Gamepad;Joystick;Touch;XR",
+                    "action": "NavigationMobile",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

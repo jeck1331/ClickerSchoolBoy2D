@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "ObserverSo",menuName = "Scriptable Objects/Observer")]
-public class ObserverSo : ScriptableObserverBase
+[CreateAssetMenu(fileName = "ObserverSO",menuName = "Scriptable Objects/Observer")]
+public class ObserverSO : ScriptableObserverBase
 {
 }

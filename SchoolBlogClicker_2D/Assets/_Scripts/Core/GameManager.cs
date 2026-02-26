@@ -6,27 +6,30 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
 {
     private SaveGameSystem _saveGameSystem;
 
-    [SerializeField] private ObserverSo scoreObserver;
-    [SerializeField] private ObserverSo powerObserver;
+    [SerializeField] private ObserverSO scoreObserver;
+    [SerializeField] private ObserverSO powerObserver;
+    [SerializeField] private ObserverSO incomeObserver;
 
     [SerializeField] private ULongValue scoreValue;
-    [SerializeField] private UIntValue clickPowerValue;
-    [SerializeField] private UIntValue passiveIncomeValue;
-    [SerializeField] private UpgradeItems_SO upgradeItems;
+    [SerializeField] private UIntValue powerValue;
+    [SerializeField] private UIntValue incomeValue;
+    
+    [SerializeField] private UpgradeClickItemSO upgradeClickItem;
+    [SerializeField] private UpgradeIncomeItemSO upgradeIncomeItem;
 
     void IInitialize.Initialize()
     {
         _saveGameSystem = new SaveGameSystem();
         RuntimeSaveGameData rgd = _saveGameSystem.Load();
         scoreValue.Value = rgd.Coins;
-        clickPowerValue.Value = rgd.ClickPower;
-        passiveIncomeValue.Value = rgd.PassiveIncome;
-        if (rgd.UpgradeTreeValue != null)
+        powerValue.Value = rgd.Power;
+        incomeValue.Value = rgd.Income;
+        if (rgd.UpgradeClickTree != null)
         {
-            foreach (var utv in rgd.UpgradeTreeValue)
+            foreach (var utv in rgd.UpgradeClickTree)
             {
                 if (utv.Value == "1")
-                    upgradeItems.Upgrades.First(x => x.Id.ToString() == utv.Key).Buy();
+                    upgradeClickItem.Upgrades.First(x => x.Id.ToString() == utv.Key).Buy();
             }
         }
     }
@@ -36,9 +39,10 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
         var sgd = new SaveGameData
         {
             Coins = scoreValue?.Value.ToString(),
-            ClickPower = clickPowerValue?.Value.ToString(),
-            PassiveIncome = passiveIncomeValue?.Value.ToString(),
-            UpgradeTreeValue = upgradeItems.Upgrades.Select(x => $"{x.Id},{(x.IsBought == false ? 0 : 1)}").ToArray()
+            Power = powerValue?.Value.ToString(),
+            Income = incomeValue?.Value.ToString(),
+            UpgradeClickTree = upgradeClickItem.Upgrades.Select(x => $"{x.Id},{(x.IsBought == false ? 0 : 1)}").ToArray(),
+            UpgradeIncomeTree = upgradeIncomeItem.Upgrades.Select(x => $"{x.Id},{(x.IsBought == false ? 0 : 1)}").ToArray()
         };
         return sgd;
     }

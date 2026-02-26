@@ -19,7 +19,7 @@ public class SaveGameSystem
     private SaveGameData LoadFromFile()
     {
         CheckPath();
-        if (!File.Exists(_pathFileSave)) return null;
+        if (!File.Exists(_pathFileSave)) return FirstLaunchData();
 
         string json = File.ReadAllText(_pathFileSave);
         var gameData = JsonUtility.FromJson<SaveGameData>(json);
@@ -45,4 +45,12 @@ public class SaveGameSystem
         _pathFileSave = Path.Combine(Application.persistentDataPath, FileName);
         _isInitialized = true;
     }
+
+    private SaveGameData FirstLaunchData() => new SaveGameData
+    {
+        Power = "1",
+        Coins = "0",
+        IsFirstLaunch = false,
+        Income = "0"
+    };
 }

@@ -12,15 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131ee95c51aec3b45afc661c004d80a9, type: 3}
   m_Name: EngLangPref
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ScriptableObjects.LangPref
-  Language: 1
+  gameLanguage: 0
   Dictionary:
-    Play: 
-    Exit: 
-    Settings: 
-    Audio: 
-    Volume: 
-    Music: 
-    Upgrade: 
-    CoinsPerSecond: 
-    Coins: 
-    Subscribers: 
+    Play: Play
+    Exit: Exit
+    Settings: Settings
+    Audio: Audio
+    Volume: Volume
+    Music: Music
+    Upgrade: Upgrade
+    CoinsPerSecond: Coins per second
+    Coins: Coins
+    Subscribers: Subscribers
+    UpgradeClickTexts: []
+    UpgradeIncomeTexts: []

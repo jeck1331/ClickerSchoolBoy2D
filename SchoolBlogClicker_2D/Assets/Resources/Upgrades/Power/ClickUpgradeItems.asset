@@ -40,43 +40,25 @@ MonoBehaviour:
     isBought: 0
     isSecret: 1
   - id: 3
-    title: Super Mega Click
+    title: SMC
     description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
       \u0432 \u0434\u0432\u0430 \u0440\u0430\u0437\u0430 (x2)"
-    power: 8
-    price: 3500
+    power: 16
+    price: 15000
     sprite: {fileID: 0}
     isBought: 0
     isSecret: 1
-  - id: 3
-    title: Super Mega Click
+  - id: 4
+    title: SMC U
     description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
       \u0432 \u0434\u0432\u0430 \u0440\u0430\u0437\u0430 (x2)"
-    power: 8
-    price: 3500
+    power: 32
+    price: 100000
     sprite: {fileID: 0}
     isBought: 0
     isSecret: 1
-  - id: 3
-    title: Super Mega Click
-    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
-      \u0432 \u0434\u0432\u0430 \u0440\u0430\u0437\u0430 (x2)"
-    power: 8
-    price: 3500
-    sprite: {fileID: 0}
-    isBought: 0
-    isSecret: 1
-  - id: 3
-    title: Super Mega Click
-    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
-      \u0432 \u0434\u0432\u0430 \u0440\u0430\u0437\u0430 (x2)"
-    power: 8
-    price: 3500
-    sprite: {fileID: 0}
-    isBought: 0
-    isSecret: 1
-  - id: 6
-    title: HLDF QQ
+  - id: 5
+    title: SMC ULTRA
     description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
       (x3)"
     power: 96
@@ -84,12 +66,30 @@ MonoBehaviour:
     sprite: {fileID: 0}
     isBought: 0
     isSecret: 1
-  - id: 7
-    title: NARMALDI
+  - id: 6
+    title: ULTRA HIGH CLICK
     description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
-      \u0432 \u0434\u0432\u0430 \u0440\u0430\u0437\u0430 (x2)"
+      (x2)"
     power: 192
     price: 300000
+    sprite: {fileID: 0}
+    isBought: 0
+    isSecret: 1
+  - id: 7
+    title: HLDF QQ
+    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
+      (x1.5)"
+    power: 288
+    price: 500000
+    sprite: {fileID: 0}
+    isBought: 0
+    isSecret: 1
+  - id: 8
+    title: NARMALDI
+    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
+      (x1.25)"
+    power: 360
+    price: 1000000
     sprite: {fileID: 0}
     isBought: 0
     isSecret: 1

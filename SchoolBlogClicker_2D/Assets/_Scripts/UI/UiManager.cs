@@ -19,8 +19,8 @@ public class UiManager : MonoBehaviour, ISubscribe
     [SerializeField] private ULongValue score;
     [SerializeField] private UIntValue clickPower;
     
-    [SerializeField] private ObserverSo clickPowerObserver;
-    [SerializeField] private ObserverSo scoreObserver;
+    [SerializeField] private ObserverSO clickPowerObserver;
+    [SerializeField] private ObserverSO scoreObserver;
 
     private void Awake()
     {

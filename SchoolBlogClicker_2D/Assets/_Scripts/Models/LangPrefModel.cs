@@ -1,4 +1,5 @@
 ﻿using System;
+using _Scripts.Models.Upgrade;
 using UnityEngine;
 
 [Serializable]
@@ -14,4 +15,7 @@ public class LangPrefModel
     [Header("Монет в секундку")] public string CoinsPerSecond;
     [Header("Монеты")] public string Coins;
     [Header("Подписчики")] public string Subscribers;
+    
+    [Header("Улучшения кликов")] public UpgradeTexts[] UpgradeClickTexts;
+    [Header("Улучшения дохода")] public UpgradeTexts[] UpgradeIncomeTexts; 
 }

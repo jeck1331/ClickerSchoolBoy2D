@@ -7,6 +7,10 @@ public class Bootstrap : MonoBehaviour
 
     private void Awake()
     {
+        // #FOR ANDROID
+        Application.targetFrameRate = 120;
+        QualitySettings.vSyncCount = 0;
+        
         foreach (var system in systems)
         {
             if (system is IInitialize iSystem) iSystem.Initialize();
