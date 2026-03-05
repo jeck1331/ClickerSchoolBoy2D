@@ -1,5 +1,5 @@
 using System.Linq;
-using _Scripts.Models.Enums;
+using _Scripts.Core;
 using _Scripts.Models.Upgrade;
 using TMPro;
 using UnityEngine;
@@ -62,18 +62,17 @@ namespace _Scripts.Prefabs
                     }
                     else
                     {
-                        // _button.enabled = false;
                         _button.interactable = false;
                     }
                     
-                    UpdateStateTexts(!prevItem.IsBought);
+                    UpdateStateTexts(_data.IsSecret);
                 }
             }
         }
 
         private void UpdateStateTexts(bool isSecret = false)
         {
-            // _image.color = isSecret ? Color.white : Color.black;
+            _image.material = isSecret ? matSecretField : null;
             priceText.text = isSecret ? "???" : _data.Price.ToString();
             powerText.text = isSecret ? "???" : _data.Power.ToString();
             descriptionText.text = isSecret ? string.Empty : _data.Description;
@@ -100,15 +99,7 @@ namespace _Scripts.Prefabs
             scoreValue.Value -= _data.Price;
             upgradeClickItem.Upgrades.Single(u => u.Id == _data.Id).Buy();
 
-            switch (_data.CalcType)
-            {
-                case ClickCalcType.Add:
-                    powerValue.Value += _data.Power;
-                    break;
-                case ClickCalcType.Multiply:
-                    powerValue.Value *= _data.Power;
-                    break;
-            }
+            powerValue.Value = CalcCacheHelper.CalcPowerCache(upgradeClickItem.Upgrades.Where(x => x.IsBought).ToArray());
         }
     }
 }

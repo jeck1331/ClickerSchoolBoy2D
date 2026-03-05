@@ -12,3 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a43b7ab4fad8c36ecb5642646e2, type: 3}
   m_Name: IncomeUpgradeItems
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeIncomeItemSO
+  Upgrades:
+  - id: 0
+    title: Beleberda
+    description: Beleberda
+    price: 50
+    sprite: {fileID: 0}
+    isBought: 0
+    isSecret: 0
+    income: 1
+  - id: 1
+    title: Beleberda 2
+    description: Beleberda 2
+    price: 600
+    sprite: {fileID: 0}
+    isBought: 0
+    isSecret: 1
+    income: 3
+  - id: 2
+    title: Beleberda 3
+    description: Beleberda 3
+    price: 1500
+    sprite: {fileID: 0}
+    isBought: 0
+    isSecret: 1
+    income: 50
+  - id: 3
+    title: Beleberda 4
+    description: Beleberda 4
+    price: 10000
+    sprite: {fileID: 0}
+    isBought: 0
+    isSecret: 1
+    income: 75

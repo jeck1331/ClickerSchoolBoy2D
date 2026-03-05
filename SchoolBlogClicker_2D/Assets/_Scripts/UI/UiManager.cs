@@ -1,13 +1,13 @@
-﻿using TMPro;
+﻿using _Scripts.Helpers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UiManager : MonoBehaviour, ISubscribe
+public class UiManager : MonoBehaviour, ISubscribe, IInitialize
 {
     private static readonly int Increment = Animator.StringToHash("increment");
 
     [SerializeField] private GameObject canvasUpgradeMenuUI;
-    [SerializeField] private GameObject bottomButtonsUI;
     [SerializeField] private GameObject tapZoneGm;
 
     [SerializeField] private TMP_Text coinsText;
@@ -18,13 +18,21 @@ public class UiManager : MonoBehaviour, ISubscribe
 
     [SerializeField] private ULongValue score;
     [SerializeField] private UIntValue clickPower;
+    [SerializeField] private UIntValue incomePower;
     
     [SerializeField] private ObserverSO clickPowerObserver;
+    [SerializeField] private ObserverSO incomePowerObserver;
     [SerializeField] private ObserverSO scoreObserver;
 
-    private void Awake()
+    // private void Awake()
+    // {
+    //     (this as ISubscribe).Subscribes();
+    // }
+    
+    public void Initialize()
     {
-        (this as ISubscribe).Subscribes();
+        UpdatePowerText();
+        UpdateIncomeText();
     }
 
     private void OnEnable()
@@ -37,14 +45,14 @@ public class UiManager : MonoBehaviour, ISubscribe
         (this as ISubscribe).Unsubscribes();
     }
 
-    private void OnDestroy()
-    {
-        (this as ISubscribe).Unsubscribes();
-    }
+    // private void OnDestroy()
+    // {
+    //     (this as ISubscribe).Unsubscribes();
+    // }
 
     private void UpdateTextCoinsText()
     {
-        coinsText.text = score.Value / 1000 >= 1 ? $"{(score.Value / 1000f).ToString("0.0")}K" : score.Value.ToString();
+        coinsText.text = score.Value.ScoreViewFromNumber();;
 
         animator?.SetTrigger(Increment);
     }
@@ -52,6 +60,11 @@ public class UiManager : MonoBehaviour, ISubscribe
     private void UpdatePowerText()
     {
         powerText.text = clickPower.Value.ToString();
+    }
+    
+    private void UpdateIncomeText()
+    {
+        passiveIncomeText.text = incomePower.Value.ToString();
     }
 
     public void ResetCount()
@@ -76,20 +89,21 @@ public class UiManager : MonoBehaviour, ISubscribe
 
     public void OpenUpgradeMenu()
     {
-        tapZoneGm.SetActive(false);
-        canvasUpgradeMenuUI.SetActive(true);
-        bottomButtonsUI.SetActive(false);
+        tapZoneGm.SetActive(!tapZoneGm.activeSelf);
+        canvasUpgradeMenuUI.SetActive(!canvasUpgradeMenuUI.activeSelf);
     }
 
     void ISubscribe.Subscribes()
     {
         scoreObserver.OnValueChanged += UpdateTextCoinsText;
         clickPowerObserver.OnValueChanged += UpdatePowerText;
+        incomePowerObserver.OnValueChanged += UpdateIncomeText;
     }
 
     void ISubscribe.Unsubscribes()
     {
         scoreObserver.OnValueChanged -= UpdateTextCoinsText;
         clickPowerObserver.OnValueChanged -= UpdatePowerText;
+        incomePowerObserver.OnValueChanged -= UpdateIncomeText;
     }
 }

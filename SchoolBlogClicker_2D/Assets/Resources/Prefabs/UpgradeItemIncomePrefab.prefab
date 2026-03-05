@@ -287,8 +287,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UpgradeItemPrefab, Assembly-CSharp
+      - m_Target: {fileID: -1313790203691656474}
+        m_TargetAssemblyTypeName: _Scripts.Prefabs.UpgradeIncomePrefab, Assembly-CSharp
         m_MethodName: OnBuyEvent
         m_Mode: 1
         m_Arguments:
@@ -316,6 +316,7 @@ MonoBehaviour:
   titleText: {fileID: 1815385682372517041}
   priceText: {fileID: 9025985185347298258}
   descriptionText: {fileID: 1017860252521055040}
+  matSecretField: {fileID: 2100000, guid: a5ae79908733266499a6ef34981710d0, type: 2}
   incomeValue: {fileID: 11400000, guid: 09997c0345dbd8c4dbd2b8e4904bef3c, type: 2}
   upgradeIncomeItem: {fileID: 11400000, guid: 0ad0ceff3417d744ab67d1d35bc1b7c3, type: 2}
   incomeObserver: {fileID: 11400000, guid: 371d10dcc848aec42bbc8ac26736141c, type: 2}

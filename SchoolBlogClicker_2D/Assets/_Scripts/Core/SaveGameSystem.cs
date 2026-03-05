@@ -48,9 +48,7 @@ public class SaveGameSystem
 
     private SaveGameData FirstLaunchData() => new SaveGameData
     {
-        Power = "1",
         Coins = "0",
         IsFirstLaunch = false,
-        Income = "0"
     };
 }

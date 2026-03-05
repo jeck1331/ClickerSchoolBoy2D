@@ -316,6 +316,7 @@ MonoBehaviour:
   titleText: {fileID: 1815385682372517041}
   priceText: {fileID: 9025985185347298258}
   descriptionText: {fileID: 1017860252521055040}
+  matSecretField: {fileID: 2100000, guid: a5ae79908733266499a6ef34981710d0, type: 2}
   powerValue: {fileID: 11400000, guid: 9377acfe70e64eb4ca190027b72b53aa, type: 2}
   upgradeClickItem: {fileID: 11400000, guid: 5b95e30f3e86f264087c10abe41bed96, type: 2}
   powerObserver: {fileID: 11400000, guid: c10945c8d75aa964d8cb2a2b6bea7dcf, type: 2}

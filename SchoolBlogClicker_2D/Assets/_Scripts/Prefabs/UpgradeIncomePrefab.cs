@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using _Scripts.Core;
 using _Scripts.Models.Upgrade;
 using TMPro;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace _Scripts.Prefabs
             descriptionText.text = data.Description;
             incomeText.text = data.Income.ToString();
 
+            CheckSecretState();
             UpdateStateButton();
             Debug.Log($"INCOME {name}Прикрепил событие к scoreObserver");
             scoreObserver.OnValueChanged += UpdateStateButton;
@@ -30,23 +32,18 @@ namespace _Scripts.Prefabs
             incomeObserver.OnValueChanged += CheckSecretState;
         }
 
-        private void Awake()
-        {
-            _button = GetComponent<Button>();
-        }
-
         protected override void UpdateStateButton()
         {
             bool t = !_data.IsBought && !_data.IsSecret && scoreValue.Value >= _data.Price;
             Debug.Log($"INCOME Проверяю хватает ли у игрока денег. {scoreValue.Value} а стоит {_data.Price} ну крч {t}");
-            _button.enabled = !_data.IsBought && !_data.IsSecret && scoreValue.Value >= _data.Price;
+            _button.interactable = !_data.IsBought && !_data.IsSecret && scoreValue.Value >= _data.Price;
         }
         
         private void CheckSecretState()
         {
             if (_data.IsBought)
             {
-                _button.enabled = false;
+                _button.interactable = false;
                 UpdateStateTexts();
                 return;
             }
@@ -64,27 +61,27 @@ namespace _Scripts.Prefabs
                     }
                     else
                     {
-                        _button.enabled = false;
+                        _button.interactable = false;
                     }
                     
-                    UpdateStateTexts(!prevItem.IsBought);
+                    UpdateStateTexts(_data.IsSecret);
                 }
             }
         }
         
         private void UpdateStateTexts(bool isSecret = false)
         {
-            _image.color = isSecret ? Color.white : Color.black;
+            _image.material = isSecret ? matSecretField : null;
             priceText.text = isSecret ? "???" : _data.Price.ToString();
             incomeText.text = isSecret ? "???" : _data.Income.ToString();
             descriptionText.text = isSecret ? string.Empty : _data.Description;
         }
 
-        private void OnDestroy()
-        {
-            Debug.Log($"INCOME {name}: Открепил событие к scoreObserver");
-            scoreObserver.OnValueChanged -= UpdateStateButton;
-        }
+        // private void OnDestroy()
+        // {
+        //     Debug.Log($"INCOME {name}: Открепил событие к scoreObserver");
+        //     scoreObserver.OnValueChanged -= UpdateStateButton;
+        // }
 
         private void OnDisable()
         {
@@ -97,9 +94,9 @@ namespace _Scripts.Prefabs
             if (scoreValue.Value < _data.Price) return;
 
             scoreValue.Value -= _data.Price;
-            incomeValue.Value += _data.Income;
             upgradeIncomeItem.Upgrades.First(u => u.Id == _data.Id).Buy();
-
+            incomeValue.Value = CalcCacheHelper.CalcIncomeCache(upgradeIncomeItem.Upgrades.Where(x => x.IsBought).ToArray());
+            
             UpdateStateButton();
         }
     }

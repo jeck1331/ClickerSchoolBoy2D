@@ -246,8 +246,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -69, y: -74}
-  m_SizeDelta: {x: -236.65002, y: 51.515015}
+  m_AnchoredPosition: {x: 14.325012, y: -142.32}
+  m_SizeDelta: {x: -108.65, y: 51.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &97564178
 MonoBehaviour:
@@ -266,7 +266,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 3
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
@@ -309,10 +309,10 @@ RectTransform:
   - {fileID: 254539084}
   m_Father: {fileID: 383930714}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 220.63763, y: 885.06476}
-  m_SizeDelta: {x: 327.4358, y: 70.2705}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 220.63763, y: -74.93524}
+  m_SizeDelta: {x: 327.4358, y: 70.27051}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &100420053
 MonoBehaviour:
@@ -1204,13 +1204,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0d172ef9977224295d8a7a4c76a622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  canvasGameBtnsUI: {fileID: 1913083195}
   tapZone: {fileID: 1251624134}
   upgradeMenuState: 0
   clickMenuBtn: {fileID: 581975151}
   passiveMenuBtn: {fileID: 723102410}
   clickUpgradeContent: {fileID: 2034100081}
   passiveUpgradeContent: {fileID: 1850506582}
+  matSelectedBtn: {fileID: 2100000, guid: 9d340700c250972409c1eab65d0f9bab, type: 2}
 --- !u!1 &375058760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2013,7 +2013,7 @@ GameObject:
   - component: {fileID: 581975154}
   - component: {fileID: 581975153}
   m_Layer: 5
-  m_Name: Upgrades
+  m_Name: Power
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2036,7 +2036,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -25.757507}
+  m_AnchoredPosition: {x: 376.96497, y: -25.76}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &581975153
@@ -2063,7 +2063,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_SelectedColor: {r: 1, g: 0.8235294, b: 0.8235294, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -2327,7 +2327,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -129.79999}
+  m_AnchoredPosition: {x: 0, y: -67}
   m_SizeDelta: {x: -40, y: 76.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &722724428
@@ -2443,7 +2443,7 @@ GameObject:
   - component: {fileID: 723102413}
   - component: {fileID: 723102412}
   m_Layer: 5
-  m_Name: Invest
+  m_Name: Income
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2466,7 +2466,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 375, y: -25.757507}
+  m_AnchoredPosition: {x: 626.96497, y: -25.76}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &723102412
@@ -2493,7 +2493,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_SelectedColor: {r: 1, g: 0.8235294, b: 0.8235294, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -2620,7 +2620,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Upgrades
+  m_text: Power Click
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: afa5e28cb6de45048b5d085206ee2b40, type: 2}
   m_sharedMaterial: {fileID: 7298244442384307289, guid: afa5e28cb6de45048b5d085206ee2b40, type: 2}
@@ -2749,6 +2749,7 @@ MonoBehaviour:
   systems:
   - {fileID: 1179688841}
   - {fileID: 1251624135}
+  - {fileID: 1153581375}
 --- !u!1 &911151386
 GameObject:
   m_ObjectHideFlags: 0
@@ -3027,7 +3028,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.UiManager
   canvasUpgradeMenuUI: {fileID: 323591647}
-  bottomButtonsUI: {fileID: 1913083195}
   tapZoneGm: {fileID: 1251624134}
   coinsText: {fileID: 375058762}
   powerText: {fileID: 233097907}
@@ -3035,7 +3035,9 @@ MonoBehaviour:
   animator: {fileID: 375058764}
   score: {fileID: 11400000, guid: 2acb08f048717f94f87c3d9df2271f1a, type: 2}
   clickPower: {fileID: 11400000, guid: 9377acfe70e64eb4ca190027b72b53aa, type: 2}
+  incomePower: {fileID: 11400000, guid: 09997c0345dbd8c4dbd2b8e4904bef3c, type: 2}
   clickPowerObserver: {fileID: 11400000, guid: c10945c8d75aa964d8cb2a2b6bea7dcf, type: 2}
+  incomePowerObserver: {fileID: 11400000, guid: 371d10dcc848aec42bbc8ac26736141c, type: 2}
   scoreObserver: {fileID: 11400000, guid: c7d62fba8abb4b042818ca58d75045cd, type: 2}
 --- !u!1 &1161737815
 GameObject:
@@ -4008,7 +4010,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Invest
+  m_text: Income
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: afa5e28cb6de45048b5d085206ee2b40, type: 2}
   m_sharedMaterial: {fileID: 7298244442384307289, guid: afa5e28cb6de45048b5d085206ee2b40, type: 2}
@@ -4326,7 +4328,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668878159}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4335,8 +4337,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -187.60999, y: -25.35}
-  m_SizeDelta: {x: -320.87, y: 67.74}
+  m_AnchoredPosition: {x: -8.100038, y: -24.52}
+  m_SizeDelta: {x: -426.27, y: 85.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1668878161
 MonoBehaviour:
@@ -4466,7 +4468,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1850506583
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4908,7 +4910,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2034100082
 RectTransform:
   m_ObjectHideFlags: 0

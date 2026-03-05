@@ -12,6 +12,7 @@ namespace _Scripts.Models.Upgrade
         [SerializeField] protected TMP_Text titleText;
         [SerializeField] protected TMP_Text priceText;
         [SerializeField] protected TMP_Text descriptionText;
+        [SerializeField] public Material matSecretField;
 
         protected Button _button;
         protected Image _image;

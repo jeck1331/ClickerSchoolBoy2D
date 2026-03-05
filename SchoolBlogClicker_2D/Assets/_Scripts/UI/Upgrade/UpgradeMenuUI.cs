@@ -1,9 +1,9 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UpgradeMenuUI : MonoBehaviour, ISubscribe
 {
-    [SerializeField] private GameObject canvasGameBtnsUI;
     [SerializeField] private GameObject tapZone;
     [SerializeField] private UpgradeMenuState upgradeMenuState = UpgradeMenuState.ClickMenu;
 
@@ -12,15 +12,22 @@ public class UpgradeMenuUI : MonoBehaviour, ISubscribe
     
     [SerializeField] private GameObject clickUpgradeContent;
     [SerializeField] private GameObject passiveUpgradeContent;
+    
+    [SerializeField] private Material matSelectedBtn;
+    
+    [CanBeNull] private Image _imageClickMenuBtn;
+    [CanBeNull] private Image _imagePassiveMenuBtn;
 
     private void OnEnable()
     {
+        _imageClickMenuBtn = clickMenuBtn.GetComponent<Image>();
+        _imagePassiveMenuBtn = passiveMenuBtn.GetComponent<Image>();
+        
         UpdateColorsUpgradeMenu();
     }
 
     public void OnExitUpgradeMenu()
     {
-        canvasGameBtnsUI.SetActive(true);
         tapZone.SetActive(true);
         gameObject.SetActive(false);
     }
@@ -44,11 +51,22 @@ public class UpgradeMenuUI : MonoBehaviour, ISubscribe
 
     private void UpdateColorsUpgradeMenu()
     {
-        if (upgradeMenuState == UpgradeMenuState.ClickMenu) clickMenuBtn.GetComponent<Button>().Select();
-        else passiveMenuBtn.GetComponent<Button>().Select();
+        if (_imagePassiveMenuBtn != null && _imageClickMenuBtn != null)
+        {
+            if (upgradeMenuState == UpgradeMenuState.ClickMenu)
+            {
+                _imageClickMenuBtn.material = matSelectedBtn;
+                _imagePassiveMenuBtn.material = null;
+            }
+            else
+            {
+                _imageClickMenuBtn.material = null;
+                _imagePassiveMenuBtn.material = matSelectedBtn;
+            }
         
-        clickUpgradeContent.SetActive(upgradeMenuState == UpgradeMenuState.ClickMenu);
-        passiveUpgradeContent.SetActive(upgradeMenuState == UpgradeMenuState.PassiveMenu);
+            clickUpgradeContent.SetActive(upgradeMenuState == UpgradeMenuState.ClickMenu);
+            passiveUpgradeContent.SetActive(upgradeMenuState == UpgradeMenuState.PassiveMenu); 
+        }
     }
 
     public void Subscribes()

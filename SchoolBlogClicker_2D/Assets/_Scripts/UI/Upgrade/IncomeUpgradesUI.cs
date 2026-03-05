@@ -20,6 +20,6 @@ public class IncomeUpgradesUI : MonoBehaviour
 
     private void OnDisable()
     {
-        while (items.Count > 0) Destroy(items.Pop().gameObject);
+        while (items.Count != 0) Destroy(items.Pop().gameObject);
     }
 }
