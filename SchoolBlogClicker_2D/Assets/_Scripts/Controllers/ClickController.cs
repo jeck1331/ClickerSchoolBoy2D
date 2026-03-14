@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,9 +6,11 @@ public class ClickController : MonoBehaviour
 {
     private InputAction _clickAction;
     private InputAction _tapAction;
+    private Vector2 _mousePosition;
 
     [SerializeField] private ULongValue scoreValue;
     [SerializeField] private UIntValue clickPowerValue;
+    [SerializeField] private ParticleSystem vfxStarParticle;
 
     private void Start()
     {
@@ -34,13 +37,27 @@ public class ClickController : MonoBehaviour
         {
             RaycastHit2D hitInformation = Physics2D.Raycast(screenPosition, Camera.main.transform.forward);
 
-            if (hitInformation.collider != null && hitInformation.collider.name == gameObject.name)
-            {
-                GameObject touchedObject = hitInformation.transform.gameObject;
+            if (hitInformation.collider != null){
+                if (hitInformation.collider.CompareTag(gameObject.name))
+                {
+                    GameObject touchedObject = hitInformation.transform.gameObject;
+                    vfxStarParticle.transform.position = screenPosition;
+                    vfxStarParticle.Play();
 
-                Debug.Log(touchedObject.name);
+                    Debug.Log(touchedObject.name);
 
-                scoreValue!.Value += clickPowerValue!.Value;
+                    scoreValue!.Value += clickPowerValue!.Value;
+                } else if (hitInformation.collider.CompareTag("ClickItemMG"))
+                {
+                    GameObject touchedObject = hitInformation.transform.gameObject;
+                    vfxStarParticle.transform.position = screenPosition;
+                    vfxStarParticle.Play();
+
+                    Debug.Log(touchedObject.name);
+                    Debug.Log($"Крит удар: {clickPowerValue!.Value * 1.25}");
+
+                    scoreValue!.Value += Convert.ToUInt64(Math.Abs(clickPowerValue!.Value * 1.25));
+                }
             }
         }
     }
