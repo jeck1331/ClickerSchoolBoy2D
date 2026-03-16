@@ -14,7 +14,7 @@ namespace _Scripts.Core
                 res += upgrade.Income;
             }
 
-            Debug.Log($"{res} РАССЧИТАН INCOME CACHE");
+            // Debug.Log($"{res} РАССЧИТАН INCOME CACHE");
             return res;
         }
         
@@ -33,7 +33,7 @@ namespace _Scripts.Core
                         break;
                 }
             }
-            Debug.Log($"{res} РАССЧИТАН POWER CACHE");
+            // Debug.Log($"{res} РАССЧИТАН POWER CACHE");
             return res;
         }
     }

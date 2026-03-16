@@ -23,5 +23,11 @@ namespace _Scripts.Models.Upgrade
         public bool IsBought => isBought;
         public void Buy() => isBought = true;
         public void Unsecret() => isSecret = false;
+
+        public void Reset()
+        {
+            isBought = false;
+            isSecret = id != 0;
+        }
     }
 }

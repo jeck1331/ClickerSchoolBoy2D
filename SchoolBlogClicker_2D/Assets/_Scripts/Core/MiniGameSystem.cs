@@ -1,20 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class MiniGameSystem : MonoBehaviour
 {
+    [SerializeField] private GameObject inheritGameObject;
     [SerializeField] private GameObject zoneGenerating;
     private BoxCollider2D _boxColliderZg;
     private RectTransform _canvasTransform;
     [SerializeField] private BoolValue valueInMenu;
     [SerializeField] private ObserverSO inMenuObserver;
-    [SerializeField] private ObserverSO clickedMgItemObserver;
     
     [SerializeField] private GameObject circlePrefab;
-    
-    private Stack<GameObject> _circles = new Stack<GameObject>();
     
     [Header("Settings")]
     [SerializeField] private float circleRadius = 187f;
@@ -22,12 +19,11 @@ public class MiniGameSystem : MonoBehaviour
     private void Awake()
     {
         _boxColliderZg = zoneGenerating.GetComponent<BoxCollider2D>();
-        _canvasTransform = zoneGenerating.GetComponent<RectTransform>();
+        _canvasTransform = inheritGameObject.GetComponent<RectTransform>();
     }
 
     private void OnEnable()
     {
-        
         inMenuObserver.OnValueChanged += OnMenuValueChanged;
         if (!valueInMenu.Value) 
         {
@@ -39,7 +35,6 @@ public class MiniGameSystem : MonoBehaviour
     {
         inMenuObserver.OnValueChanged -= OnMenuValueChanged;
         StopCoroutine(MiniGamePlayCoroutineStart());
-        StopCoroutine(CircleDestroy_Coroutine());
     }
 
     private IEnumerator MiniGamePlayCoroutineStart()
@@ -53,15 +48,6 @@ public class MiniGameSystem : MonoBehaviour
         }
     }
     
-    private IEnumerator CircleDestroy_Coroutine()
-    {
-            yield return new WaitForSeconds(3);
-            while (_circles.Count > 0)
-            {
-                Destroy(_circles.Pop());
-            }
-    }
-    
     public void SpawnCircle()
     {
         if (_boxColliderZg == null || circlePrefab == null || _canvasTransform == null) return;
@@ -73,11 +59,10 @@ public class MiniGameSystem : MonoBehaviour
         float randomX = Random.Range(bounds.min.x + circleRadius * 0.01f, bounds.max.x - circleRadius * 0.01f);
         float randomY = Random.Range(bounds.min.y + circleRadius * 0.01f, bounds.max.y - circleRadius * 0.01f);
         
-        Vector3 worldPos = new Vector3(randomX, randomY, _boxColliderZg.transform.position.z);
+        Vector3 worldPos = new Vector3(randomX, randomY, 1);
 
         // 2. Переводим мировую позицию в локальную позицию внутри Canvas
         GameObject newCircle = Instantiate(circlePrefab, _canvasTransform);
-        _circles.Push(newCircle);
         RectTransform rect = newCircle.GetComponent<RectTransform>();
 
         // Используем ScreenPoint для корректного наложения (подходит для Overlay и Camera Canvas)
@@ -92,8 +77,6 @@ public class MiniGameSystem : MonoBehaviour
         );
 
         rect.anchoredPosition = localPos;
-        
-        StartCoroutine(CircleDestroy_Coroutine());
     }
     
     // private IEnumerator MiniGameGenerateCircle_Coroutine()

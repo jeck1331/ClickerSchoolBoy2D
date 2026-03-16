@@ -28,8 +28,9 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
         {
             foreach (var utv in rgd.UpgradeClickTree)
             {
-                if (utv.Value == "1")
-                    upgradeClickItem.Upgrades.First(x => x.Id.ToString() == utv.Key).Buy();
+                var v = upgradeClickItem.Upgrades.First(x => x.Id.ToString() == utv.Key);
+                if (utv.Value == "1") v.Buy();
+                else v.Reset();
             }
 
             powerValue.Value = CalcCacheHelper.CalcPowerCache(upgradeClickItem.Upgrades.Where(x => x.IsBought).ToArray());
@@ -38,8 +39,10 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
         {
             foreach (var utv in rgd.UpgradeIncomeTree)
             {
-                if (utv.Value == "1")
-                    upgradeIncomeItem.Upgrades.First(x => x.Id.ToString() == utv.Key).Buy();
+                var v = upgradeIncomeItem.Upgrades.First(x => x.Id.ToString() == utv.Key);
+                if (utv.Value == "1") v.Buy();
+                else v.Reset();
+                
             }
             incomeValue.Value = CalcCacheHelper.CalcIncomeCache(upgradeIncomeItem.Upgrades.Where(x => x.IsBought).ToArray());
         }
@@ -76,7 +79,7 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
         
             scoreValue.Value += incomeValue.Value;
         
-            Debug.Log("INCOME executed");
+            // Debug.Log("INCOME executed");
         }
     }
 
@@ -96,7 +99,7 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
     {
         if (!_isIncomeStared && incomeValue.Value > 0)
         {
-            Debug.Log("Income update START COROUTINE");
+            // Debug.Log("Income update START COROUTINE");
             _isIncomeStared = true;
             StartCoroutine(Income_Coroutine());
         }
@@ -114,7 +117,7 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
         
         StopCoroutine(AutoSave_Coroutine());
         StopCoroutine(Income_Coroutine());
-        Debug.Log("Coroutines stopped");
+        // Debug.Log("Coroutines stopped");
         
         _saveGameSystem.Save(CurrentGameData());
     }

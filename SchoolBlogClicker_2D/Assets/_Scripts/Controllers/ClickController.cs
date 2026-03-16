@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class ClickController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class ClickController : MonoBehaviour
     [SerializeField] private ULongValue scoreValue;
     [SerializeField] private UIntValue clickPowerValue;
     [SerializeField] private ParticleSystem vfxStarParticle;
+    [SerializeField] private ParticleSystem vfxCritStarParticle;
+    [SerializeField] private ObserverGameObjSO circleObserver;
 
     private void Start()
     {
@@ -40,23 +43,19 @@ public class ClickController : MonoBehaviour
             if (hitInformation.collider != null){
                 if (hitInformation.collider.CompareTag(gameObject.name))
                 {
-                    GameObject touchedObject = hitInformation.transform.gameObject;
                     vfxStarParticle.transform.position = screenPosition;
                     vfxStarParticle.Play();
-
-                    Debug.Log(touchedObject.name);
 
                     scoreValue!.Value += clickPowerValue!.Value;
                 } else if (hitInformation.collider.CompareTag("ClickItemMG"))
                 {
                     GameObject touchedObject = hitInformation.transform.gameObject;
-                    vfxStarParticle.transform.position = screenPosition;
-                    vfxStarParticle.Play();
-
-                    Debug.Log(touchedObject.name);
-                    Debug.Log($"Крит удар: {clickPowerValue!.Value * 1.25}");
-
-                    scoreValue!.Value += Convert.ToUInt64(Math.Abs(clickPowerValue!.Value * 1.25));
+                    circleObserver.Changing(touchedObject);
+                    vfxCritStarParticle.transform.position = screenPosition;
+                    vfxCritStarParticle.Play();
+                    float addCoefficient = Random.Range(1.05f, 2f);
+                    Debug.Log($"Крит удар: {Convert.ToUInt64(Math.Abs(clickPowerValue!.Value * addCoefficient))}; кэф: {addCoefficient}");
+                    scoreValue!.Value += Convert.ToUInt64(Math.Abs(clickPowerValue!.Value * addCoefficient));
                 }
             }
         }

@@ -26,7 +26,7 @@ namespace _Scripts.Prefabs
 
             CheckSecretState();
             UpdateStateButton();
-            Debug.Log($"INCOME {name}Прикрепил событие к scoreObserver");
+            // Debug.Log($"INCOME {name}Прикрепил событие к scoreObserver");
             scoreObserver.OnValueChanged += UpdateStateButton;
             incomeObserver.OnValueChanged += UpdateStateButton;
             incomeObserver.OnValueChanged += CheckSecretState;
@@ -35,7 +35,7 @@ namespace _Scripts.Prefabs
         protected override void UpdateStateButton()
         {
             bool t = !_data.IsBought && !_data.IsSecret && scoreValue.Value >= _data.Price;
-            Debug.Log($"INCOME Проверяю хватает ли у игрока денег. {scoreValue.Value} а стоит {_data.Price} ну крч {t}");
+            // Debug.Log($"INCOME Проверяю хватает ли у игрока денег. {scoreValue.Value} а стоит {_data.Price} ну крч {t}");
             _button.interactable = !_data.IsBought && !_data.IsSecret && scoreValue.Value >= _data.Price;
         }
         
@@ -85,7 +85,7 @@ namespace _Scripts.Prefabs
 
         private void OnDisable()
         {
-            Debug.Log($"INCOME {name}: Откерпил событие к scoreObserver");
+            // Debug.Log($"INCOME {name}: Откерпил событие к scoreObserver");
             scoreObserver.OnValueChanged -= UpdateStateButton;
         }
 
