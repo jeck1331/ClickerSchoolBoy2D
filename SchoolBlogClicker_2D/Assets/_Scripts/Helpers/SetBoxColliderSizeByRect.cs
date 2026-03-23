@@ -4,7 +4,6 @@ public class SetBoxColliderSizeByRect : MonoBehaviour
 {
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private BoxCollider2D boxCollider;
-
     // void Awake() {
     //     _rectTransform = GetComponent<RectTransform>();
     //     _boxCollider = GetComponent<BoxCollider2D>();
