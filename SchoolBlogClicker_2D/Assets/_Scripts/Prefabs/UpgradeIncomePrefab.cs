@@ -87,6 +87,8 @@ namespace _Scripts.Prefabs
         {
             // Debug.Log($"INCOME {name}: Откерпил событие к scoreObserver");
             scoreObserver.OnValueChanged -= UpdateStateButton;
+            incomeObserver.OnValueChanged -= UpdateStateButton;
+            incomeObserver.OnValueChanged -= CheckSecretState;
         }
 
         public override void OnBuyEvent()

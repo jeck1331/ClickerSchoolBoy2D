@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Linq;
 using _Scripts.Core;
+using JetBrains.Annotations;
 using UnityEngine;
 
-public class GameManager : Singleton<MonoBehaviour>, IInitialize
+public class GameManager : Singleton<GameManager>, IInitialize
 {
     private SaveGameSystem _saveGameSystem;
     private bool _isIncomeStared = false;
+    [CanBeNull] private Coroutine _autoSaveCoroutine;
+    [CanBeNull] private Coroutine _incomeCoroutine;
 
     [SerializeField] private ObserverSO scoreObserver;
     [SerializeField] private ObserverSO powerObserver;
@@ -92,7 +95,7 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
 
         IncomeUpdate();
 
-        StartCoroutine(AutoSave_Coroutine());
+        _autoSaveCoroutine = StartCoroutine(AutoSave_Coroutine());
     }
 
     private void IncomeUpdate()
@@ -101,7 +104,7 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
         {
             // Debug.Log("Income update START COROUTINE");
             _isIncomeStared = true;
-            StartCoroutine(Income_Coroutine());
+            _incomeCoroutine = StartCoroutine(Income_Coroutine());
         }
     }
 
@@ -115,8 +118,10 @@ public class GameManager : Singleton<MonoBehaviour>, IInitialize
     {
         incomeObserver.OnValueChanged -= IncomeUpdate;
         
-        StopCoroutine(AutoSave_Coroutine());
-        StopCoroutine(Income_Coroutine());
+        if (_autoSaveCoroutine != null)
+            StopCoroutine(_autoSaveCoroutine);
+        if (_incomeCoroutine != null)
+            StopCoroutine(_incomeCoroutine);
         // Debug.Log("Coroutines stopped");
         
         _saveGameSystem.Save(CurrentGameData());

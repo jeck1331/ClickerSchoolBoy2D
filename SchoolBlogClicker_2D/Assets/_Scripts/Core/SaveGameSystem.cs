@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class SaveGameSystem
@@ -10,8 +11,8 @@ public class SaveGameSystem
     public void Save(SaveGameData saveGameData)
     {
         CheckPath();
-
-        string json = JsonUtility.ToJson(saveGameData, true);
+        
+        string json = JsonConvert.SerializeObject(saveGameData);
         File.WriteAllText(_pathFileSave, json);
         Debug.Log("save");
     }
@@ -22,7 +23,7 @@ public class SaveGameSystem
         if (!File.Exists(_pathFileSave)) return FirstLaunchData();
 
         string json = File.ReadAllText(_pathFileSave);
-        var gameData = JsonUtility.FromJson<SaveGameData>(json);
+        var gameData = JsonConvert.DeserializeObject<SaveGameData>(json);
 
         //// Оффлайн-прогресс
         //double secondsOffline = (DateTime.Now.ToBinary() - dto.lastSaveTime) / 10000000d;

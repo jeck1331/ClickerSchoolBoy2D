@@ -9,9 +9,9 @@
                 return $"{(numberFloat / 1000f).ToString("0.0")}K";
             else if (numberFloat / 1_000_000f >= 1 && numberFloat / 1_000_000_000f < 1)
                 return $"{(numberFloat / 1000f).ToString("0.0")}M";
-            else if (numberFloat / 1_000_000f >= 1 && numberFloat / 1_000_000_000f < 1)
+            else if (numberFloat / 1_000_000_000f >= 1 && numberFloat / 1_000_000_000_000f < 1)
                 return $"{(numberFloat / 1000f).ToString("0.0")}B";
-            else if  (numberFloat / 1_000_000_000f >= 1)
+            else if  (numberFloat / 1_000_000_000_000f >= 1)
                 return $"{(numberFloat / 1000f).ToString("0.0")}T";
 
             return number.ToString();
