@@ -9,8 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 4ce7532a22ea48c3b9daeaae1ccdafe8, type: 3}
   m_Name: Upgrade Click Items
   m_EditorClassIdentifier: Assembly-CSharp:_Scripts.ScriptableObjects:StateUpgradeClickItems
-  items:
-  - {fileID: 11400000, guid: 0056e692637d50341bb7689dfb6612be, type: 2}
+  Upgrades:
+  - id: 0
+    title: 
+    description: 
+    price: 0
+    sprite: {fileID: 0}
+    isBought: 0
+    isSecret: 0
+    power: 0
+    calcType: 0
