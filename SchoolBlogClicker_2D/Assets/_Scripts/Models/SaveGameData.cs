@@ -37,15 +37,34 @@ public class RuntimeSaveGameData
         }
         else
         {
-            Coins = ulong.Parse(String.IsNullOrEmpty(gd.Coins) ? "0" : gd.Coins);
+            if (!ulong.TryParse(string.IsNullOrEmpty(gd.Coins) ? "0" : gd.Coins, out var parsedCoins))
+                parsedCoins = 0;
+            Coins = parsedCoins;
 
-            UpgradeClickTree = gd.UpgradeClickTree != null ?
-                gd.UpgradeClickTree.ToDictionary(kvp => kvp.Split(",")[0], kvp => kvp.Split(",")[1]) :
-                new();
-            UpgradeIncomeTree = gd.UpgradeIncomeTree != null ? 
-                gd.UpgradeIncomeTree.ToDictionary(kvp => kvp.Split(",")[0], kvp => kvp.Split(",")[1]) :
-                new();
+            UpgradeClickTree = ParseUpgradeTree(gd.UpgradeClickTree);
+            UpgradeIncomeTree = ParseUpgradeTree(gd.UpgradeIncomeTree);
         }
+    }
+
+    private static Dictionary<string, string> ParseUpgradeTree([CanBeNull] IEnumerable<string> source)
+    {
+        var result = new Dictionary<string, string>();
+        if (source == null) return result;
+
+        foreach (var rawEntry in source)
+        {
+            if (string.IsNullOrWhiteSpace(rawEntry)) continue;
+            var parts = rawEntry.Split(',');
+            if (parts.Length < 2) continue;
+
+            var key = parts[0].Trim();
+            var value = parts[1].Trim();
+            if (string.IsNullOrEmpty(key)) continue;
+
+            result[key] = value;
+        }
+
+        return result;
     }
 
 

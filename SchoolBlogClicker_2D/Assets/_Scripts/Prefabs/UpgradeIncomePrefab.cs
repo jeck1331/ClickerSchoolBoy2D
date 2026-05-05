@@ -34,9 +34,7 @@ namespace _Scripts.Prefabs
 
         protected override void UpdateStateButton()
         {
-            bool t = !_data.IsBought && !_data.IsSecret && scoreValue.Value >= _data.Price;
-            // Debug.Log($"INCOME Проверяю хватает ли у игрока денег. {scoreValue.Value} а стоит {_data.Price} ну крч {t}");
-            _button.interactable = !_data.IsBought && !_data.IsSecret && scoreValue.Value >= _data.Price;
+            _button.interactable = UpgradeEconomyService.CanBuy(_data, scoreValue.Value);
         }
         
         private void CheckSecretState()
@@ -51,21 +49,9 @@ namespace _Scripts.Prefabs
             //If the item is secret, check if the previous item has been with IsBought state
             if (_data.IsSecret)
             {
-                var prevItem = upgradeIncomeItem.Upgrades.SingleOrDefault(u => u.Id == _data.Id - 1);
-                if (prevItem is not null)
-                {
-                    if (prevItem.IsBought)
-                    {
-                        _data.Unsecret();
-                        UpdateStateButton();
-                    }
-                    else
-                    {
-                        _button.interactable = false;
-                    }
-                    
-                    UpdateStateTexts(_data.IsSecret);
-                }
+                UpgradeEconomyService.TryUnlockByPreviousId(_data, upgradeIncomeItem.Upgrades);
+                _button.interactable = !_data.IsSecret && !_data.IsBought;
+                UpdateStateTexts(_data.IsSecret);
             }
         }
         
@@ -93,13 +79,11 @@ namespace _Scripts.Prefabs
 
         public override void OnBuyEvent()
         {
-            if (scoreValue.Value < _data.Price) return;
-
-            scoreValue.Value -= _data.Price;
-            upgradeIncomeItem.Upgrades.First(u => u.Id == _data.Id).Buy();
-            incomeValue.Value = CalcCacheHelper.CalcIncomeCache(upgradeIncomeItem.Upgrades.Where(x => x.IsBought).ToArray());
-            
-            UpdateStateButton();
+            if (UpgradeEconomyService.TryBuyIncomeUpgrade(_data, scoreValue, incomeValue, upgradeIncomeItem))
+            {
+                AudioManager.Instance?.PlaySfx(SfxType.UpgradeBuy);
+                UpdateStateButton();
+            }
         }
     }
 }

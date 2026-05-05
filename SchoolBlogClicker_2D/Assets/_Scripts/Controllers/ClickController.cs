@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Random = UnityEngine.Random;
 
 public class ClickController : MonoBehaviour
 {
@@ -14,6 +13,9 @@ public class ClickController : MonoBehaviour
     [SerializeField] private ParticleSystem vfxStarParticle;
     [SerializeField] private ParticleSystem vfxCritStarParticle;
     [SerializeField] private ObserverGameObjSO circleObserver;
+    [SerializeField] private CritConfigSO critConfig;
+    [SerializeField] private string tapZoneTag = "TapZone";
+    [SerializeField] private string miniGameTag = "ClickItemMG";
 
     private void Start()
     {
@@ -30,21 +32,35 @@ public class ClickController : MonoBehaviour
         Collider2D hitCollider = Physics2D.OverlapPoint(screenPosition, layerMask);
         
         if (hitCollider != null){
-            if (hitCollider.CompareTag(gameObject.name))
+            if (hitCollider.CompareTag(tapZoneTag))
             {
-                vfxStarParticle.transform.position = screenPosition;
-                vfxStarParticle.Play();
-        
-                scoreValue!.Value += clickPowerValue!.Value;
-            } else if (hitCollider.CompareTag("ClickItemMG"))
+                var hitReward = CritCalculator.CalculateHitReward(clickPowerValue!.Value, scoreValue.Value, critConfig, out var isCrit);
+                scoreValue.Value += hitReward;
+                if (isCrit)
+                {
+                    if (vfxCritStarParticle != null)
+                    {
+                        vfxCritStarParticle.transform.position = screenPosition;
+                        vfxCritStarParticle.Play();
+                    }
+                    AudioManager.Instance?.PlaySfx(SfxType.Crit);
+                }
+                else
+                {
+                    if (vfxStarParticle != null)
+                    {
+                        vfxStarParticle.transform.position = screenPosition;
+                        vfxStarParticle.Play();
+                    }
+                    AudioManager.Instance?.PlaySfx(SfxType.Click);
+                }
+
+                GameEvents.ClickResolved(isCrit, hitReward);
+            } else if (hitCollider.CompareTag(miniGameTag))
             {
                 GameObject touchedObject = hitCollider.transform.gameObject;
                 circleObserver.Changing(touchedObject);
-                vfxCritStarParticle.transform.position = screenPosition;
-                vfxCritStarParticle.Play();
-                float addCoefficient = Random.Range(1.05f, 2f);
-                Debug.Log($"Крит удар: {Convert.ToUInt64(Math.Abs(clickPowerValue!.Value * addCoefficient))}; кэф: {addCoefficient}");
-                scoreValue!.Value += Convert.ToUInt64(Math.Abs(clickPowerValue!.Value * addCoefficient));
+                AudioManager.Instance?.PlaySfx(SfxType.MiniHit);
             }
         }
 
@@ -94,13 +110,13 @@ public class ClickController : MonoBehaviour
     
     private bool TryGetPointerPosition(out Vector3 pointerPosition)
     {
-        if (Mouse.current != null && _clickAction.WasPressedThisFrame())
+        if (Mouse.current != null && _clickAction != null && _clickAction.WasPressedThisFrame())
         {
             pointerPosition = Mouse.current.position.ReadValue();
             return true;
         }
 
-        if (Touchscreen.current != null && _tapAction.WasPressedThisFrame())
+        if (Touchscreen.current != null && _tapAction != null && _tapAction.WasPressedThisFrame())
         {
             pointerPosition = Touchscreen.current.primaryTouch.position.ReadValue();
             return true;

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using _Scripts.Core;
 using JetBrains.Annotations;
@@ -7,7 +8,7 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>, IInitialize
 {
     private SaveGameSystem _saveGameSystem;
-    private bool _isIncomeStared = false;
+    private bool _isIncomeStarted = false;
     [CanBeNull] private Coroutine _autoSaveCoroutine;
     [CanBeNull] private Coroutine _incomeCoroutine;
 
@@ -27,11 +28,14 @@ public class GameManager : Singleton<GameManager>, IInitialize
         _saveGameSystem = new SaveGameSystem();
         RuntimeSaveGameData rgd = _saveGameSystem.Load();
         scoreValue.Value = rgd.Coins;
+        ResetUpgradesToDefault();
+
         if (rgd.UpgradeClickTree != null)
         {
+            var clickMap = upgradeClickItem.Upgrades.ToDictionary(x => x.Id.ToString(), x => x);
             foreach (var utv in rgd.UpgradeClickTree)
             {
-                var v = upgradeClickItem.Upgrades.First(x => x.Id.ToString() == utv.Key);
+                if (!clickMap.TryGetValue(utv.Key, out var v)) continue;
                 if (utv.Value == "1") v.Buy();
                 else v.Reset();
             }
@@ -40,15 +44,24 @@ public class GameManager : Singleton<GameManager>, IInitialize
         }
         if (rgd.UpgradeIncomeTree != null)
         {
+            var incomeMap = upgradeIncomeItem.Upgrades.ToDictionary(x => x.Id.ToString(), x => x);
             foreach (var utv in rgd.UpgradeIncomeTree)
             {
-                var v = upgradeIncomeItem.Upgrades.First(x => x.Id.ToString() == utv.Key);
+                if (!incomeMap.TryGetValue(utv.Key, out var v)) continue;
                 if (utv.Value == "1") v.Buy();
                 else v.Reset();
                 
             }
             incomeValue.Value = CalcCacheHelper.CalcIncomeCache(upgradeIncomeItem.Upgrades.Where(x => x.IsBought).ToArray());
         }
+    }
+
+    private void ResetUpgradesToDefault()
+    {
+        foreach (var clickUpgrade in upgradeClickItem.Upgrades)
+            clickUpgrade.Reset();
+        foreach (var incomeUpgrade in upgradeIncomeItem.Upgrades)
+            incomeUpgrade.Reset();
     }
 
     private SaveGameData CurrentGameData()
@@ -100,11 +113,16 @@ public class GameManager : Singleton<GameManager>, IInitialize
 
     private void IncomeUpdate()
     {
-        if (!_isIncomeStared && incomeValue.Value > 0)
+        if (!_isIncomeStarted && incomeValue.Value > 0)
         {
-            // Debug.Log("Income update START COROUTINE");
-            _isIncomeStared = true;
+            _isIncomeStarted = true;
             _incomeCoroutine = StartCoroutine(Income_Coroutine());
+        }
+        else if (_isIncomeStarted && incomeValue.Value == 0 && _incomeCoroutine != null)
+        {
+            StopCoroutine(_incomeCoroutine);
+            _incomeCoroutine = null;
+            _isIncomeStarted = false;
         }
     }
 
@@ -122,6 +140,7 @@ public class GameManager : Singleton<GameManager>, IInitialize
             StopCoroutine(_autoSaveCoroutine);
         if (_incomeCoroutine != null)
             StopCoroutine(_incomeCoroutine);
+        _isIncomeStarted = false;
         // Debug.Log("Coroutines stopped");
         
         _saveGameSystem.Save(CurrentGameData());

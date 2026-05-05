@@ -25,7 +25,11 @@ public abstract class ValueStoreSO<T> : ScriptableObject
     /// <param name="value">New value</param>
     private void ChangeValue()
     {
+        if (observers == null) return;
         foreach (var observer in observers)
+        {
+            if (observer == null) continue;
             observer.Changing();
+        }
     }
 }

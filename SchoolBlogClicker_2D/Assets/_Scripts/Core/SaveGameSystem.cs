@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -22,14 +23,22 @@ public class SaveGameSystem
         CheckPath();
         if (!File.Exists(_pathFileSave)) return FirstLaunchData();
 
-        string json = File.ReadAllText(_pathFileSave);
-        var gameData = JsonConvert.DeserializeObject<SaveGameData>(json);
+        try
+        {
+            string json = File.ReadAllText(_pathFileSave);
+            if (string.IsNullOrWhiteSpace(json)) return FirstLaunchData();
+            var gameData = JsonConvert.DeserializeObject<SaveGameData>(json);
+            return gameData ?? FirstLaunchData();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"Save file is broken. Using defaults. Reason: {ex.Message}");
+            return FirstLaunchData();
+        }
 
         //// Оффлайн-прогресс
         //double secondsOffline = (DateTime.Now.ToBinary() - dto.lastSaveTime) / 10000000d;
         //OfflineEarnings.Calculate(secondsOffline);
-
-        return gameData;
     }
 
     public RuntimeSaveGameData Load()
