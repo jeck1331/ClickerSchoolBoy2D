@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Button text="" enable-rich-text="false" name="BtnLeaderboard" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; position: relative; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-color: rgba(188, 188, 188, 0); height: 156px; width: 226px;">
+        <ui:Image name="BtnBg" source="project://database/Assets/UI%20Graphics/UI%20Kit.png?fileID=2596848558489221933&amp;guid=df562ec39731f6647aa07904ac60f961&amp;type=3#UI Kit_5" style="justify-content: center; align-items: center; height: 172px; width: initial;">
+            <ui:Image name="BtnIcon" source="project://database/Assets/UI%20Graphics/UI%20Kit.png?fileID=3143001341752472225&amp;guid=df562ec39731f6647aa07904ac60f961&amp;type=3#UI Kit_10" style="padding-left: 0; margin-left: -7px; margin-top: 0; margin-bottom: 6px;"/>
+        </ui:Image>
+    </ui:Button>
+</ui:UXML>

@@ -1,0 +1,44 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Graphics/UiDocument/MainStyles.uss?fileID=7433441132597879392&amp;guid=e9a25300cffdf3c47bab2982f6552c40&amp;type=3#MainStyles"/>
+    <ui:VisualElement name="MainContainer" style="flex-grow: 1; -unity-font-definition: url(&quot;project://database/Assets/Fonts/rimouski%20sb.otf?fileID=12800000&amp;guid=88a712b5ce475224cbf35c3b64ff9163&amp;type=3#rimouski sb&quot;); flex-direction: column;">
+        <ui:VisualElement name="Header" style="flex-grow: 1; flex-wrap: nowrap; flex-shrink: 1; max-height: 20%;">
+            <ui:Image name="BG" source="project://database/Assets/UI%20Graphics/UI%20Kit.png?fileID=-204671460337131484&amp;guid=df562ec39731f6647aa07904ac60f961&amp;type=3#UI Kit_0" scale-mode="StretchToFill" style="background-image: none; background-color: rgba(0, 0, 0, 0); -unity-slice-scale: 1px; -unity-slice-type: sliced; -unity-text-align: middle-center; height: 350px;">
+                <ui:VisualElement name="Top" style="flex-grow: initial; flex-direction: row; justify-content: space-between; align-items: center; flex-shrink: initial; margin-right: 0%; margin-top: 0%; margin-bottom: 0%; margin-left: 0%; padding-top: 3%; padding-right: 10%; padding-bottom: 0; padding-left: 10%;">
+                    <ui:Image name="BG_left" source="project://database/Assets/UI%20Graphics/UI%20Kit.png?fileID=5311167027807519512&amp;guid=df562ec39731f6647aa07904ac60f961&amp;type=3#UI Kit_8" scale-mode="StretchToFill" style="height: 83px; width: 187px; flex-basis: auto; min-width: 35%; aspect-ratio: auto; min-height: auto; max-height: 56px;">
+                        <ui:VisualElement name="Row" style="flex-grow: 1; justify-content: space-between; align-items: center; flex-direction: row; width: auto; height: initial; padding-left: 10px; padding-right: 10px; min-width: auto;">
+                            <ui:Image name="Image" source="project://database/Assets/UI%20Graphics/UI%20Kit.png?fileID=3143001341752472225&amp;guid=df562ec39731f6647aa07904ac60f961&amp;type=3#UI Kit_10" style="height: auto; width: 20%; aspect-ratio: 1.333333;"/>
+                            <ui:Label text="19022" class="font-numbers"/>
+                        </ui:VisualElement>
+                    </ui:Image>
+                </ui:VisualElement>
+                <ui:VisualElement name="Center" style="flex-grow: 3; flex-shrink: 3; align-items: center; justify-content: center;">
+                    <ui:Label text="1123K&#10;" class="font-numbers" style="font-size: 100px;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="Bottom" style="flex-grow: 1; padding-bottom: 4%;"/>
+            </ui:Image>
+        </ui:VisualElement>
+        <ui:VisualElement name="Body" style="flex-grow: 5; flex-shrink: 5;"/>
+        <ui:VisualElement name="NavButtons" style="flex-grow: initial; flex-direction: row; align-items: center; justify-content: space-between; padding-right: 5%; padding-left: 5%; flex-shrink: initial; padding-top: 20px; padding-bottom: 20px; max-height: 15%;">
+            <ui:Button text="" enable-rich-text="false" name="BtnLeaderboard" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; position: relative; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-color: rgba(188, 188, 188, 0); height: 156px; width: 226px;">
+                <ui:Image name="BtnBg" source="project://database/Assets/UI%20Graphics/UI%20Kit.png?fileID=2596848558489221933&amp;guid=df562ec39731f6647aa07904ac60f961&amp;type=3#UI Kit_5" style="justify-content: center; align-items: center; height: 172px; width: initial;">
+                    <ui:Image name="BtnIcon" source="project://database/Assets/UI%20Graphics/UI%20Kit.png?fileID=3143001341752472225&amp;guid=df562ec39731f6647aa07904ac60f961&amp;type=3#UI Kit_10" style="padding-left: 0; margin-left: -7px; margin-top: 0; margin-bottom: 6px;"/>
+                </ui:Image>
+            </ui:Button>
+            <ui:Button text="" enable-rich-text="false" name="BtnUpgrade" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; position: relative; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-color: rgba(188, 188, 188, 0); height: 156px; width: 226px;">
+                <ui:Image name="BtnBg" source="project://database/Assets/UI%20Graphics/UI%20Kit.png?fileID=2596848558489221933&amp;guid=df562ec39731f6647aa07904ac60f961&amp;type=3#UI Kit_5" style="justify-content: center; align-items: center; height: 172px; width: initial;">
+                    <ui:Image name="BtnIcon" source="project://database/Assets/UI%20Graphics/UI%20Kit.png?fileID=673210593180288781&amp;guid=df562ec39731f6647aa07904ac60f961&amp;type=3#UI Kit_12" style="padding-left: 0; margin-left: 0; margin-top: 0; margin-bottom: 12px; margin-right: 4px;"/>
+                </ui:Image>
+            </ui:Button>
+            <ui:Button text="" enable-rich-text="false" name="BtnShop" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; position: relative; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-color: rgba(188, 188, 188, 0); height: 156px; width: 226px;">
+                <ui:Image name="BtnBg" source="project://database/Assets/UI%20Graphics/UI%20Kit.png?fileID=2596848558489221933&amp;guid=df562ec39731f6647aa07904ac60f961&amp;type=3#UI Kit_5" style="justify-content: center; align-items: center; height: 172px; width: initial;">
+                    <ui:Image name="BtnIcon" source="project://database/Assets/UI%20Graphics/UI%20Kit.png?fileID=-6036789963431726792&amp;guid=df562ec39731f6647aa07904ac60f961&amp;type=3#UI Kit_13" style="padding-left: 0; margin-left: 0; margin-top: 0; margin-bottom: 9px; margin-right: 5px;"/>
+                </ui:Image>
+            </ui:Button>
+            <ui:Button text="" enable-rich-text="false" name="BtnSettings" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; position: relative; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-color: rgba(188, 188, 188, 0); height: 156px; width: 226px;">
+                <ui:Image name="BtnBg" source="project://database/Assets/UI%20Graphics/UI%20Kit.png?fileID=2596848558489221933&amp;guid=df562ec39731f6647aa07904ac60f961&amp;type=3#UI Kit_5" style="justify-content: center; align-items: center; height: 172px; width: initial;">
+                    <ui:Image name="BtnIcon" source="project://database/Assets/UI%20Graphics/UI%20Kit.png?fileID=-1173721361784811164&amp;guid=df562ec39731f6647aa07904ac60f961&amp;type=3#UI Kit_1" style="padding-left: 0; margin-left: 0; margin-top: 0; margin-bottom: 8px; margin-right: 6px;"/>
+                </ui:Image>
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
