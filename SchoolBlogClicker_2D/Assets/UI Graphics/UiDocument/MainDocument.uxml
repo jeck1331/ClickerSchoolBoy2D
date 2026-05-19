@@ -11,7 +11,7 @@
                         </ui:VisualElement>
                     </ui:Image>
                 </ui:VisualElement>
-                <ui:VisualElement name="Center" style="flex-grow: 3; flex-shrink: 3; align-items: center; justify-content: center;">
+                <ui:VisualElement name="Center" style="flex-grow: 3; flex-shrink: 3; align-items: center; justify-content: center; padding-right: 5%; padding-left: 5%;">
                     <ui:Label text="1123K&#10;" class="font-numbers" style="font-size: 100px;"/>
                 </ui:VisualElement>
                 <ui:VisualElement name="Bottom" style="flex-grow: 1; padding-bottom: 4%;"/>
