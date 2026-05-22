@@ -13,15 +13,15 @@ public class CritConfigSO : ScriptableObject
     [SerializeField] private float maxMultiplierAtStart = 2.1f;
     [SerializeField] private float minMultiplierAtHighScore = 2.0f;
     [SerializeField] private float maxMultiplierAtHighScore = 3.1f;
-    [SerializeField] private ulong scoreForMaxMultiplierRange = 1000000;
+    [SerializeField] private long scoreForMaxMultiplierRange = 1000000;
 
-    public float CalculateChance(ulong score)
+    public float CalculateChance(long score)
     {
         var chance = baseChance + score * chancePerScoreUnit;
         return Mathf.Clamp(chance, 0f, maxChance);
     }
 
-    public Vector2 CalculateMultiplierRange(ulong score)
+    public Vector2 CalculateMultiplierRange(long score)
     {
         var t = scoreForMaxMultiplierRange == 0 ? 1f : Mathf.Clamp01(score / (float)scoreForMaxMultiplierRange);
         var min = Mathf.Lerp(minMultiplierAtStart, minMultiplierAtHighScore, t);

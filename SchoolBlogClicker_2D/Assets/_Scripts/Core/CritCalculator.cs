@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 public static class CritCalculator
 {
-    public static ulong CalculateHitReward(uint basePower, ulong score, CritConfigSO config, out bool isCrit)
+    public static long CalculateHitReward(int basePower, long score, CritConfigSO config, out bool isCrit)
     {
         if (config == null)
         {
@@ -19,6 +19,6 @@ public static class CritCalculator
 
         var range = config.CalculateMultiplierRange(score);
         var coeff = Random.Range(range.x, range.y);
-        return Convert.ToUInt64(Math.Max(1f, basePower * coeff));
+        return Convert.ToInt64(Math.Max(1f, basePower * coeff));
     }
 }

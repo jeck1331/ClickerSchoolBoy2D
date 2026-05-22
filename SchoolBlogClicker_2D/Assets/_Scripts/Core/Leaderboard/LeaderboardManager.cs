@@ -40,7 +40,7 @@ public class LeaderboardManager : MonoBehaviour
         _provider?.SubmitScore(scoreValue.Value);
     }
 
-    public ulong GetBestScore()
+    public long GetBestScore()
     {
         return _provider?.GetBestScore() ?? 0;
     }

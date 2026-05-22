@@ -6,28 +6,16 @@ namespace _Scripts.Models.Upgrade
     [Serializable]
     public abstract class UpgradeBaseField
     {
-        [Header("ID")] [SerializeField] private uint id;
+        [Header("ID")] [SerializeField] private int id;
         [Header("Title")] [SerializeField] private string title;
         [Header("Base Description")] [SerializeField] private string description;
-        [Header("Price")] [SerializeField] private uint price;
+        [Header("Price")] [SerializeField] private int price;
         [Header("Icon")] [SerializeField] private Sprite sprite;
-        [Header("Bought?")] [SerializeField] private bool isBought = false;
-        [Header("Secret?")] [SerializeField] private bool isSecret = true;
 
-        public uint Id => id;
+        public int Id => id;
         public string Title => title;
         public string Description => description;
-        public uint Price => price;
+        public int Price => price;
         public Sprite SpriteAsset => sprite;
-        public bool IsSecret => isSecret;
-        public bool IsBought => isBought;
-        public void Buy() => isBought = true;
-        public void Unsecret() => isSecret = false;
-
-        public void Reset()
-        {
-            isBought = false;
-            isSecret = id != 0;
-        }
     }
 }

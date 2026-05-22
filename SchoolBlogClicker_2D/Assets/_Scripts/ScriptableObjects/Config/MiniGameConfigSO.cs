@@ -27,11 +27,11 @@ public class MiniGameConfigSO : ScriptableObject
     public float WarningAnimationStartNormalized => Mathf.Clamp01(warningAnimationStartNormalized);
     public float CircleRadius => Mathf.Max(1f, circleRadius);
 
-    public ulong CalculateReward(uint clickPower, float reactionTime)
+    public long CalculateReward(int clickPower, float reactionTime)
     {
         var normalized = Mathf.Clamp01(reactionTime / CircleLifetime);
         var multiplier = Mathf.Lerp(maxRewardMultiplier, minRewardMultiplier, normalized);
         var result = Math.Max(1f, clickPower * multiplier);
-        return Convert.ToUInt64(result);
+        return Convert.ToInt64(result);
     }
 }

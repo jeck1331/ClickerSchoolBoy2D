@@ -1,5 +1,5 @@
 public interface ILeaderboardProvider
 {
-    void SubmitScore(ulong score);
-    ulong GetBestScore();
+    void SubmitScore(long score);
+    long GetBestScore();
 }

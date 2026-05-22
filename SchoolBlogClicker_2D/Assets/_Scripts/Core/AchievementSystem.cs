@@ -29,7 +29,7 @@ public class AchievementSystem : MonoBehaviour
         SaveState();
     }
 
-    private void HandleClickResolved(bool isCrit, ulong _)
+    private void HandleClickResolved(bool isCrit, long _)
     {
         _critStreak = isCrit ? _critStreak + 1 : 0;
         if (_critStreak >= 5) Unlock("crit_streak_5");

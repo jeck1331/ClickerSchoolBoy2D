@@ -6,9 +6,9 @@ namespace _Scripts.Core
 {
     public static class CalcCacheHelper
     {
-        public static uint CalcIncomeCache (UpgradeIncomeField[] incomeUpgrades)
+        public static int CalcIncomeCache (UpgradeIncomeField[] incomeUpgrades)
         {
-            uint res = 0;
+            int res = 0;
             foreach (var upgrade in incomeUpgrades)
             {
                 res += upgrade.Income;
@@ -18,9 +18,9 @@ namespace _Scripts.Core
             return res;
         }
         
-        public static uint CalcPowerCache (UpgradeClickField[] powerUpgrades)
+        public static int CalcPowerCache (UpgradeClickField[] powerUpgrades)
         {
-            uint res = 1;
+            int res = 1;
             foreach (var upgrade in powerUpgrades)
             {
                 switch (upgrade.CalcType)

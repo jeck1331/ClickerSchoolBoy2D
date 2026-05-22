@@ -2,7 +2,7 @@
 {
     public static class TextHelper
     {
-        public static string ScoreViewFromNumber(this ulong number)
+        public static string ScoreViewFromNumber(this long number)
         {
             float numberFloat = number;
             if (numberFloat / 1000f >= 1 && numberFloat / 1_000_000f < 1)

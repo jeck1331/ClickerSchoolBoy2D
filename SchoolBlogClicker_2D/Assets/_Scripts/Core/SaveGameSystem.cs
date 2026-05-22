@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System;
+using _Scripts.Models.Save;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -9,16 +10,16 @@ public class SaveGameSystem
     private const string FileName = "wasilisk_data.json";
     private string _pathFileSave;
 
-    public void Save(SaveGameData saveGameData)
+    public void Save(SavedGameData savedGameData)
     {
         CheckPath();
         
-        string json = JsonConvert.SerializeObject(saveGameData);
+        string json = JsonConvert.SerializeObject(savedGameData);
         File.WriteAllText(_pathFileSave, json);
         Debug.Log("save");
     }
 
-    private SaveGameData LoadFromFile()
+    private SavedGameData LoadFromFile()
     {
         CheckPath();
         if (!File.Exists(_pathFileSave)) return FirstLaunchData();
@@ -27,7 +28,7 @@ public class SaveGameSystem
         {
             string json = File.ReadAllText(_pathFileSave);
             if (string.IsNullOrWhiteSpace(json)) return FirstLaunchData();
-            var gameData = JsonConvert.DeserializeObject<SaveGameData>(json);
+            var gameData = JsonConvert.DeserializeObject<SavedGameData?>(json);
             return gameData ?? FirstLaunchData();
         }
         catch (Exception ex)
@@ -41,10 +42,10 @@ public class SaveGameSystem
         //OfflineEarnings.Calculate(secondsOffline);
     }
 
-    public RuntimeSaveGameData Load()
+    public RuntimeSavedGameData Load()
     {
         Debug.Log("load");
-        return new RuntimeSaveGameData(LoadFromFile());
+        return new RuntimeSavedGameData(LoadFromFile());
     }
 
     private void CheckPath()
@@ -56,9 +57,9 @@ public class SaveGameSystem
         _isInitialized = true;
     }
 
-    private SaveGameData FirstLaunchData() => new SaveGameData
+    private SavedGameData FirstLaunchData() => new SavedGameData
     {
-        Coins = "0",
+        Coins = 0,
         IsFirstLaunch = false,
     };
 }

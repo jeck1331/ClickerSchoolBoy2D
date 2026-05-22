@@ -1,9 +1,6 @@
-﻿using System.Linq;
-using _Scripts.Core;
-using _Scripts.Models.Upgrade;
+﻿using _Scripts.Models.Upgrade;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Scripts.Prefabs
 {
@@ -39,20 +36,20 @@ namespace _Scripts.Prefabs
         
         private void CheckSecretState()
         {
-            if (_data.IsBought)
-            {
-                _button.interactable = false;
-                UpdateStateTexts();
-                return;
-            }
-
-            //If the item is secret, check if the previous item has been with IsBought state
-            if (_data.IsSecret)
-            {
-                UpgradeEconomyService.TryUnlockByPreviousId(_data, upgradeIncomeItem.Upgrades);
-                _button.interactable = !_data.IsSecret && !_data.IsBought;
-                UpdateStateTexts(_data.IsSecret);
-            }
+            // if (_data.IsBought)
+            // {
+            //     _button.interactable = false;
+            //     UpdateStateTexts();
+            //     return;
+            // }
+            //
+            // //If the item is secret, check if the previous item has been with IsBought state
+            // if (_data.IsSecret)
+            // {
+            //     UpgradeEconomyService.TryUnlockByPreviousId(_data, upgradeIncomeItem.Upgrades);
+            //     _button.interactable = !_data.IsSecret && !_data.IsBought;
+            //     UpdateStateTexts(_data.IsSecret);
+            // }
         }
         
         private void UpdateStateTexts(bool isSecret = false)
