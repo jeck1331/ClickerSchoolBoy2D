@@ -32,7 +32,7 @@ namespace _Scripts.Prefabs
 
         protected override void UpdateStateButton()
         {
-            _button.interactable = UpgradeEconomyService.CanBuy(_data, scoreValue.Value);
+            _button.interactable = UpgradeEconomyService.CanBuy(_data, state, scoreValue.Value);
         }
 
         private void CheckSecretState()
@@ -78,7 +78,7 @@ namespace _Scripts.Prefabs
 
         public override void OnBuyEvent()
         {
-            if (UpgradeEconomyService.TryBuyClickUpgrade(_data, scoreValue, powerValue, upgradeClickItem))
+            if (UpgradeEconomyService.TryBuyClickUpgrade(_data, state, scoreValue, powerValue, upgradeClickItem))
                 AudioManager.Instance?.PlaySfx(SfxType.UpgradeBuy);
         }
     }
