@@ -1,8 +1,0 @@
-:root {
-}
-
-.font-numbers {
-    -unity-font-definition: url("project://database/Assets/Fonts/Supply%20Center.ttf?fileID=12800000&guid=d7506af493c4e6c47bd5f74a846bdaee&type=3#Supply Center");
-    font-size: 24px;
-    -unity-text-align: middle-left;
-}
