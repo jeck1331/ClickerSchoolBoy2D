@@ -14,7 +14,7 @@ public class MiniGameSystem : MonoBehaviour
 {
     [SerializeField] private GameObject inheritGameObject;
     [SerializeField] private GameObject zoneGenerating;
-    private BoxCollider2D _boxColliderZg;
+    private RectTransform _zoneGeneratingTransform;
     private RectTransform _canvasTransform;
     [SerializeField] private BoolValue valueInMenu;
     [SerializeField] private ObserverSO inMenuObserver;
@@ -39,15 +39,21 @@ public class MiniGameSystem : MonoBehaviour
 
     private void Awake()
     {
-        _boxColliderZg = zoneGenerating.GetComponent<BoxCollider2D>();
-        _canvasTransform = inheritGameObject.GetComponent<RectTransform>();
+        if (zoneGenerating != null)
+            _zoneGeneratingTransform = zoneGenerating.GetComponent<RectTransform>();
+
+        if (inheritGameObject != null)
+            _canvasTransform = inheritGameObject.GetComponent<RectTransform>();
     }
 
     private void OnEnable()
     {
-        inMenuObserver.OnValueChanged += OnMenuValueChanged;
+        if (inMenuObserver != null)
+            inMenuObserver.OnValueChanged += OnMenuValueChanged;
+
+        GameplayPauseService.OnPauseChanged += OnGameplayPauseChanged;
         circleObserver.OnValueChanged += HandleCircleClick;
-        if (!valueInMenu.Value) 
+        if (!IsGameplayPaused()) 
         {
             StartLoop();
         }
@@ -55,7 +61,10 @@ public class MiniGameSystem : MonoBehaviour
 
     private void OnDisable()
     {
-        inMenuObserver.OnValueChanged -= OnMenuValueChanged;
+        if (inMenuObserver != null)
+            inMenuObserver.OnValueChanged -= OnMenuValueChanged;
+
+        GameplayPauseService.OnPauseChanged -= OnGameplayPauseChanged;
         circleObserver.OnValueChanged -= HandleCircleClick;
         StopLoop();
     }
@@ -113,15 +122,8 @@ public class MiniGameSystem : MonoBehaviour
 
     public void SpawnCircle()
     {
-        if (_boxColliderZg == null || circlePrefab == null || _canvasTransform == null) return;
-
-        var bounds = _boxColliderZg.bounds;
-        
-        var circleRadius = miniGameConfig.CircleRadius;
-        var randomX = Random.Range(bounds.min.x + circleRadius * 0.01f, bounds.max.x - circleRadius * 0.01f);
-        var randomY = Random.Range(bounds.min.y + circleRadius * 0.01f, bounds.max.y - circleRadius * 0.01f);
-        
-        var worldPos = new Vector3(randomX, randomY, 1);
+        if (_zoneGeneratingTransform == null || circlePrefab == null || _canvasTransform == null || miniGameConfig == null)
+            return;
 
         var newCircle = Instantiate(circlePrefab, _canvasTransform);
         var lifecycle = newCircle.GetComponent<_Scripts.Prefabs.CircleLifeCycleMGS>();
@@ -129,30 +131,45 @@ public class MiniGameSystem : MonoBehaviour
             lifecycle.Configure(miniGameConfig.CircleLifetime, miniGameConfig.WarningAnimationStartNormalized);
 
         var rect = newCircle.GetComponent<RectTransform>();
-        var mainCamera = Camera.main;
-        if (rect == null || mainCamera == null)
+        if (rect == null)
         {
             Destroy(newCircle);
             return;
         }
-        var screenPoint = mainCamera.WorldToScreenPoint(worldPos);
-        
-        Vector2 localPos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            _canvasTransform, 
-            screenPoint, 
-            mainCamera, 
-            out localPos
-        );
 
-        rect.anchoredPosition = localPos;
+        rect.anchoredPosition = GetRandomPositionInsideZone();
         _currentCircle = newCircle;
         _currentCircleSpawnTime = Time.time;
     }
 
+    private Vector2 GetRandomPositionInsideZone()
+    {
+        var bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(_canvasTransform, _zoneGeneratingTransform);
+        var circlePadding = miniGameConfig.CircleRadius * 0.5f;
+
+        var minX = bounds.min.x + circlePadding;
+        var maxX = bounds.max.x - circlePadding;
+        var minY = bounds.min.y + circlePadding;
+        var maxY = bounds.max.y - circlePadding;
+
+        if (minX > maxX)
+        {
+            minX = bounds.center.x;
+            maxX = bounds.center.x;
+        }
+
+        if (minY > maxY)
+        {
+            minY = bounds.center.y;
+            maxY = bounds.center.y;
+        }
+
+        return new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+    }
+
     private void OnMenuValueChanged()
     {
-        if (!valueInMenu.Value)
+        if (!IsGameplayPaused())
         {
             StartLoop();
         }
@@ -191,6 +208,9 @@ public class MiniGameSystem : MonoBehaviour
 
     private void HandleCircleClick(GameObject clickedObject)
     {
+        if (IsGameplayPaused())
+            return;
+
         if (_currentCircle == null || clickedObject != _currentCircle) return;
 
         _currentCircleWasHit = true;
@@ -202,5 +222,15 @@ public class MiniGameSystem : MonoBehaviour
         AudioManager.Instance?.PlaySfx(SfxType.MiniHit);
         GameEvents.ClickResolved(false, reward);
         _currentCircle = null;
+    }
+
+    private void OnGameplayPauseChanged(bool _)
+    {
+        OnMenuValueChanged();
+    }
+
+    private bool IsGameplayPaused()
+    {
+        return GameplayPauseService.IsGameplayInputPaused || valueInMenu != null && valueInMenu.Value;
     }
 }

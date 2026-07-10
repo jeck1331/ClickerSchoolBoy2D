@@ -19,6 +19,8 @@ public class SettingsMenuUI : MonoBehaviour
     {
         if (panel != null)
             panel.SetActive(true);
+
+        GameplayPauseService.SetPaused(this, true);
         SyncFromPrefs();
     }
 
@@ -26,6 +28,13 @@ public class SettingsMenuUI : MonoBehaviour
     {
         if (panel != null)
             panel.SetActive(false);
+
+        GameplayPauseService.SetPaused(this, false);
+    }
+
+    private void OnDisable()
+    {
+        GameplayPauseService.SetPaused(this, false);
     }
 
     public void OnMasterVolumeChanged(float value)

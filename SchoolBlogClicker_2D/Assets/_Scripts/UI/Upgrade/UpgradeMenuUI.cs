@@ -20,6 +20,8 @@ public class UpgradeMenuUI : MonoBehaviour, ISubscribe
 
     private void OnEnable()
     {
+        GameplayPauseService.SetPaused(this, true);
+
         _imageClickMenuBtn = clickMenuBtn.GetComponent<Image>();
         _imagePassiveMenuBtn = passiveMenuBtn.GetComponent<Image>();
         
@@ -28,7 +30,10 @@ public class UpgradeMenuUI : MonoBehaviour, ISubscribe
 
     public void OnExitUpgradeMenu()
     {
-        tapZone.SetActive(true);
+        if (tapZone != null)
+            tapZone.SetActive(true);
+
+        GameplayPauseService.SetPaused(this, false);
         gameObject.SetActive(false);
     }
     
@@ -37,6 +42,7 @@ public class UpgradeMenuUI : MonoBehaviour, ISubscribe
 
     private void OnDisable()
     {
+        GameplayPauseService.SetPaused(this, false);
     }
 
     private void OnDestroy()

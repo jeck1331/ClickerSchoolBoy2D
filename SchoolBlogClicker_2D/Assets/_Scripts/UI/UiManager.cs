@@ -89,8 +89,13 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
 
     public void OpenUpgradeMenu()
     {
-        tapZoneGm.SetActive(!tapZoneGm.activeSelf);
-        canvasUpgradeMenuUI.SetActive(!canvasUpgradeMenuUI.activeSelf);
+        var isOpen = !canvasUpgradeMenuUI.activeSelf;
+        canvasUpgradeMenuUI.SetActive(isOpen);
+
+        if (tapZoneGm != null)
+            tapZoneGm.SetActive(true);
+
+        GameplayPauseService.SetPaused(this, isOpen);
     }
 
     void ISubscribe.Subscribes()

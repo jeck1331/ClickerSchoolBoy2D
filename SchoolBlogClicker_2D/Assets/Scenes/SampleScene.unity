@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0.2627451}
+  m_Color: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5953,10 +5953,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   tapZone: {fileID: 1251624134}
   upgradeMenuState: 0
-  clickMenuBtn: {fileID: 0}
-  passiveMenuBtn: {fileID: 0}
-  clickUpgradeContent: {fileID: 0}
-  passiveUpgradeContent: {fileID: 0}
+  clickMenuBtn: {fileID: 667386426}
+  passiveMenuBtn: {fileID: 2079927528}
+  clickUpgradeContent: {fileID: 3180038415165293528}
+  passiveUpgradeContent: {fileID: 934189392}
   matSelectedBtn: {fileID: 2100000, guid: 9d340700c250972409c1eab65d0f9bab, type: 2}
 --- !u!1 &352766184
 GameObject:
@@ -7384,7 +7384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448495208e16d0740b00a1dd171d48ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MiniGameSystem
-  inheritGameObject: {fileID: 0}
+  inheritGameObject: {fileID: 1287165037}
   zoneGenerating: {fileID: 100939755}
   valueInMenu: {fileID: 11400000, guid: 6641dfb8e4acc08409a291a74ce03af2, type: 2}
   inMenuObserver: {fileID: 11400000, guid: ca3c75beb0bcb0a44817be3d4ec45b4c, type: 2}
@@ -7857,6 +7857,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5427681038525717367, guid: 8a20e91eadf47144b8560ddb4e59016f, type: 3}
   m_PrefabInstance: {fileID: 934189390}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &934189392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8497691133898318366, guid: 8a20e91eadf47144b8560ddb4e59016f, type: 3}
+  m_PrefabInstance: {fileID: 934189390}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1153581372
 GameObject:
   m_ObjectHideFlags: 0
@@ -8217,6 +8222,7 @@ MonoBehaviour:
   circleObserver: {fileID: 11400000, guid: 700ac243f6a8307479e93dea1ac16fda, type: 2}
   critConfig: {fileID: 11400000, guid: 71cf52464d8dde04cb257c0ae30b8b60, type: 2}
   tapZoneTag: TapZone
+  tapZoneButton: {fileID: 0}
   miniGameTag: ClickItemMG
 --- !u!4 &1251624137
 Transform:
@@ -14507,7 +14513,7 @@ GameObject:
   - component: {fileID: 2079927531}
   - component: {fileID: 2079927530}
   m_Layer: 5
-  m_Name: Btn_ShopMenu
+  m_Name: Btn_MarketMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15024,6 +15030,11 @@ PrefabInstance:
 --- !u!224 &3180038415165293527 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1100552916196073755, guid: e7bafcdcadcff894eb23fe22af85d837, type: 3}
+  m_PrefabInstance: {fileID: 3180038415165293526}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3180038415165293528 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3601420916857182322, guid: e7bafcdcadcff894eb23fe22af85d837, type: 3}
   m_PrefabInstance: {fileID: 3180038415165293526}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
