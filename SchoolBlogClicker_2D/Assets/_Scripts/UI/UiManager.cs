@@ -7,7 +7,7 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
 {
     private static readonly int Increment = Animator.StringToHash("increment");
 
-    [SerializeField] private GameObject canvasUpgradeMenuUI;
+    [SerializeField] private GameObject shopMenuUI;
     [SerializeField] private GameObject tapZoneGm;
 
     [SerializeField] private TMP_Text coinsText;
@@ -23,11 +23,6 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
     [SerializeField] private ObserverSO clickPowerObserver;
     [SerializeField] private ObserverSO incomePowerObserver;
     [SerializeField] private ObserverSO scoreObserver;
-
-    // private void Awake()
-    // {
-    //     (this as ISubscribe).Subscribes();
-    // }
     
     public void Initialize()
     {
@@ -44,11 +39,6 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
     {
         (this as ISubscribe).Unsubscribes();
     }
-
-    // private void OnDestroy()
-    // {
-    //     (this as ISubscribe).Unsubscribes();
-    // }
 
     private void UpdateTextCoinsText()
     {
@@ -89,8 +79,8 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
 
     public void OpenUpgradeMenu()
     {
-        var isOpen = !canvasUpgradeMenuUI.activeSelf;
-        canvasUpgradeMenuUI.SetActive(isOpen);
+        var isOpen = !shopMenuUI.activeSelf;
+        shopMenuUI.SetActive(isOpen);
 
         if (tapZoneGm != null)
             tapZoneGm.SetActive(true);
