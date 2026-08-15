@@ -655,7 +655,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.5328882, y: -0.89622116}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -665,7 +665,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5.618364, y: 6.926361}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &187823534
 Transform:
@@ -676,7 +676,7 @@ Transform:
   m_GameObject: {fileID: 187823532}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.53755, y: 0.391, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7671,6 +7671,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b48c17603a68842bfffc50ae745d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  gmTapZone: {fileID: 187823532}
+  tapZoneRectTransform: {fileID: 1921409977}
   scoreObserver: {fileID: 11400000, guid: c7d62fba8abb4b042818ca58d75045cd, type: 2}
   powerObserver: {fileID: 11400000, guid: c10945c8d75aa964d8cb2a2b6bea7dcf, type: 2}
   incomeObserver: {fileID: 11400000, guid: 371d10dcc848aec42bbc8ac26736141c, type: 2}
@@ -7679,8 +7681,7 @@ MonoBehaviour:
   incomeValue: {fileID: 11400000, guid: 09997c0345dbd8c4dbd2b8e4904bef3c, type: 2}
   upgradeClickItem: {fileID: 11400000, guid: 5b95e30f3e86f264087c10abe41bed96, type: 2}
   upgradeIncomeItem: {fileID: 11400000, guid: 0ad0ceff3417d744ab67d1d35bc1b7c3, type: 2}
-  shopManager: {fileID: 0}
-  upgradeManager: {fileID: 0}
+  canvasCamera: {fileID: 519420031}
 --- !u!4 &1179688842
 Transform:
   m_ObjectHideFlags: 0
@@ -7866,7 +7867,6 @@ MonoBehaviour:
   circleObserver: {fileID: 11400000, guid: 700ac243f6a8307479e93dea1ac16fda, type: 2}
   critConfig: {fileID: 11400000, guid: 71cf52464d8dde04cb257c0ae30b8b60, type: 2}
   tapZoneTag: TapZone
-  tapZoneButton: {fileID: 0}
   miniGameTag: ClickItemMG
 --- !u!4 &1251624137
 Transform:
