@@ -8,6 +8,8 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
     private static readonly int Increment = Animator.StringToHash("increment");
 
     [SerializeField] private GameObject shopMenuUI;
+    [SerializeField] private GameObject upgradeMenuUI;
+    
     [SerializeField] private GameObject tapZoneGm;
 
     [SerializeField] private TMP_Text coinsText;
@@ -76,16 +78,31 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
     {
         SceneManager.LoadScene(0);
     }
-
-    public void OpenUpgradeMenu()
+    
+    public void OpenShopMenu()
     {
-        var isOpen = !shopMenuUI.activeSelf;
-        shopMenuUI.SetActive(isOpen);
+        if (upgradeMenuUI.activeSelf)
+            upgradeMenuUI.SetActive(false);
+        
+        shopMenuUI.SetActive(true);
 
         if (tapZoneGm != null)
             tapZoneGm.SetActive(true);
 
-        GameplayPauseService.SetPaused(this, isOpen);
+        GameplayPauseService.SetPaused(this, true);
+    }
+
+    public void OpenUpgradeMenu()
+    {
+        if (shopMenuUI.activeSelf)
+            shopMenuUI.SetActive(false);
+        
+        upgradeMenuUI.SetActive(true);
+
+        if (tapZoneGm != null)
+            tapZoneGm.SetActive(true);
+
+        GameplayPauseService.SetPaused(this, true);
     }
 
     void ISubscribe.Subscribes()

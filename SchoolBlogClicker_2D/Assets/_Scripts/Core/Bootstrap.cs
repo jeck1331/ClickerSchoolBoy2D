@@ -8,6 +8,7 @@ public class Bootstrap : MonoBehaviour
     private void Awake()
     {
         // #FOR ANDROID
+        // Научится вычислять FrameRate телефона
         Application.targetFrameRate = 120;
         QualitySettings.vSyncCount = 0;
         

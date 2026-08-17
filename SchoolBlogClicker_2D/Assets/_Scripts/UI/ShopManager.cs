@@ -39,4 +39,12 @@ public class ShopManager : MonoBehaviour
             _shopData.Upgrades.Where(x => upgradeStates.ContainsKey(x.Id) && upgradeStates[x.Id].IsBought).ToArray()
             );
     }
+    
+    public void Reset()
+    {
+        foreach (var upgradeStateItem in upgradeStates)
+        {
+            upgradeStateItem.Value.Reset();
+        }
+    }
 }

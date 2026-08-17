@@ -3,8 +3,7 @@ using UnityEngine.InputSystem;
 
 public class ClickController : MonoBehaviour
 {
-    private InputAction _clickAction;
-    private InputAction _tapAction;
+    private InputAction _pointerAction;
 
     [SerializeField] private ULongValue scoreValue;
     [SerializeField] private UIntValue clickPowerValue;
@@ -12,89 +11,79 @@ public class ClickController : MonoBehaviour
     [SerializeField] private ParticleSystem vfxCritStarParticle;
     [SerializeField] private ObserverGameObjSO circleObserver;
     [SerializeField] private CritConfigSO critConfig;
-    [SerializeField] private string tapZoneTag = "TapZone";
     [SerializeField] private string miniGameTag = "ClickItemMG";
+    
+    [SerializeField] private RectTransform hitArea;
+    [SerializeField] private Canvas canvas;
+    private Camera UICamera => canvas.worldCamera;
+    
+    private void Awake()
+    {
+        _pointerAction = InputSystem.actions.FindAction("Pointer");
+    }
 
     private void OnEnable()
     {
-        
+        _pointerAction.performed += OnClick;
         GameplayPauseService.OnPauseChanged += HandlePauseChanged;
         HandlePauseChanged(GameplayPauseService.IsGameplayInputPaused);
     }
 
     private void OnDisable()
     {
+        _pointerAction.performed -= OnClick;
         GameplayPauseService.OnPauseChanged -= HandlePauseChanged;
     }
-
-    private void Start()
+    
+    private void OnClick(InputAction.CallbackContext ctx)
     {
-        _clickAction = InputSystem.actions.FindAction("Click");
-        _tapAction = InputSystem.actions.FindAction("Tap");
-    }
-
-    private void Update()
-    {
-        if (GameplayPauseService.IsGameplayInputPaused)
+        if (ctx.control.device is not Pointer pointer)
             return;
 
-        if (!TryGetPointerPosition(out Vector3 pointerPosition))
-            return;
+        Vector2 screenPosition = pointer.position.ReadValue();
         
-        Vector2 screenPosition = Camera.main.ScreenToWorldPoint(pointerPosition);
-        int layerMask = 1 << LayerMask.NameToLayer("TapZone");
-        Collider2D hitCollider = Physics2D.OverlapPoint(screenPosition, layerMask);
-        
-        if (hitCollider != null){
-            if (hitCollider.CompareTag(tapZoneTag))
-            {
-                var hitReward = CritCalculator.CalculateHitReward(clickPowerValue!.Value, scoreValue.Value, critConfig, out var isCrit);
-                scoreValue.Value += hitReward;
-                if (isCrit)
-                {
-                    if (vfxCritStarParticle != null)
-                    {
-                        vfxCritStarParticle.transform.position = screenPosition;
-                        vfxCritStarParticle.Play();
-                    }
-                    AudioManager.Instance?.PlaySfx(SfxType.Crit);
-                }
-                else
-                {
-                    if (vfxStarParticle != null)
-                    {
-                        vfxStarParticle.transform.position = screenPosition;
-                        vfxStarParticle.Play();
-                    }
-                    AudioManager.Instance?.PlaySfx(SfxType.Click);
-                }
+        if (!IsInside(screenPosition)) return;
 
-                GameEvents.ClickResolved(isCrit, hitReward);
-            } else if (hitCollider.CompareTag(miniGameTag))
-            {
-                GameObject touchedObject = hitCollider.transform.gameObject;
-                circleObserver.Changing(touchedObject);
-                AudioManager.Instance?.PlaySfx(SfxType.MiniHit);
-            }
+        //MiniGame Hit
+        if (false)
+        {
+            //Подумать мб генерить не gameObject Sprite, а RectTransform?
+            // GameObject touchedObject = hitCollider.transform.gameObject;
+            // circleObserver.Changing(touchedObject);
+            // AudioManager.Instance?.PlaySfx(SfxType.MiniHit);
         }
+
+        var hitReward = CritCalculator.CalculateHitReward(clickPowerValue!.Value, scoreValue.Value, critConfig, out var isCrit);
+        scoreValue.Value += hitReward;
+        if (isCrit)
+        {
+            if (vfxCritStarParticle != null)
+            {
+                vfxCritStarParticle.transform.position = screenPosition;
+                vfxCritStarParticle.Play();
+            }
+            AudioManager.Instance?.PlaySfx(SfxType.Crit);
+        }
+        else
+        {
+            if (vfxStarParticle != null)
+            {
+                vfxStarParticle.transform.position = screenPosition;
+                vfxStarParticle.Play();
+            }
+            AudioManager.Instance?.PlaySfx(SfxType.Click);
+        }
+
+        GameEvents.ClickResolved(isCrit, hitReward);
     }
     
-    private bool TryGetPointerPosition(out Vector3 pointerPosition)
+    private bool IsInside(Vector2 screenPosition)
     {
-        if (Mouse.current != null && _clickAction != null && _clickAction.WasPressedThisFrame())
-        {
-            pointerPosition = Mouse.current.position.ReadValue();
-            return true;
-        }
-
-        if (Touchscreen.current != null && _tapAction != null && _tapAction.WasPressedThisFrame())
-        {
-            pointerPosition = Touchscreen.current.primaryTouch.position.ReadValue();
-            return true;
-        }
-
-        pointerPosition = new Vector3();
-        return false;
+        return RectTransformUtility.RectangleContainsScreenPoint(
+            hitArea,
+            screenPosition,
+            UICamera
+        );
     }
 
     private void HandlePauseChanged(bool isPaused)

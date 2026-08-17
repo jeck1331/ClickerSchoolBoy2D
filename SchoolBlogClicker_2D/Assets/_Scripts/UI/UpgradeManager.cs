@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using _Scripts.Core;
@@ -5,7 +6,7 @@ using _Scripts.Models.Save;
 using _Scripts.Models.Upgrade;
 using UnityEngine;
 
-public class UpgradeManager : MonoBehaviour
+public class UpgradeManager: MonoBehaviour
 {
     private Dictionary<int, UpgradeStateItem> upgradeStates = new();
     [SerializeField] private UpgradeClickItemSO upgradeData;
@@ -38,5 +39,13 @@ public class UpgradeManager : MonoBehaviour
         return CalcCacheHelper.CalcPowerCache(
             upgradeData.Upgrades.Where(x => upgradeStates.ContainsKey(x.Id) && upgradeStates[x.Id].IsBought).ToArray()
         );
+    }
+
+    public void Reset()
+    {
+        foreach (var upgradeStateItem in upgradeStates)
+        {
+            upgradeStateItem.Value.Reset();
+        }
     }
 }
