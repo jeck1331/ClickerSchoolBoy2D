@@ -215,7 +215,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Market
+  m_text: UPgrades
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2619a37e67cb1f64b8a28da1fd8ebef6, type: 2}
   m_sharedMaterial: {fileID: -9142252091172984947, guid: 2619a37e67cb1f64b8a28da1fd8ebef6, type: 2}
@@ -729,9 +729,9 @@ GameObject:
   - component: {fileID: 4850949327676159188}
   - component: {fileID: 8713494205244758838}
   - component: {fileID: 1967366296624120464}
-  - component: {fileID: 6862183075918715740}
+  - component: {fileID: 5775746739707774874}
   m_Layer: 5
-  m_Name: MarketPanel
+  m_Name: UpgradePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -797,7 +797,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6862183075918715740
+--- !u!114 &5775746739707774874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -806,10 +806,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4400518306679635318}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6baac41185c3bfcdd8f6833efc30d93d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a6285819781490909912bf8c7e7b4cc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShopManager
-  _shopData: {fileID: 11400000, guid: 0ad0ceff3417d744ab67d1d35bc1b7c3, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
+  upgradeData: {fileID: 11400000, guid: 5b95e30f3e86f264087c10abe41bed96, type: 2}
 --- !u!1 &5307640982896688289
 GameObject:
   m_ObjectHideFlags: 0

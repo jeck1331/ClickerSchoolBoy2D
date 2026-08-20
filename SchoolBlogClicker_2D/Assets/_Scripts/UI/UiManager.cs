@@ -28,8 +28,11 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
     
     public void Initialize()
     {
+        UpdateTextCoinsText();
         UpdatePowerText();
         UpdateIncomeText();
+        
+        Debug.Log("Initialize UiManager");
     }
 
     private void OnEnable()
@@ -87,7 +90,7 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
         shopMenuUI.SetActive(true);
 
         if (tapZoneGm != null)
-            tapZoneGm.SetActive(true);
+            tapZoneGm.SetActive(false);
 
         GameplayPauseService.SetPaused(this, true);
     }
@@ -100,9 +103,14 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
         upgradeMenuUI.SetActive(true);
 
         if (tapZoneGm != null)
-            tapZoneGm.SetActive(true);
+            tapZoneGm.SetActive(false);
 
         GameplayPauseService.SetPaused(this, true);
+    }
+
+    public void CloseAnyMenu()
+    {
+        tapZoneGm.SetActive(true);
     }
 
     void ISubscribe.Subscribes()

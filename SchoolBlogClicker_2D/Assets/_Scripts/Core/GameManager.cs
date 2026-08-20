@@ -28,11 +28,11 @@ public class GameManager : Singleton<GameManager>, IInitialize
     {
         _saveGameSystem = new SaveGameSystem();
         RuntimeSavedGameData rgd = _saveGameSystem.Load();
-        scoreValue.Value = rgd.Coins;
         
         shopManager.FillDataFromSave(rgd.UpgradeIncomeTree);
         upgradeManager.FillDataFromSave(rgd.UpgradeClickTree);
         
+        scoreValue.Value = rgd.Coins;
         powerValue.Value = upgradeManager.GetPowerValue();
         incomeValue.Value = shopManager.GetIncomeValue();
     }
@@ -70,6 +70,7 @@ public class GameManager : Singleton<GameManager>, IInitialize
     {
         incomeObserver.OnValueChanged += IncomeUpdate;
         
+        Debug.Log($"Start income {scoreValue.Value}");
         scoreObserver.Changing();
         powerObserver.Changing();
 
@@ -91,6 +92,11 @@ public class GameManager : Singleton<GameManager>, IInitialize
             _incomeCoroutine = null;
             _isIncomeStarted = false;
         }
+    }
+
+    private void ScoreUpdate()
+    {
+        
     }
     
     private void OnDisable()
