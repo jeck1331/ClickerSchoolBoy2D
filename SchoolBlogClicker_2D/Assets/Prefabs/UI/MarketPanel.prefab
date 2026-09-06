@@ -556,9 +556,9 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 4588747432160737990}
   m_HandleRect: {fileID: 4660237482741473576}
-  m_Direction: 2
-  m_Value: 1
-  m_Size: 0
+  m_Direction: 3
+  m_Value: 0
+  m_Size: 0.3
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1143,7 +1143,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.24002075, y: 3.7424316}
+  m_AnchoredPosition: {x: -0.24002075, y: -3.7424316}
   m_SizeDelta: {x: -8.05, y: -7.485}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7166114028473949795
@@ -1260,7 +1260,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -73, y: -78.37}
+  m_AnchoredPosition: {x: -73, y: -78.369995}
   m_SizeDelta: {x: 128, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3066679300092217514
@@ -1346,8 +1346,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UpgradeMenuUI, Assembly-CSharp
-        m_MethodName: OnExitUpgradeMenu
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
+        m_MethodName: CloseAnyMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1424,7 +1424,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.5100098, y: -27.979797}
+  m_AnchoredPosition: {x: 1.5100098, y: -27.979858}
   m_SizeDelta: {x: -115.9717, y: -228.7805}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2319119178399395965
@@ -1665,7 +1665,7 @@ GameObject:
   - component: {fileID: 3089932816109241817}
   - component: {fileID: 8695892229197596197}
   - component: {fileID: 8722704993486907983}
-  - component: {fileID: 137880746279412216}
+  - component: {fileID: 3896405545546224209}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1689,7 +1689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -14.999939, y: -0.020019531}
+  m_AnchoredPosition: {x: -14.999939, y: 19.979958}
   m_SizeDelta: {x: -30.000128, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &8695892229197596197
@@ -1732,7 +1732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 0
   m_VerticalFit: 2
---- !u!114 &137880746279412216
+--- !u!114 &3896405545546224209
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1741,8 +1741,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9073955569337011645}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb3b344b129b46541b69a0f6dee55361, type: 3}
+  m_Script: {fileID: 11500000, guid: 9700bfd5dcbf1da4888402002e6f5f3e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  upgradeClickItem: {fileID: 11400000, guid: 5b95e30f3e86f264087c10abe41bed96, type: 2}
-  clickPrefab: {fileID: 4933865606745677572, guid: 5d6c038be8dcb5a439dae397dc039aff, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::IncomeUpgradesUI
+  upgradeIncomeItem: {fileID: 11400000, guid: 0ad0ceff3417d744ab67d1d35bc1b7c3, type: 2}
+  incomePrefab: {fileID: -1313790203691656474, guid: 15a007b407afc534680dc16d6d87ee7d, type: 3}
+  _shopManager: {fileID: 6862183075918715740}

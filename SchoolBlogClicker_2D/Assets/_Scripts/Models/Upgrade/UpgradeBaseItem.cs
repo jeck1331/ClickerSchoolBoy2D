@@ -21,7 +21,7 @@ namespace _Scripts.Models.Upgrade
 
         protected TData _data;
 
-        public abstract void Initialize(TData data);
+        public abstract void Initialize(TData data, UpgradeStateItem stateItem);
 
         private void Awake()
         {

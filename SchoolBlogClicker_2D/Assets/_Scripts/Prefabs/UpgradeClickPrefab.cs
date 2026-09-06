@@ -12,9 +12,10 @@ namespace _Scripts.Prefabs
 
         [SerializeField] private TMP_Text powerText;
 
-        public override void Initialize(UpgradeClickField data)
+        public override void Initialize(UpgradeClickField data, UpgradeStateItem stateItem)
         {
             _data = data;
+            state = stateItem;
 
             titleText.text = data.Title;
             priceText.text = data.Price.ToString();

@@ -12,9 +12,10 @@ namespace _Scripts.Prefabs
         
         [SerializeField] private TMP_Text incomeText;
 
-        public override void Initialize(UpgradeIncomeField data)
+        public override void Initialize(UpgradeIncomeField data, UpgradeStateItem stateItem)
         {
             _data = data;
+            state = stateItem;
 
             titleText.text = data.Title;
             priceText.text = data.Price.ToString();
@@ -68,7 +69,6 @@ namespace _Scripts.Prefabs
 
         private void OnDisable()
         {
-            // Debug.Log($"INCOME {name}: Откерпил событие к scoreObserver");
             scoreObserver.OnValueChanged -= UpdateStateButton;
             incomeObserver.OnValueChanged -= UpdateStateButton;
             incomeObserver.OnValueChanged -= CheckSecretState;

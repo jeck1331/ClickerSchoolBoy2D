@@ -6,6 +6,7 @@ public class IncomeUpgradesUI : MonoBehaviour
 {
     [SerializeField] private UpgradeIncomeItemSO upgradeIncomeItem;
     [SerializeField] private UpgradeIncomePrefab incomePrefab;
+    [SerializeField] private ShopManager _shopManager;
 
     private Stack<UpgradeIncomePrefab> items = new Stack<UpgradeIncomePrefab>();
     private void OnEnable()
@@ -13,7 +14,7 @@ public class IncomeUpgradesUI : MonoBehaviour
         foreach (var upgradeItem in upgradeIncomeItem.Upgrades)
         {
             UpgradeIncomePrefab upgradeIncomePrefab = Instantiate(incomePrefab, transform);
-            upgradeIncomePrefab.Initialize(upgradeItem);
+            upgradeIncomePrefab.Initialize(upgradeItem, _shopManager.GetStateItem(upgradeItem.Id));
             items.Push(upgradeIncomePrefab);
         }
     }
