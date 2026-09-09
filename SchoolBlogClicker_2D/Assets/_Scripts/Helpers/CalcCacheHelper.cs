@@ -1,6 +1,6 @@
-﻿using _Scripts.Models.Enums;
+﻿using System.Linq;
+using _Scripts.Models.Enums;
 using _Scripts.Models.Upgrade;
-using UnityEngine;
 
 namespace _Scripts.Core
 {
@@ -21,7 +21,7 @@ namespace _Scripts.Core
         public static int CalcPowerCache (UpgradeClickField[] powerUpgrades)
         {
             int res = 1;
-            foreach (var upgrade in powerUpgrades)
+            foreach (var upgrade in powerUpgrades.OrderBy(x => x.Id))
             {
                 switch (upgrade.CalcType)
                 {

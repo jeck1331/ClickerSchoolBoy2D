@@ -4,27 +4,26 @@ using UnityEngine;
 
 namespace _Scripts.Prefabs
 {
-    public class UpgradeIncomePrefab : UpgradeBaseItem<UpgradeIncomeField>
+    public class UpgradeIncomePrefab : UpgradeBaseItem<UpgradeIncomeField, ShopManager>
     {
         [SerializeField] private UIntValue incomeValue;
-        [SerializeField] private UpgradeIncomeItemSO upgradeIncomeItem;
         [SerializeField] private ObserverSO incomeObserver;
-        
+
         [SerializeField] private TMP_Text incomeText;
 
-        public override void Initialize(UpgradeIncomeField data, UpgradeStateItem stateItem)
+        public override void Initialize(UpgradeIncomeField data, UpgradeStateItem stateItem, UpgradeStateItem previousStateItem, ShopManager shopManager)
         {
             _data = data;
             state = stateItem;
+            previousState = previousStateItem;
+            manager = shopManager;
 
             titleText.text = data.Title;
-            priceText.text = data.Price.ToString();
             descriptionText.text = data.Description;
             incomeText.text = data.Income.ToString();
 
             CheckSecretState();
             UpdateStateButton();
-            // Debug.Log($"INCOME {name}Прикрепил событие к scoreObserver");
             scoreObserver.OnValueChanged += UpdateStateButton;
             incomeObserver.OnValueChanged += UpdateStateButton;
             incomeObserver.OnValueChanged += CheckSecretState;
@@ -34,29 +33,22 @@ namespace _Scripts.Prefabs
         {
             _button.interactable = UpgradeEconomyService.CanBuy(_data, state, scoreValue.Value);
         }
-        
+
         private void CheckSecretState()
         {
-            // if (_data.IsBought)
-            // {
-            //     _button.interactable = false;
-            //     UpdateStateTexts();
-            //     return;
-            // }
-            //
-            // //If the item is secret, check if the previous item has been with IsBought state
-            // if (_data.IsSecret)
-            // {
-            //     UpgradeEconomyService.TryUnlockByPreviousId(_data, upgradeIncomeItem.Upgrades);
-            //     _button.interactable = !_data.IsSecret && !_data.IsBought;
-            //     UpdateStateTexts(_data.IsSecret);
-            // }
+            if (state.IsSecret)
+                UpgradeEconomyService.TryUnlockByPreviousId(state, previousState);
+
+            UpdateStateTexts();
         }
-        
-        private void UpdateStateTexts(bool isSecret = false)
+
+        private void UpdateStateTexts()
         {
+            bool isSecret = state.IsSecret;
+            bool isBought = state.IsBought;
+
             _image.material = isSecret ? matSecretField : null;
-            priceText.text = isSecret ? "???" : _data.Price.ToString();
+            priceText.text = isSecret ? "???" : isBought ? "Куплено" : _data.Price.ToString();
             incomeText.text = isSecret ? "???" : _data.Income.ToString();
             descriptionText.text = isSecret ? string.Empty : _data.Description;
         }
@@ -76,7 +68,7 @@ namespace _Scripts.Prefabs
 
         public override void OnBuyEvent()
         {
-            if (UpgradeEconomyService.TryBuyIncomeUpgrade(_data, state, scoreValue, incomeValue, upgradeIncomeItem))
+            if (UpgradeEconomyService.TryBuyIncomeUpgrade(_data, state, scoreValue, incomeValue, manager))
             {
                 AudioManager.Instance?.PlaySfx(SfxType.UpgradeBuy);
                 UpdateStateButton();

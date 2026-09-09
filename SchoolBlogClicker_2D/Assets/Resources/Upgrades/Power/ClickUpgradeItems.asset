@@ -84,3 +84,11 @@ MonoBehaviour:
     sprite: {fileID: 0}
     power: 360
     calcType: 0
+  - id: 9
+    title: Pipiska
+    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
+      (x1.25)"
+    price: 1000000
+    sprite: {fileID: 0}
+    power: 360
+    calcType: 0

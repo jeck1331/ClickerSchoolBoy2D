@@ -18,7 +18,6 @@ public class ShopManager : MonoBehaviour
         foreach (var item in _shopData.Upgrades.OrderBy(x => x.Id))
         {
             var isBought = savedById.TryGetValue(item.Id, out var saved) && saved.IsBought;
-            //Not secret if it's the first upgrade, or the previous one is already bought
             var isSecret = !previousBought;
 
             var sui = new UpgradeStateItem(item.Id, isBought, isSecret);
@@ -29,6 +28,8 @@ public class ShopManager : MonoBehaviour
     }
     
     public UpgradeStateItem GetStateItem(int id) => upgradeStates[id];
+
+    public UpgradeStateItem GetPreviousStateItem(int id) => upgradeStates.TryGetValue(id - 1, out var item) ? item : null;
 
     public SavedUpgradeItem[] GetDataToSave() => upgradeStates.Select(x => new SavedUpgradeItem
     {

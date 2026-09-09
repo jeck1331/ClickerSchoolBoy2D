@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using _Scripts.Models.Upgrade;
 using _Scripts.Prefabs;
 using UnityEngine;
 
@@ -15,9 +14,12 @@ public class ClickUpgradesUI : MonoBehaviour
         foreach (var upgradeItem in upgradeClickItem.Upgrades)
         {
             UpgradeClickPrefab upgradeClickPrefab = Instantiate(clickPrefab, transform);
-            upgradeClickPrefab.Initialize(upgradeItem, _upgradeManager.GetStateItem(upgradeItem.Id));
+            upgradeClickPrefab.Initialize(
+                upgradeItem,
+                _upgradeManager.GetStateItem(upgradeItem.Id),
+                _upgradeManager.GetPreviousStateItem(upgradeItem.Id),
+                _upgradeManager);
             items.Push(upgradeClickPrefab);
-            Debug.Log($"Instantiate: {upgradeClickPrefab.name}");
         }
     }
 

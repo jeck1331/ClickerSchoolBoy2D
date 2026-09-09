@@ -1,4 +1,6 @@
-﻿using _Scripts.Helpers;
+﻿using System.Collections.Generic;
+using _Scripts.Helpers;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -82,30 +84,24 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
         SceneManager.LoadScene(0);
     }
     
-    public void OpenShopMenu()
+    public void OpenShopMenu() => ClickToMenu(shopMenuUI, new [] { upgradeMenuUI });
+
+    public void OpenUpgradeMenu() => ClickToMenu(upgradeMenuUI, new [] { shopMenuUI });
+
+    private void ClickToMenu(GameObject menu, [CanBeNull] GameObject[] otherMenus)
     {
-        if (upgradeMenuUI.activeSelf)
-            upgradeMenuUI.SetActive(false);
+        bool pauseNewState = !menu.activeSelf;
         
-        shopMenuUI.SetActive(true);
+        if (otherMenus is { Length: > 0 })
+            foreach (var otherMenu in otherMenus)
+                otherMenu.SetActive(false);
+        
+        menu.SetActive(pauseNewState);
 
         if (tapZoneGm != null)
-            tapZoneGm.SetActive(false);
+            tapZoneGm.SetActive(!pauseNewState);
 
-        GameplayPauseService.SetPaused(this, true);
-    }
-
-    public void OpenUpgradeMenu()
-    {
-        if (shopMenuUI.activeSelf)
-            shopMenuUI.SetActive(false);
-        
-        upgradeMenuUI.SetActive(true);
-
-        if (tapZoneGm != null)
-            tapZoneGm.SetActive(false);
-
-        GameplayPauseService.SetPaused(this, true);
+        GameplayPauseService.SetPaused(this, pauseNewState);
     }
 
     public void CloseAnyMenu()

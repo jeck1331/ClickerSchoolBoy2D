@@ -30,6 +30,8 @@ public class UpgradeManager: MonoBehaviour
     }
     
     public UpgradeStateItem GetStateItem(int id) => upgradeStates[id];
+
+    public UpgradeStateItem GetPreviousStateItem(int id) => upgradeStates.TryGetValue(id - 1, out var item) ? item : null;
     
     public SavedUpgradeItem[] GetDataToSave() => upgradeStates.Select(x => new SavedUpgradeItem
     {

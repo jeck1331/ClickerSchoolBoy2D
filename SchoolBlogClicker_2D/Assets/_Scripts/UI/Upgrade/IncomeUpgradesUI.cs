@@ -14,7 +14,11 @@ public class IncomeUpgradesUI : MonoBehaviour
         foreach (var upgradeItem in upgradeIncomeItem.Upgrades)
         {
             UpgradeIncomePrefab upgradeIncomePrefab = Instantiate(incomePrefab, transform);
-            upgradeIncomePrefab.Initialize(upgradeItem, _shopManager.GetStateItem(upgradeItem.Id));
+            upgradeIncomePrefab.Initialize(
+                upgradeItem,
+                _shopManager.GetStateItem(upgradeItem.Id),
+                _shopManager.GetPreviousStateItem(upgradeItem.Id),
+                _shopManager);
             items.Push(upgradeIncomePrefab);
         }
     }

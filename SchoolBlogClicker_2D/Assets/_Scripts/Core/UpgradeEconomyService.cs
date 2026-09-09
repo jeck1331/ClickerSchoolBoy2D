@@ -1,4 +1,3 @@
-using System.Linq;
 using _Scripts.Core;
 using _Scripts.Models.Upgrade;
 using Unity.VisualScripting;
@@ -15,38 +14,37 @@ public static class UpgradeEconomyService
         UpgradeStateItem state,
         ULongValue scoreValue,
         UIntValue powerValue,
-        UpgradeClickItemSO upgrades)
+        UpgradeManager upgradeManager)
     {
         if (!CanBuy(data, state, scoreValue.Value)) return false;
-    
+
         scoreValue.Value -= data.Price;
         state.Buy();
-        powerValue.Value = CalcCacheHelper.CalcPowerCache(upgrades.Upgrades.Where(x => x.Id == state.Id && state.IsBought).ToArray());
+        powerValue.Value = upgradeManager.GetPowerValue();
         GameEvents.UpgradePurchased();
         return true;
     }
-    
+
     public static bool TryBuyIncomeUpgrade(
         UpgradeIncomeField data,
         UpgradeStateItem state,
         ULongValue scoreValue,
         UIntValue incomeValue,
-        UpgradeIncomeItemSO upgrades)
+        ShopManager shopManager)
     {
         if (!CanBuy(data, state, scoreValue.Value)) return false;
-    
+
         scoreValue.Value -= data.Price;
         state.Buy();
-        incomeValue.Value = CalcCacheHelper.CalcIncomeCache(upgrades.Upgrades.Where(x =>  x.Id == state.Id && state.IsBought).ToArray());
+        incomeValue.Value = shopManager.GetIncomeValue();
         GameEvents.UpgradePurchased();
         return true;
     }
     
-    public static void TryUnlockByPreviousId(UpgradeBaseField data, UpgradeStateItem state, UpgradeStateItem[] states)
+    public static void TryUnlockByPreviousId(UpgradeStateItem state, UpgradeStateItem previousState)
     {
-        if (data == null || states == null || !state.IsSecret) return;
-        var prev = states.SingleOrDefault(u => u.Id == state.Id - 1);
-        if (prev != null && prev.IsBought)
+        if (!state.IsSecret) return;
+        if (previousState == null || previousState.IsBought)
             state.Unsecret();
     }
 }

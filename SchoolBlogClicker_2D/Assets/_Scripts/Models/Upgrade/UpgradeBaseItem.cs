@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace _Scripts.Models.Upgrade
 {
-    public abstract class UpgradeBaseItem<TData> : MonoBehaviour where TData : class
+    public abstract class UpgradeBaseItem<TData, TManager> : MonoBehaviour where TData : class
     {
         [SerializeField] protected ULongValue scoreValue;
         [SerializeField] protected ObserverSO scoreObserver;
@@ -20,8 +20,10 @@ namespace _Scripts.Models.Upgrade
         protected Image _image;
 
         protected TData _data;
+        protected UpgradeStateItem previousState;
+        protected TManager manager;
 
-        public abstract void Initialize(TData data, UpgradeStateItem stateItem);
+        public abstract void Initialize(TData data, UpgradeStateItem stateItem, UpgradeStateItem previousStateItem, TManager manager);
 
         private void Awake()
         {
