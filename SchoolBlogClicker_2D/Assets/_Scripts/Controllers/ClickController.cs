@@ -16,10 +16,12 @@ public class ClickController : MonoBehaviour
     [SerializeField] private RectTransform hitArea;
     [SerializeField] private Canvas canvas;
     private Camera UICamera => canvas.worldCamera;
-    
+    private Camera _worldCamera;
+
     private void Awake()
     {
         _pointerAction = InputSystem.actions.FindAction("Pointer");
+        _worldCamera = Camera.main;
     }
 
     private void OnEnable()
@@ -54,12 +56,13 @@ public class ClickController : MonoBehaviour
         }
 
         var hitReward = CritCalculator.CalculateHitReward(clickPowerValue!.Value, scoreValue.Value, critConfig, out var isCrit);
+        Debug.Log($"Hit Reward: {hitReward}, isCrit: {isCrit}");
         scoreValue.Value += hitReward;
         if (isCrit)
         {
             if (vfxCritStarParticle != null)
             {
-                vfxCritStarParticle.transform.position = screenPosition;
+                vfxCritStarParticle.transform.position = ScreenToWorldPosition(screenPosition);
                 vfxCritStarParticle.Play();
             }
             AudioManager.Instance?.PlaySfx(SfxType.Crit);
@@ -68,7 +71,7 @@ public class ClickController : MonoBehaviour
         {
             if (vfxStarParticle != null)
             {
-                vfxStarParticle.transform.position = screenPosition;
+                vfxStarParticle.transform.position = ScreenToWorldPosition(screenPosition);
                 vfxStarParticle.Play();
             }
             AudioManager.Instance?.PlaySfx(SfxType.Click);
@@ -77,6 +80,17 @@ public class ClickController : MonoBehaviour
         GameEvents.ClickResolved(isCrit, hitReward);
     }
     
+    private Vector3 ScreenToWorldPosition(Vector2 screenPosition)
+    {
+        if (_worldCamera == null)
+            return screenPosition;
+
+        Vector3 worldPosition = _worldCamera.ScreenToWorldPoint(
+            new Vector3(screenPosition.x, screenPosition.y, -_worldCamera.transform.position.z));
+        worldPosition.z = 0f;
+        return worldPosition;
+    }
+
     private bool IsInside(Vector2 screenPosition)
     {
         return RectTransformUtility.RectangleContainsScreenPoint(

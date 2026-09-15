@@ -117,5 +117,9 @@ public class GameManager : Singleton<GameManager>, IInitialize
         scoreValue.Value = 0;
         shopManager.Reset();
         upgradeManager.Reset();
+        powerValue.Value = upgradeManager.GetPowerValue();
+        incomeValue.Value = shopManager.GetIncomeValue();
+        
+        _saveGameSystem.Save(CurrentGameData());
     }
 }
