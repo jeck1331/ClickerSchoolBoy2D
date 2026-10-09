@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Prefabs.CircleLifeCycleMGS
   timeout: 3
-  warningAnimationStartNormalized: 0.65
+  warningAnimationStartNormalized: 0.4
   warningScaleMultiplier: 1.08
   circleClickObserver: {fileID: 11400000, guid: 700ac243f6a8307479e93dea1ac16fda, type: 2}
 --- !u!1 &2855468904370767212

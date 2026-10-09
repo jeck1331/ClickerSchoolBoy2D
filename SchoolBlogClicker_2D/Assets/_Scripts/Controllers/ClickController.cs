@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class ClickController : MonoBehaviour
 {
     private InputAction _pointerAction;
+    private readonly List<RaycastResult> _uiHits = new List<RaycastResult>();
 
     [SerializeField] private ULongValue scoreValue;
     [SerializeField] private UIntValue clickPowerValue;
@@ -39,21 +42,16 @@ public class ClickController : MonoBehaviour
     
     private void OnClick(InputAction.CallbackContext ctx)
     {
+        if (GameplayPauseService.IsGameplayInputPaused)
+            return;
+
         if (ctx.control.device is not Pointer pointer)
             return;
 
         Vector2 screenPosition = pointer.position.ReadValue();
         
+        if (TryHitMiniGameCircle(screenPosition)) return;
         if (!IsInside(screenPosition)) return;
-
-        //MiniGame Hit
-        if (false)
-        {
-            //Подумать мб генерить не gameObject Sprite, а RectTransform?
-            // GameObject touchedObject = hitCollider.transform.gameObject;
-            // circleObserver.Changing(touchedObject);
-            // AudioManager.Instance?.PlaySfx(SfxType.MiniHit);
-        }
 
         var hitReward = CritCalculator.CalculateHitReward(clickPowerValue!.Value, scoreValue.Value, critConfig, out var isCrit);
         Debug.Log($"Hit Reward: {hitReward}, isCrit: {isCrit}");
@@ -78,6 +76,24 @@ public class ClickController : MonoBehaviour
         }
 
         GameEvents.ClickResolved(isCrit, hitReward);
+    }
+
+    private bool TryHitMiniGameCircle(Vector2 screenPosition)
+    {
+        if (EventSystem.current == null || circleObserver == null)
+            return false;
+
+        _uiHits.Clear();
+        var pointerData = new PointerEventData(EventSystem.current) { position = screenPosition };
+        EventSystem.current.RaycastAll(pointerData, _uiHits);
+        if (_uiHits.Count == 0) return false;
+
+        // Only the foremost UI element receives the hit; overlays can block circles.
+        var circle = _uiHits[0].gameObject.GetComponentInParent<_Scripts.Prefabs.CircleLifeCycleMGS>();
+        if (circle == null || !circle.CompareTag(miniGameTag)) return false;
+
+        circleObserver.ChangingAtScreenPosition(circle.gameObject, screenPosition);
+        return true;
     }
     
     private Vector3 ScreenToWorldPosition(Vector2 screenPosition)

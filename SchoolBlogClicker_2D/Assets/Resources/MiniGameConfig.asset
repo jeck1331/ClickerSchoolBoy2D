@@ -15,9 +15,8 @@ MonoBehaviour:
   roundStartDelayMin: 6
   roundStartDelayMax: 12
   circleCountPerRound: 3
-  delayBetweenCircles: 0.3
-  circleLifetime: 2.2
-  warningAnimationStartNormalized: 0.65
-  circleRadius: 187
+  delayBetweenCircles: {x: 0.25, y: 0.5}
+  circleLifetime: {x: 1.18, y: 2}
+  warningAnimationStartNormalized: 0.4
   minRewardMultiplier: 1.05
   maxRewardMultiplier: 2.2

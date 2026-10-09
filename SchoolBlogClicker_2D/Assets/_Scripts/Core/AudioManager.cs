@@ -33,12 +33,51 @@ public class AudioManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
+            // Sources can be separate objects, so destroying just the manager is insufficient.
+            if (musicSource != null && musicSource != Instance.musicSource)
+            {
+                musicSource.playOnAwake = false;
+                musicSource.Stop();
+            }
+            if (sfxSource != null && sfxSource != Instance.sfxSource)
+            {
+                sfxSource.playOnAwake = false;
+                sfxSource.Stop();
+            }
             Destroy(gameObject);
             return;
         }
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // Silence old sources left on the manager after moving audio to separate objects.
+        foreach (var source in GetComponents<AudioSource>())
+        {
+            if (source == musicSource || source == sfxSource) continue;
+            source.Stop();
+            source.playOnAwake = false;
+            source.enabled = false;
+        }
+
+        if (musicSource != null)
+        {
+            musicSource.playOnAwake = false;
+            musicSource.Stop();
+            musicSource.loop = true;
+            if (defaultMusicTrack != null) musicSource.clip = defaultMusicTrack;
+            if (musicSource.transform != transform && !musicSource.transform.IsChildOf(transform))
+                musicSource.transform.SetParent(transform, true);
+        }
+        if (sfxSource != null)
+        {
+            sfxSource.playOnAwake = false;
+            sfxSource.Stop();
+            sfxSource.clip = null;
+            sfxSource.loop = false;
+            if (sfxSource.transform != transform && !sfxSource.transform.IsChildOf(transform))
+                sfxSource.transform.SetParent(transform, true);
+        }
 
         _sfxMap.Clear();
         foreach (var entry in sfxEntries)
@@ -60,16 +99,22 @@ public class AudioManager : MonoBehaviour
     {
         if (sfxSource == null) return;
         if (!_sfxMap.TryGetValue(type, out var clip) || clip == null) return;
-        sfxSource.PlayOneShot(clip, SettingsService.SfxVolume);
+        sfxSource.PlayOneShot(clip);
     }
 
     public void PlayMusic(AudioClip clip, bool loop)
     {
         if (musicSource == null || clip == null) return;
         musicSource.loop = loop;
-        musicSource.clip = clip;
-        if (SettingsService.MusicEnabled)
+        if (musicSource.clip != clip)
+        {
+            musicSource.Stop();
+            musicSource.clip = clip;
+        }
+        if (SettingsService.MusicEnabled && !musicSource.isPlaying)
             musicSource.Play();
+        else if (!SettingsService.MusicEnabled)
+            musicSource.Stop();
     }
 
     public void ApplyVolumes()
@@ -80,5 +125,10 @@ public class AudioManager : MonoBehaviour
         if (musicSource != null && !SettingsService.MusicEnabled && musicSource.isPlaying) musicSource.Stop();
         if (musicSource != null && SettingsService.MusicEnabled && !musicSource.isPlaying && musicSource.clip != null)
             musicSource.Play();
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
     }
 }

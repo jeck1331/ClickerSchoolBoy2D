@@ -8,12 +8,11 @@ public class MiniGameConfigSO : ScriptableObject
     [SerializeField] private float roundStartDelayMin = 6f;
     [SerializeField] private float roundStartDelayMax = 12f;
     [SerializeField] private int circleCountPerRound = 3;
-    [SerializeField] private float delayBetweenCircles = 0.3f;
+    [SerializeField] private Vector2 delayBetweenCircles = new Vector2(0.25f, 0.5f);
 
     [Header("Circle")]
-    [SerializeField] private float circleLifetime = 2.2f;
-    [SerializeField] private float warningAnimationStartNormalized = 0.65f;
-    [SerializeField] private float circleRadius = 187f;
+    [SerializeField] private Vector2 circleLifetime = new Vector2(1.5f, 2f);
+    [SerializeField] private float warningAnimationStartNormalized = 0.4f;
 
     [Header("Reward")]
     [SerializeField] private float minRewardMultiplier = 1.05f;
@@ -22,10 +21,13 @@ public class MiniGameConfigSO : ScriptableObject
     public float RoundStartDelayMin => roundStartDelayMin;
     public float RoundStartDelayMax => roundStartDelayMax;
     public int CircleCountPerRound => Mathf.Max(1, circleCountPerRound);
-    public float DelayBetweenCircles => Mathf.Max(0f, delayBetweenCircles);
-    public float CircleLifetime => Mathf.Max(0.1f, circleLifetime);
+    public float DelayBetweenCircles => UnityEngine.Random.Range(
+        Mathf.Max(0f, delayBetweenCircles.x), Mathf.Max(delayBetweenCircles.x, delayBetweenCircles.y));
+    public float CircleLifetime => Mathf.Max(0.1f, circleLifetime.y);
+
+    public float GetFirstCircleLifetime() => UnityEngine.Random.Range(
+        Mathf.Max(0.1f, circleLifetime.x), Mathf.Max(0.1f, Mathf.Max(circleLifetime.x, circleLifetime.y)));
     public float WarningAnimationStartNormalized => Mathf.Clamp01(warningAnimationStartNormalized);
-    public float CircleRadius => Mathf.Max(1f, circleRadius);
 
     public long CalculateReward(int clickPower, float reactionTime)
     {

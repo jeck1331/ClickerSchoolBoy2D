@@ -11,34 +11,38 @@ namespace _Scripts.Prefabs
     public class CircleLifeCycleMGS: MonoBehaviour
     {
         [SerializeField] private float timeout = 3f;
-        [SerializeField] private float warningAnimationStartNormalized = 0.65f;
+        [SerializeField] private float warningAnimationStartNormalized = 0.4f;
         [SerializeField] private float warningScaleMultiplier = 1.08f;
         [SerializeField] private ObserverGameObjSO circleClickObserver;
         
         private Coroutine _lifetimeCoroutine;
         private Coroutine _warningCoroutine;
         private RectTransform _rectTransform;
-        private Image _image;
+        private Image[] _images;
         private Vector3 _baseScale;
-        private Color _baseColor;
+        private Color[] _baseColors;
 
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
-            _image = GetComponent<Image>();
+            _images = GetComponentsInChildren<Image>(true);
+            _baseColors = new Color[_images.Length];
             if (_rectTransform != null) _baseScale = _rectTransform.localScale;
-            if (_image != null) _baseColor = _image.color;
+            for (var i = 0; i < _images.Length; i++)
+                _baseColors[i] = _images[i].color;
         }
         
         private void OnEnable()
         {
             _lifetimeCoroutine = StartCoroutine(CircleDestroy_Coroutine());
             _warningCoroutine = StartCoroutine(WarningAnimation_Coroutine());
-            circleClickObserver.OnValueChanged += HandleCircleClick;
+            if (circleClickObserver != null)
+                circleClickObserver.OnValueChanged += HandleCircleClick;
         }
         private void OnDestroy()
         {
-            circleClickObserver.OnValueChanged -= HandleCircleClick;
+            if (circleClickObserver != null)
+                circleClickObserver.OnValueChanged -= HandleCircleClick;
         }
 
         private void HandleCircleClick(GameObject value)
@@ -66,17 +70,21 @@ namespace _Scripts.Prefabs
             if (warningStart > 0f)
                 yield return new WaitForSeconds(warningStart);
 
+            var elapsed = 0f;
             while (true)
             {
-                var pulse = Mathf.PingPong(Time.time * 3.5f, 1f);
+                // Start from the original color and smoothly blink twice per second.
+                var pulse = (1f - Mathf.Cos(elapsed * Mathf.PI * 4f)) * 0.5f;
                 if (_rectTransform != null)
                     _rectTransform.localScale = Vector3.Lerp(_baseScale, _baseScale * warningScaleMultiplier, pulse);
-                if (_image != null)
+                for (var i = 0; i < _images.Length; i++)
                 {
-                    var color = _baseColor;
-                    color.a = Mathf.Lerp(0.45f, _baseColor.a, pulse);
-                    _image.color = color;
+                    if (_images[i] == null) continue;
+                    var original = _baseColors[i];
+                    var red = new Color(1f, 0f, 0f, original.a);
+                    _images[i].color = Color.Lerp(original, red, pulse);
                 }
+                elapsed += Time.deltaTime;
                 yield return null;
             }
         }
@@ -85,6 +93,13 @@ namespace _Scripts.Prefabs
         {
             timeout = Mathf.Max(0.1f, newTimeout);
             warningAnimationStartNormalized = Mathf.Clamp01(warningStartNormalized);
+            // Instantiate invokes OnEnable before MiniGameSystem supplies the config.
+            if (!isActiveAndEnabled) return;
+
+            if (_lifetimeCoroutine != null) StopCoroutine(_lifetimeCoroutine);
+            if (_warningCoroutine != null) StopCoroutine(_warningCoroutine);
+            _lifetimeCoroutine = StartCoroutine(CircleDestroy_Coroutine());
+            _warningCoroutine = StartCoroutine(WarningAnimation_Coroutine());
         }
     }
 }

@@ -4,19 +4,19 @@ public static class SettingsService
 {
     public static float MasterVolume
     {
-        get => PlayerPrefs.GetFloat(USER_PREFS_SETTINGS_KEYS.MasterVolume, 1f);
+        get => Mathf.Clamp01(PlayerPrefs.GetFloat(USER_PREFS_SETTINGS_KEYS.MasterVolume, 1f));
         set => PlayerPrefs.SetFloat(USER_PREFS_SETTINGS_KEYS.MasterVolume, Mathf.Clamp01(value));
     }
 
     public static float SfxVolume
     {
-        get => PlayerPrefs.GetFloat(USER_PREFS_SETTINGS_KEYS.SfxVolume, 1f);
+        get => Mathf.Clamp01(PlayerPrefs.GetFloat(USER_PREFS_SETTINGS_KEYS.SfxVolume, 1f));
         set => PlayerPrefs.SetFloat(USER_PREFS_SETTINGS_KEYS.SfxVolume, Mathf.Clamp01(value));
     }
 
     public static float MusicVolume
     {
-        get => PlayerPrefs.GetFloat(USER_PREFS_SETTINGS_KEYS.MusicVolume, 1f);
+        get => Mathf.Clamp01(PlayerPrefs.GetFloat(USER_PREFS_SETTINGS_KEYS.MusicVolume, 1f));
         set => PlayerPrefs.SetFloat(USER_PREFS_SETTINGS_KEYS.MusicVolume, Mathf.Clamp01(value));
     }
 

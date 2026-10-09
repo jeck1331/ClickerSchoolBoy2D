@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using _Scripts.Helpers;
+﻿using _Scripts.Helpers;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class UiManager : MonoBehaviour, ISubscribe, IInitialize
 {
@@ -11,6 +9,7 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
 
     [SerializeField] private GameObject shopMenuUI;
     [SerializeField] private GameObject upgradeMenuUI;
+    [SerializeField] private GameObject settingsMenuUI;
     
     [SerializeField] private GameObject tapZoneGm;
 
@@ -79,9 +78,14 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
         clickPower.Value = clickPower.Value > 1 ? clickPower.Value / 2 : clickPower.Value;
     }
 
-    public void BackToMainMenu()
+    public void OpenSettings()
     {
-        SceneManager.LoadScene(0);
+        if (settingsMenuUI == null) return;
+        var settingsPanel = settingsMenuUI.GetComponent<SettingsPanel>();
+        if (settingsPanel != null)
+            settingsPanel.OpenSettings();
+        else
+            settingsMenuUI.SetActive(true);
     }
     
     public void OpenShopMenu() => ClickToMenu(shopMenuUI, new [] { upgradeMenuUI });
@@ -107,6 +111,9 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
     public void CloseAnyMenu()
     {
         tapZoneGm.SetActive(true);
+        
+        if (GameplayPauseService.IsGameplayInputPaused)
+            GameplayPauseService.SetPaused(this, false);
     }
 
     void ISubscribe.Subscribes()
