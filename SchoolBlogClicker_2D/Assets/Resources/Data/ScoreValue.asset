@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f9b1c805da44a3b8eb735da99bb4aa, type: 3}
+  m_Name: ScoreValue
+  m_EditorClassIdentifier: Assembly-CSharp::ULongValue
+  value: 0
+  observers:
+  - {fileID: 11400000, guid: c7d62fba8abb4b042818ca58d75045cd, type: 2}
