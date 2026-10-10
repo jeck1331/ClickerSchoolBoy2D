@@ -2,6 +2,7 @@
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UiManager : MonoBehaviour, ISubscribe, IInitialize
 {

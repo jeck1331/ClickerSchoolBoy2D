@@ -3,17 +3,21 @@ using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
-    [SerializeField] private SettingsMenuUI settingsMenu;
+    [SerializeField] private GameObject settingsMenuUI;
 
     public void RunGameScene()
     {
         SceneManager.LoadScene(1);
     }
-
-    public void RunSettings()
+    
+    public void OpenSettings()
     {
-        if (settingsMenu != null)
-            settingsMenu.Open();
+        if (settingsMenuUI == null) return;
+        var settingsPanel = settingsMenuUI.GetComponent<SettingsPanel>();
+        if (settingsPanel != null)
+            settingsPanel.OpenSettings();
+        else
+            settingsMenuUI.SetActive(true);
     }
 
     public void ExitGame()

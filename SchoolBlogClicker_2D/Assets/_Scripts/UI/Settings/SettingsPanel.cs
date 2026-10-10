@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class SettingsPanel : MonoBehaviour
 {
@@ -47,6 +48,16 @@ public class SettingsPanel : MonoBehaviour
     {
         gameObject.SetActive(true);
         GameplayPauseService.SetPaused(this, true);
+    }
+    
+    public void BackToMainMenu()
+    {
+        GameplayPauseService.SetPaused(this, true);
+        
+        if (SceneManager.GetActiveScene().name != "StartScene")
+            SceneManager.LoadScene(0);
+        else 
+            ExitSettings();
     }
 
     public void ExitSettings()
