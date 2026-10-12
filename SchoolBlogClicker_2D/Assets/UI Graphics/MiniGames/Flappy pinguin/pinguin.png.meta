@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -6995826270287042053
     second: pinguin_0
+  - first:
+      213: -6709140018727757948
+    second: pinguin_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +51,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -142,10 +145,10 @@ TextureImporter:
       name: pinguin_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1774
-        height: 887
+        x: 442
+        y: 320
+        width: 359
+        height: 284
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,6 +159,28 @@ TextureImporter:
       bones: []
       spriteID: bf9e1399215d9ee90800000000000000
       internalID: -6995826270287042053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinguin_1
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 340
+        width: 359
+        height: 285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 487df5313b854e2a0800000000000000
+      internalID: -6709140018727757948
       vertices: []
       indices: 
       edges: []
@@ -175,6 +200,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       pinguin_0: -6995826270287042053
+      pinguin_1: -6709140018727757948
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

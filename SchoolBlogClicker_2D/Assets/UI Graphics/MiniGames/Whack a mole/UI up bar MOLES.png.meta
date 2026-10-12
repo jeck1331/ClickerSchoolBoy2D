@@ -5,6 +5,12 @@ TextureImporter:
   - first:
       213: 8967118781464308949
     second: UI up bar MOLES_0
+  - first:
+      213: -7916072309381347544
+    second: UI up bar MOLES_1
+  - first:
+      213: -7787431419535026192
+    second: UI up bar MOLES_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -142,10 +148,10 @@ TextureImporter:
       name: UI up bar MOLES_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1151
-        height: 1920
+        x: 13
+        y: 26
+        width: 262
+        height: 239
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,6 +162,50 @@ TextureImporter:
       bones: []
       spriteID: 5dce9eb950b917c70800000000000000
       internalID: 8967118781464308949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI up bar MOLES_1
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 4
+        width: 620
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 827c40ffc26742290800000000000000
+      internalID: -7916072309381347544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI up bar MOLES_2
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 26
+        width: 237
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f716ed226c7de390800000000000000
+      internalID: -7787431419535026192
       vertices: []
       indices: 
       edges: []
@@ -175,6 +225,8 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       UI up bar MOLES_0: 8967118781464308949
+      UI up bar MOLES_1: -7916072309381347544
+      UI up bar MOLES_2: -7787431419535026192
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

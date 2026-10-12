@@ -5,6 +5,12 @@ TextureImporter:
   - first:
       213: 8617278338890539712
     second: mango_0
+  - first:
+      213: 5781706893970150123
+    second: mango_1
+  - first:
+      213: 6482297444964963036
+    second: mango_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -142,10 +148,10 @@ TextureImporter:
       name: mango_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1920
-        height: 2160
+        x: 604
+        y: 1148
+        width: 475
+        height: 558
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,6 +162,50 @@ TextureImporter:
       bones: []
       spriteID: 0c22d303ef8b69770800000000000000
       internalID: 8617278338890539712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mango_1
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 433
+        width: 422
+        height: 475
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be2948a89cfbc3050800000000000000
+      internalID: 5781706893970150123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mango_2
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 473
+        width: 436
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd21f877e2fb5f950800000000000000
+      internalID: 6482297444964963036
       vertices: []
       indices: 
       edges: []
@@ -175,6 +225,8 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       mango_0: 8617278338890539712
+      mango_1: 5781706893970150123
+      mango_2: 6482297444964963036
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

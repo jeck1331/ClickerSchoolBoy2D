@@ -5,6 +5,12 @@ TextureImporter:
   - first:
       213: 8532703672136922592
     second: watermelon_0
+  - first:
+      213: 4875705461218295869
+    second: watermelon_1
+  - first:
+      213: 5844380270745805749
+    second: watermelon_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -142,10 +148,10 @@ TextureImporter:
       name: watermelon_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1920
-        height: 2160
+        x: 641
+        y: 1028
+        width: 486
+        height: 501
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,6 +162,50 @@ TextureImporter:
       bones: []
       spriteID: 0e5746718c04a6670800000000000000
       internalID: 8532703672136922592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: watermelon_1
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 404
+        width: 457
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d30495dc84cf9a340800000000000000
+      internalID: 4875705461218295869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: watermelon_2
+      rect:
+        serializedVersion: 2
+        x: 1061
+        y: 403
+        width: 457
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b3ea1234e86b1150800000000000000
+      internalID: 5844380270745805749
       vertices: []
       indices: 
       edges: []
@@ -175,6 +225,8 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       watermelon_0: 8532703672136922592
+      watermelon_1: 4875705461218295869
+      watermelon_2: 5844380270745805749
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
