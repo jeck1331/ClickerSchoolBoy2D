@@ -142,10 +142,10 @@ TextureImporter:
       name: UI_0
       rect:
         serializedVersion: 2
-        x: 29
-        y: 78
-        width: 200
-        height: 200
+        x: 15
+        y: 64
+        width: 234
+        height: 223
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,7 +169,7 @@ TextureImporter:
         width: 500
         height: 150
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 15, y: 19, z: 16, w: 15}
       customData: 
       outline: []
@@ -186,12 +186,12 @@ TextureImporter:
       name: UI_2
       rect:
         serializedVersion: 2
-        x: 807
-        y: 82
-        width: 200
-        height: 200
+        x: 783
+        y: 57
+        width: 250
+        height: 236
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

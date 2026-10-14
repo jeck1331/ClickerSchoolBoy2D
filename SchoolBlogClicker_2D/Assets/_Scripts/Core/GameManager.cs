@@ -122,4 +122,13 @@ public class GameManager : Singleton<GameManager>, IInitialize
         
         _saveGameSystem.Save(CurrentGameData());
     }
+
+    public void AddCoinsAndSave(long amount)
+    {
+        if (amount < 0) throw new System.ArgumentOutOfRangeException(nameof(amount));
+        SavedGameData data = CurrentGameData();
+        data.Coins += System.Math.Min(amount, long.MaxValue - System.Math.Max(0L, data.Coins));
+        _saveGameSystem.Save(data);
+        scoreValue.Value = data.Coins;
+    }
 }

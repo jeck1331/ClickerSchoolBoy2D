@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PinguinController : MonoBehaviour
@@ -9,6 +11,17 @@ public class PinguinController : MonoBehaviour
     [SerializeField, Min(0.1f)] private float flapSpeed = 4f;
     [SerializeField, Min(0.1f)] private float maxFallSpeed = 7f;
     [SerializeField] private LayerMask collisionLayers = ~0;
+    [Header("Score and rewards")]
+    [Tooltip("Assign the same value assets used by the main game's GameManager.")]
+    [SerializeField] private ULongValue scoreValue;
+    [SerializeField] private UIntValue powerValue;
+    [SerializeField] private UIntValue incomeValue;
+    [SerializeField, Min(0)] private int clickMultiplier = 3;
+    [SerializeField, Min(0)] private int incomeMultiplier = 10;
+    [Header("UI")]
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text earnedText;
+    [SerializeField] private GameObject refreshScreen;
     [Header("Sprites")]
     [SerializeField] private SpriteRenderer playerRenderer;
     [Tooltip("If empty, uses the sprite already assigned to the SpriteRenderer.")]
@@ -31,6 +44,10 @@ public class PinguinController : MonoBehaviour
     private Vector2 startPosition;
     private float startRotation;
     private bool flapPending;
+    private bool rewardPaid;
+
+    public long Score { get; private set; }
+    public event System.Action GameReset;
 
     public bool HasStarted { get; private set; }
     public bool IsDead { get; private set; }
@@ -49,9 +66,14 @@ public class PinguinController : MonoBehaviour
         if (playerRenderer == null) playerRenderer = GetComponentInChildren<SpriteRenderer>();
         if (playerRenderer != null && normalSprite == null) normalSprite = playerRenderer.sprite;
         SetSprite(normalSprite);
+        UpdateScoreText();
+        if (refreshScreen != null) refreshScreen.SetActive(false);
     }
 
-    private void OnEnable() => GameplayPauseService.OnPauseChanged += HandlePause;
+    private void OnEnable()
+    {
+        GameplayPauseService.OnPauseChanged += HandlePause;
+    }
     private void OnDisable()
     {
         GameplayPauseService.OnPauseChanged -= HandlePause;
@@ -138,12 +160,17 @@ public class PinguinController : MonoBehaviour
             flapPending = false;
             rb.linearVelocity = Vector2.zero;
             rb.simulated = false;
+            PayReward();
+            earnedText.text = scoreText.text;
+            if (refreshScreen != null) refreshScreen.SetActive(true);
             onDied.Invoke();
         }
     }
 
     public void ResetGame()
     {
+        // Retry saving before discarding a finished run if the previous save failed.
+        if (IsDead) PayReward();
         rb.simulated = false;
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
@@ -152,7 +179,57 @@ public class PinguinController : MonoBehaviour
         HasStarted = false;
         IsDead = false;
         flapPending = false;
+        Score = 0;
+        rewardPaid = false;
+        UpdateScoreText();
+        earnedText.text = "0";
+        if (refreshScreen != null) refreshScreen.SetActive(false);
         SetSprite(normalSprite);
+        GameReset?.Invoke();
         onReset.Invoke();
+    }
+
+    public void AddPipeScore()
+    {
+        if (!IsRunning) return;
+        if (powerValue == null || incomeValue == null)
+        {
+            Debug.LogError("PinguinController: assign Power Value and Income Value from the main game.", this);
+            return;
+        }
+
+        long passiveReward = incomeValue.Value <= 0
+            ? 5L
+            : (long)incomeValue.Value * Mathf.Max(0, incomeMultiplier);
+        long reward = (long)Mathf.Max(0, powerValue.Value) * Mathf.Max(0, clickMultiplier)
+                    + passiveReward;
+        Score += System.Math.Min(reward, long.MaxValue - Score);
+        UpdateScoreText();
+    }
+
+    private void UpdateScoreText()
+    {
+        if (scoreText != null) scoreText.text = Score.ToString();
+    }
+
+    private void PayReward()
+    {
+        if (rewardPaid || Score == 0) return;
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.AddCoinsAndSave(Score);
+        else
+        {
+            // SampleScene reloads its balance from disk, not from the value asset.
+            long balance = new SaveGameSystem().AddCoins(Score);
+            if (scoreValue != null) scoreValue.Value = balance;
+        }
+        rewardPaid = true;
+    }
+
+    public void ExitToMainScene()
+    {
+        if (IsDead) PayReward();
+        SceneManager.LoadScene("MainScene");
     }
 }

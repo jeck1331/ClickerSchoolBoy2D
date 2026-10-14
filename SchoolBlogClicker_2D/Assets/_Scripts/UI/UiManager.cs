@@ -11,6 +11,7 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
     [SerializeField] private GameObject shopMenuUI;
     [SerializeField] private GameObject upgradeMenuUI;
     [SerializeField] private GameObject settingsMenuUI;
+    [SerializeField] private GameObject miniGamesMenuUI;
     
     [SerializeField] private GameObject tapZoneGm;
 
@@ -45,6 +46,8 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
     private void OnDisable()
     {
         (this as ISubscribe).Unsubscribes();
+        // Release this menu's pause when its scene is unloaded or the UI is disabled.
+        GameplayPauseService.SetPaused(this, false);
     }
 
     private void UpdateTextCoinsText()
@@ -107,6 +110,20 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
             tapZoneGm.SetActive(!pauseNewState);
 
         GameplayPauseService.SetPaused(this, pauseNewState);
+    }
+
+    public void OpenMiniGames()
+    {
+        if (miniGamesMenuUI == null) return;
+        miniGamesMenuUI.SetActive(true);
+        GameplayPauseService.SetPaused(this, true);
+    }
+    
+    public void CloseMiniGames()
+    {
+        if (miniGamesMenuUI == null) return;
+        miniGamesMenuUI.SetActive(false);
+        CloseAnyMenu();
     }
 
     public void CloseAnyMenu()

@@ -6,11 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/StartScene.unity
-    guid: 18dd162ee8fc56f41992e12e2ec7b8c9
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/MainScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/FlappyPinguin.unity
+    guid: 77675dbd9b0f3a34c819be1ab28b7880
+  - enabled: 1
+    path: Assets/Scenes/FruitSchool.unity
+    guid: bd70afdb9a2bd664d88d00b7ac61001d
+  - enabled: 1
+    path: Assets/Scenes/PopIt.unity
+    guid: eaa82684e33cb2a47a6e32d5439371e1
+  - enabled: 1
+    path: Assets/Scenes/WhackMole.unity
+    guid: 0ed501f826655c04ab4568973fc5b02f
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

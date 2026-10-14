@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -139,15 +139,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Whack a hole_0
+      name: refresh_whackmole
       rect:
         serializedVersion: 2
-        x: 15
-        y: 7
-        width: 1053
-        height: 289
+        x: 17
+        y: 67
+        width: 232
+        height: 230
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -160,11 +160,55 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: count_whackmole
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 72
+        width: 562
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 27, y: 52, z: 42, w: 32}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a03b90f0a10801849a81fd7e08a7ab43
+      internalID: -839967267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exit_whackmole
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 56
+        width: 220
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f239d70956378474ba41e9cf76f8f839
+      internalID: -1815985978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 536275118cd9262458138b8b324a7df0
     internalID: 0
     vertices: []
     indices: 
@@ -174,7 +218,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Whack a hole_0: 8918572624108381929
+      count_whackmole: -839967267
+      exit_whackmole: -1815985978
+      refresh_whackmole: 8918572624108381929
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -48,6 +48,15 @@ public class SaveGameSystem
         return new RuntimeSavedGameData(LoadFromFile());
     }
 
+    public long AddCoins(long amount)
+    {
+        if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
+        SavedGameData data = LoadFromFile();
+        data.Coins += Math.Min(amount, long.MaxValue - Math.Max(0L, data.Coins));
+        Save(data);
+        return data.Coins;
+    }
+
     private void CheckPath()
     {
         if (_isInitialized) return;

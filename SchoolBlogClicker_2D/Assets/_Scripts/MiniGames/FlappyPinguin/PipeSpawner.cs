@@ -20,12 +20,18 @@ public class PipeSpawner : MonoBehaviour
     {
         public Rigidbody2D Body;
         public float RightOffset;
+        public bool Scored;
     }
 
     private readonly List<PipePair> pairs = new List<PipePair>();
     private float timer;
     private float playerHeight;
     private bool warnedAboutGap;
+
+    private void OnEnable()
+    {
+        if (player != null) player.GameReset += ClearPipes;
+    }
 
     private void Start()
     {
@@ -70,6 +76,12 @@ public class PipeSpawner : MonoBehaviour
         for (int i = pairs.Count - 1; i >= 0; i--)
         {
             PipePair pair = pairs[i];
+            // Check the completed physics step, before moving or removing the pair.
+            if (!pair.Scored && pair.Body.position.x + pair.RightOffset < player.transform.position.x)
+            {
+                pair.Scored = true;
+                player.AddPipeScore();
+            }
             Vector2 next = pair.Body.position + Vector2.left * (moveSpeed * Time.fixedDeltaTime);
             if (next.x + pair.RightOffset < zone.min.x - offscreenMargin)
             {
@@ -157,6 +169,10 @@ public class PipeSpawner : MonoBehaviour
         timer = firstSpawnDelay;
     }
 
-    private void OnDisable() => ClearPipes();
+    private void OnDisable()
+    {
+        if (player != null) player.GameReset -= ClearPipes;
+        ClearPipes();
+    }
 }
 
