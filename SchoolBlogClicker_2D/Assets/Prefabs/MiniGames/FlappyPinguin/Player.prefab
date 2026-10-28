@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8157201582761846807}
   - component: {fileID: 1614380107176124596}
   - component: {fileID: 2614556737102075761}
+  - component: {fileID: 8894895583568285987}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -180,3 +181,45 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8894895583568285987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748253238569519940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f102b4b2e57f1f040bcb5d741852ea97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PinguinController
+  gameZone: {fileID: 0}
+  flapSpeed: 4
+  maxFallSpeed: 7
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  scoreValue: {fileID: 11400000, guid: 2acb08f048717f94f87c3d9df2271f1a, type: 2}
+  powerValue: {fileID: 11400000, guid: 9377acfe70e64eb4ca190027b72b53aa, type: 2}
+  incomeValue: {fileID: 11400000, guid: 09997c0345dbd8c4dbd2b8e4904bef3c, type: 2}
+  clickMultiplier: 3
+  incomeMultiplier: 10
+  scoreText: {fileID: 0}
+  earnedText: {fileID: 0}
+  refreshScreen: {fileID: 0}
+  playerRenderer: {fileID: 8157201582761846807}
+  normalSprite: {fileID: -6995826270287042053, guid: 358d346ae6e9a304687a198608c96cba, type: 3}
+  divingSprite: {fileID: -6709140018727757948, guid: 358d346ae6e9a304687a198608c96cba, type: 3}
+  divingSpeedThreshold: 0.1
+  risingAngle: 30
+  fallingAngle: -45
+  rotationSpeed: 180
+  onStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onDied:
+    m_PersistentCalls:
+      m_Calls: []
+  onReset:
+    m_PersistentCalls:
+      m_Calls: []

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PinguinController : MonoBehaviour
+public class PinguinController : MiniGameBase
 {
     [SerializeField] private FlappyGameZone gameZone;
     [SerializeField, Min(0.1f)] private float flapSpeed = 4f;
@@ -69,19 +69,15 @@ public class PinguinController : MonoBehaviour
         UpdateScoreText();
         if (refreshScreen != null) refreshScreen.SetActive(false);
     }
-
-    private void OnEnable()
+    
+    protected override void OnDisable()
     {
-        GameplayPauseService.OnPauseChanged += HandlePause;
-    }
-    private void OnDisable()
-    {
-        GameplayPauseService.OnPauseChanged -= HandlePause;
+        base.OnDisable();
         rb.simulated = false;
         flapPending = false;
     }
 
-    private void HandlePause(bool paused)
+    protected override void HandlePause(bool paused)
     {
         rb.simulated = !paused && HasStarted && !IsDead && isActiveAndEnabled;
         if (paused) flapPending = false;

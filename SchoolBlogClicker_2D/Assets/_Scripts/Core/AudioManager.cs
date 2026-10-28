@@ -49,6 +49,8 @@ public class AudioManager : MonoBehaviour
         }
 
         Instance = this;
+        // DontDestroyOnLoad only preserves root objects and their children.
+        transform.SetParent(null, true);
         DontDestroyOnLoad(gameObject);
 
         // Silence old sources left on the manager after moving audio to separate objects.
