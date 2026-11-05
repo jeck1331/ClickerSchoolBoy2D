@@ -7,10 +7,15 @@ public class Bootstrap : MonoBehaviour
 
     private void Awake()
     {
-        // #FOR ANDROID
-        // Научится вычислять FrameRate телефона
-        Application.targetFrameRate = 120;
-        QualitySettings.vSyncCount = 0;
+        if (Application.isMobilePlatform)
+        {
+            Application.targetFrameRate = Mathf.CeilToInt((float)Screen.currentResolution.refreshRateRatio.value);
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 1;
+            Application.targetFrameRate = -1;
+        }
         
         foreach (var system in systems)
         {
