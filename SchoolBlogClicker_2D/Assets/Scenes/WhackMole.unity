@@ -1105,6 +1105,7 @@ MonoBehaviour:
   hiddenPoint: {fileID: 2133557914}
   visiblePoint: {fileID: 47694604}
   spriteMask: {fileID: 1086579579}
+  moleWidthFraction: 0.65
 --- !u!210 &372544905
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -1236,7 +1237,7 @@ PrefabInstance:
     - target: {fileID: 879490476083088002, guid: 744540646ad67504cb536eb359e1b260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2025653182}
     - target: {fileID: 879490476083088002, guid: 744540646ad67504cb536eb359e1b260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ExitMiniGame
@@ -1970,6 +1971,7 @@ MonoBehaviour:
   hiddenPoint: {fileID: 1539869090}
   visiblePoint: {fileID: 1328157611}
   spriteMask: {fileID: 387663066}
+  moleWidthFraction: 0.65
 --- !u!210 &697608501
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -2126,6 +2128,7 @@ MonoBehaviour:
   hiddenPoint: {fileID: 1424244731}
   visiblePoint: {fileID: 244479514}
   spriteMask: {fileID: 194852836}
+  moleWidthFraction: 0.65
 --- !u!210 &747595668
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -3784,6 +3787,7 @@ MonoBehaviour:
   hiddenPoint: {fileID: 1818736318}
   visiblePoint: {fileID: 81834568}
   spriteMask: {fileID: 1096580078}
+  moleWidthFraction: 0.65
 --- !u!210 &1218009163
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -3947,7 +3951,7 @@ PrefabInstance:
     - target: {fileID: 3423351445854992909, guid: 6c24ba33db53e494ea667022d33433bb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2025653182}
     - target: {fileID: 3423351445854992909, guid: 6c24ba33db53e494ea667022d33433bb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CloseMiniGames
@@ -4036,6 +4040,11 @@ PrefabInstance:
 --- !u!224 &1274333144 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1233424647288492711, guid: 6c24ba33db53e494ea667022d33433bb, type: 3}
+  m_PrefabInstance: {fileID: 1274333143}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1274333145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4330964030736117600, guid: 6c24ba33db53e494ea667022d33433bb, type: 3}
   m_PrefabInstance: {fileID: 1274333143}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1301633522
@@ -5005,6 +5014,7 @@ MonoBehaviour:
   hiddenPoint: {fileID: 2048568889}
   visiblePoint: {fileID: 1376733076}
   spriteMask: {fileID: 1678994621}
+  moleWidthFraction: 0.65
 --- !u!210 &1625688902
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -5205,6 +5215,7 @@ MonoBehaviour:
   hiddenPoint: {fileID: 1301633523}
   visiblePoint: {fileID: 1388164266}
   spriteMask: {fileID: 929293150}
+  moleWidthFraction: 0.65
 --- !u!210 &1647419974
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -5738,6 +5749,7 @@ MonoBehaviour:
   hiddenPoint: {fileID: 514568336}
   visiblePoint: {fileID: 866171860}
   spriteMask: {fileID: 1189971557}
+  moleWidthFraction: 0.65
 --- !u!210 &1865007485
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -6029,7 +6041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5e49bf3f8541a391ee250a61c22b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MiniGamesManager
-  miniGamesWindowUI: {fileID: 0}
+  miniGamesWindowUI: {fileID: 1274333145}
   settingsWindowUI: {fileID: 100332855}
 --- !u!1 &2031861730
 GameObject:
@@ -6276,6 +6288,7 @@ MonoBehaviour:
   hiddenPoint: {fileID: 718846302}
   visiblePoint: {fileID: 474849649}
   spriteMask: {fileID: 1754436662}
+  moleWidthFraction: 0.65
 --- !u!210 &2037910366
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -6432,6 +6445,7 @@ MonoBehaviour:
   hiddenPoint: {fileID: 1225757015}
   visiblePoint: {fileID: 782287796}
   spriteMask: {fileID: 365067593}
+  moleWidthFraction: 0.65
 --- !u!210 &2121331340
 SortingGroup:
   m_ObjectHideFlags: 0

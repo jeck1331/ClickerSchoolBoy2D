@@ -99,8 +99,13 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySfx(SfxType type)
     {
-        if (sfxSource == null) return;
         if (!_sfxMap.TryGetValue(type, out var clip) || clip == null) return;
+        PlaySfx(clip);
+    }
+
+    public void PlaySfx(AudioClip clip)
+    {
+        if (sfxSource == null || clip == null) return;
         sfxSource.PlayOneShot(clip);
     }
 

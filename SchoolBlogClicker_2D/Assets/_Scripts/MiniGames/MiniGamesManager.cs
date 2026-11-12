@@ -8,14 +8,14 @@ public class MiniGamesManager : MonoBehaviour
 
     public void OpenMiniGames()
     {
+        if (miniGamesWindowUI == null) return;
         GameplayPauseService.SetPaused(this, true);
-        if (miniGamesWindowUI != null)
-            miniGamesWindowUI.SetActive(true);
+        miniGamesWindowUI.SetActive(true);
     }
 
     public void OpenSettings()
     {
-        GameplayPauseService.SetPaused(this, true);
+        // SettingsPanel owns its pause through OnEnable and OnDisable.
         if (settingsWindowUI != null)
             settingsWindowUI.SetActive(true);
     }
@@ -29,9 +29,13 @@ public class MiniGamesManager : MonoBehaviour
     
     public void CloseSettings()
     {
-        GameplayPauseService.SetPaused(this, false);
         if (settingsWindowUI != null)
             settingsWindowUI.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        GameplayPauseService.SetPaused(this, false);
     }
 
     public void ExitMiniGame()
