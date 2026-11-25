@@ -12,6 +12,8 @@ public class FruitSchoolItem : MonoBehaviour
     [SerializeField] private Transform cutForm;
     [SerializeField] private Transform leftHalf;
     [SerializeField] private Transform rightHalf;
+    [Tooltip("Optional tap sound. Uses the default mini-game hit or miss sound when empty.")]
+    [SerializeField] private AudioClip tapSound;
     [Header("Cut motion")]
     [Tooltip("Speed of each half away from the cut, in world units per second.")]
     [SerializeField, Min(0f)] private float separationSpeed = 1.5f;
@@ -28,6 +30,7 @@ public class FruitSchoolItem : MonoBehaviour
 
     public ItemKind Kind => kind;
     public int Points => points;
+    public Vector3 Center => intact.bounds.center;
     public bool IsConfigured => intact != null && intact.sprite != null &&
                                 (intact.transform == transform || intact.transform.IsChildOf(transform)) &&
                                 (cutForm == null || (cutForm != transform && cutForm.IsChildOf(transform) &&
@@ -64,6 +67,11 @@ public class FruitSchoolItem : MonoBehaviour
         if (popped) return;
         popped = true;
         age = 0f;
+        if (tapSound != null)
+            AudioManager.Instance?.PlaySfx(tapSound);
+        else
+            AudioManager.Instance?.PlaySfx(kind == ItemKind.Fruit ? SfxType.MiniHit : SfxType.MiniMiss);
+
         Vector2 momentum = body.linearVelocity * inheritedVelocity;
         body.simulated = false;
         intact.enabled = false;

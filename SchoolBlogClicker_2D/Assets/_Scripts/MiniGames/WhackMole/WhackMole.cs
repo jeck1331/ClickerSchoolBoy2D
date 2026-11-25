@@ -78,8 +78,9 @@ public class WhackMole : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.button != PointerEventData.InputButton.Left || state != State.Visible || !owner.IsRunning) return;
+        Vector2 screenCenter = RectTransformUtility.WorldToScreenPoint(eventData.pressEventCamera, spriteRenderer.bounds.center);
         BeginHiding(true);
-        owner.RegisterHit();
+        owner.RegisterHit(screenCenter);
     }
 
     private void BeginHiding(bool hit)

@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class FruitSchoolController : MiniGameBase
 {
+    private const float LaunchHeightMultiplier = 1.15f;
+
     [Header("Session")]
     [SerializeField, Min(1f)] private float sessionDuration = 60f;
     [SerializeField, Min(1)] private int startingLives = 3;
@@ -27,6 +29,8 @@ public class FruitSchoolController : MiniGameBase
     [Header("Effects")]
     [Tooltip("Prefab or scene template. A separate copy plays for each tap; the template itself is not played.")]
     [SerializeField] private ParticleSystem cutParticleEffect;
+    [Tooltip("Optional explosion for both bomb types. Uses the cut effect when empty.")]
+    [SerializeField] private ParticleSystem bombParticleEffect;
     [Header("Rewards (same assets as GameManager)")]
     [SerializeField] private ULongValue scoreValue;
     [SerializeField] private UIntValue powerValue;
@@ -116,6 +120,7 @@ public class FruitSchoolController : MiniGameBase
         TickEffects(Time.deltaTime);
         if (!IsRunning || !TryGetBounds(out Bounds bounds)) return;
         float dt = Time.deltaTime;
+        TickScorePopups(dt);
         RemainingTime = Mathf.Max(0f, RemainingTime - dt);
         if (RemainingTime <= 0f) { EndSession(); return; }
 
@@ -129,14 +134,14 @@ public class FruitSchoolController : MiniGameBase
         if (nextWave <= 0f)
         {
             int count = Random.Range(Mathf.Max(1, fruitsPerWave.x), Mathf.Max(1, fruitsPerWave.y) + 1);
-            for (int i = 0; i < count; i++) Spawn(bounds);
+            for (int i = 0; i < count; i++) Spawn(bounds, i, count);
             nextWave = Random.Range(Mathf.Max(0.1f, waveInterval.x), Mathf.Max(0.1f, waveInterval.y));
         }
         ReadInput();
         UpdateUI();
     }
 
-    private void Spawn(Bounds bounds)
+    private void Spawn(Bounds bounds, int index, int count)
     {
         FruitSchoolItem prefab = fruitPrefabs[Random.Range(0, fruitPrefabs.Length)];
         if (Random.value < bombChance)
@@ -144,15 +149,21 @@ public class FruitSchoolController : MiniGameBase
             FruitSchoolItem bomb = Random.value < 0.5f ? largeBombPrefab : smallBombPrefab;
             if (bomb != null) prefab = bomb;
         }
-        float x = Random.Range(bounds.min.x + bounds.size.x * 0.15f, bounds.max.x - bounds.size.x * 0.15f);
+        // Give each object in the wave its own horizontal band, widening the spread as it flies.
+        float start = (index + Random.Range(0.2f, 0.8f)) / count;
+        float target = (index + Random.Range(0.2f, 0.8f)) / count;
+        float width = bounds.size.x;
+        float x = bounds.min.x + width * Mathf.Lerp(0.12f, 0.88f, start);
         float y = bounds.min.y - 1f;
-        float peak = bounds.min.y + bounds.size.y * Random.Range(minimumHeight, maximumHeight);
-        float speed = Mathf.Sqrt(2f * Mathf.Max(0.1f, gravity) * (peak - y));
-        float targetX = Random.Range(bounds.min.x + bounds.size.x * 0.2f, bounds.max.x - bounds.size.x * 0.2f);
+        float peakHeight = Mathf.Clamp01(Random.Range(minimumHeight, maximumHeight) * LaunchHeightMultiplier);
+        float peak = bounds.min.y + bounds.size.y * peakHeight;
+        float launchGravity = Mathf.Max(0.1f, gravity);
+        float speed = Mathf.Sqrt(2f * launchGravity * (peak - y));
+        float targetX = bounds.min.x + width * Mathf.Lerp(0.04f, 0.96f, target);
         FruitSchoolItem item = Instantiate(prefab, new Vector3(x, y, gameplayZ), Quaternion.identity, transform);
         item.gameObject.SetActive(true);
-        item.Launch(new Vector2((targetX - x) / (2f * speed / Mathf.Max(0.1f, gravity)), speed),
-            Random.Range(-150f, 150f), ++spawnOrder, Mathf.Max(0.1f, gravity));
+        item.Launch(new Vector2((targetX - x) / (2f * speed / launchGravity), speed),
+            Random.Range(-150f, 150f), ++spawnOrder, launchGravity);
         items.Add(item);
     }
 
@@ -183,9 +194,12 @@ public class FruitSchoolController : MiniGameBase
         {
             FruitSchoolItem item = items[i];
             if (!item.Contains(point)) continue;
+            bool isFruit = item.Kind == FruitSchoolItem.ItemKind.Fruit;
+            if (isFruit) ShowScorePopup(scoreText, worldCamera.WorldToScreenPoint(item.Center));
             item.Pop();
-            PlayEffect(item.transform.position);
-            if (item.Kind == FruitSchoolItem.ItemKind.Fruit)
+            PlayEffect(!isFruit && bombParticleEffect != null ? bombParticleEffect : cutParticleEffect,
+                item.transform.position);
+            if (isFruit)
                 Score += System.Math.Min((long)Mathf.Max(0, item.Points), long.MaxValue - Score);
             else
             {
@@ -199,10 +213,10 @@ public class FruitSchoolController : MiniGameBase
         }
     }
 
-    private void PlayEffect(Vector3 position)
+    private void PlayEffect(ParticleSystem effectTemplate, Vector3 position)
     {
-        if (cutParticleEffect == null) return;
-        ParticleSystem effect = Instantiate(cutParticleEffect, position, cutParticleEffect.transform.rotation, transform);
+        if (effectTemplate == null) return;
+        ParticleSystem effect = Instantiate(effectTemplate, position, effectTemplate.transform.rotation, transform);
         effect.gameObject.SetActive(true);
         effect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         foreach (ParticleSystem child in effect.GetComponentsInChildren<ParticleSystem>(true))
@@ -233,6 +247,7 @@ public class FruitSchoolController : MiniGameBase
     {
         if (!HasStarted || HasEnded) return;
         HasEnded = true;
+        HideScorePopups();
         // Decimal avoids overflow before clamping to the balance's long representation.
         decimal factor = (decimal)Mathf.Max(0, powerValue.Value) * Mathf.Max(0, clickMultiplier) +
                          (incomeValue.Value <= 0 ? 5m : (decimal)incomeValue.Value * Mathf.Max(0, incomeMultiplier));

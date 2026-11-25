@@ -33,8 +33,8 @@ public class PopItManager : MiniGameBase
     [SerializeField] private GameObject resultScreen;
     [SerializeField] private string exitSceneName = "MainScene";
     [Header("Score popup")]
-    [SerializeField, Min(0.01f)] private float popupDuration = 0.7f;
-    [SerializeField, Min(0f)] private float popupRise = 100f;
+    [SerializeField, Min(0.01f)] private float popupDuration = MiniGameScorePopup.DefaultDuration;
+    [SerializeField, Min(0f)] private float popupRise = MiniGameScorePopup.DefaultRise;
 
     private readonly List<PopItBubble> bubbles = new();
     private int unpressedCount;

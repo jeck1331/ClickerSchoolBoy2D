@@ -104,6 +104,7 @@ public class WhackMoleManager : MiniGameBase
     {
         if (!IsRunning) return;
         float deltaTime = Time.deltaTime;
+        TickScorePopups(deltaTime);
         RemainingTime = Mathf.Max(0f, RemainingTime - deltaTime);
         if (RemainingTime <= 0f) { EndSession(); return; }
 
@@ -141,10 +142,18 @@ public class WhackMoleManager : MiniGameBase
         UpdateScoreUI();
     }
 
+    internal void RegisterHit(Vector2 screenPosition)
+    {
+        if (!IsRunning) return;
+        RegisterHit();
+        ShowScorePopup(scoreText, screenPosition);
+    }
+
     public void EndSession()
     {
         if (!HasStarted || HasEnded) return;
         HasEnded = true;
+        HideScorePopups();
         RemainingTime = 0f;
         ResetMoles();
         decimal passive = incomeValue.Value <= 0 ? 1.25m : (decimal)incomeValue.Value * 0.3m;
