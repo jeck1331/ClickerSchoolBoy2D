@@ -53,9 +53,9 @@ public class ClickController : MonoBehaviour
         if (TryHitMiniGameCircle(screenPosition)) return;
         if (!IsInside(screenPosition)) return;
 
-        var hitReward = CritCalculator.CalculateHitReward(clickPowerValue!.Value, scoreValue.Value, critConfig, out var isCrit);
+        long rewardUnits = CritCalculator.CalculateHitRewardUnits(clickPowerValue.Value, scoreValue.Value, critConfig, out var isCrit);
+        long hitReward = GameManager.Instance.EarnCoinUnits(rewardUnits);
         Debug.Log($"Hit Reward: {hitReward}, isCrit: {isCrit}");
-        scoreValue.Value += hitReward;
         if (isCrit)
         {
             if (vfxCritStarParticle != null)

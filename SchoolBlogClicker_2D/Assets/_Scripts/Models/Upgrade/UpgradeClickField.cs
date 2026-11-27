@@ -7,7 +7,7 @@ namespace _Scripts.Models.Upgrade
     [Serializable]
     public class UpgradeClickField: UpgradeBaseField
     {
-        [Header("Power")] [SerializeField] private int power;
+        [Header("Click bonus (hundredths of a coin) or multiplier")] [SerializeField] private int power;
         [Header("Type Calculation")] [SerializeField] private ClickCalcType calcType;
         
         public ClickCalcType CalcType => calcType;

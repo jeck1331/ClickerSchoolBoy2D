@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using _Scripts.Core;
 using _Scripts.Models.Save;
 using _Scripts.Models.Upgrade;
 using UnityEngine;
@@ -46,13 +45,12 @@ public class ShopManager : MonoBehaviour
 
         foreach (var item in _shopData.Upgrades.OrderBy(x => x.Id))
         {
-            var isBought = savedById.TryGetValue(item.Id, out var saved) && saved.IsBought;
-            var isSecret = !previousBought;
-
-            var sui = new UpgradeStateItem(item.Id, isBought, isSecret);
-            upgradeStates.TryAdd(item.Id, sui);
-
-            previousBought = isBought;
+            int owned = savedById.TryGetValue(item.Id, out var saved)
+                ? System.Math.Max(saved.Count, saved.IsBought ? 1 : 0)
+                : 0;
+            var state = new UpgradeStateItem(item.Id, owned, !previousBought && owned == 0);
+            upgradeStates.TryAdd(item.Id, state);
+            previousBought = state.IsBought;
         }
     }
     
@@ -63,14 +61,20 @@ public class ShopManager : MonoBehaviour
     public SavedUpgradeItem[] GetDataToSave() => upgradeStates.Select(x => new SavedUpgradeItem
     {
         Id = x.Key,
-        IsBought = x.Value.IsBought
+        IsBought = x.Value.IsBought,
+        Count = x.Value.Count
     }).ToArray();
 
     public int GetIncomeValue()
     {
-        return CalcCacheHelper.CalcIncomeCache(
-            _shopData.Upgrades.Where(x => upgradeStates.ContainsKey(x.Id) && upgradeStates[x.Id].IsBought).ToArray()
-            );
+        int total = 0;
+        foreach (var upgrade in _shopData.Upgrades)
+        {
+            if (upgradeStates.TryGetValue(upgrade.Id, out var state))
+                total += upgrade.Income * state.Count;
+        }
+
+        return total;
     }
     
     public void Reset()

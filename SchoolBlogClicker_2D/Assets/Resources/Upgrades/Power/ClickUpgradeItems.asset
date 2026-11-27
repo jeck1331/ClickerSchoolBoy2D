@@ -14,81 +14,345 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeItems_SO
   Upgrades:
   - id: 0
-    title: Super Click
-    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A"
-    price: 50
+    title: First Post
+    description: Start the school blog.
+    price: 15
     sprite: {fileID: 0}
-    power: 2
-    calcType: 0
+    power: 10
+    calcType: 2
   - id: 1
-    title: Mega Click
-    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
-      \u0432 \u0442\u0440\u0438 \u0440\u0430\u0437\u0430 (x3)"
-    price: 920
+    title: Clean Lens
+    description: Get a clearer shot.
+    price: 17
     sprite: {fileID: 0}
-    power: 4
-    calcType: 0
+    power: 20
+    calcType: 2
   - id: 2
-    title: Super Mega Click
-    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
-      \u0432 \u0434\u0432\u0430 \u0440\u0430\u0437\u0430 (x2)"
-    price: 3500
+    title: Steady Hands
+    description: Keep the picture steady.
+    price: 20
     sprite: {fileID: 0}
-    power: 8
-    calcType: 1
+    power: 30
+    calcType: 2
   - id: 3
-    title: SMC
-    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
-      \u0432 \u0434\u0432\u0430 \u0440\u0430\u0437\u0430 (x2)"
-    price: 15000
+    title: Window Light
+    description: Film in good light.
+    price: 23
+    sprite: {fileID: 0}
+    power: 40
+    calcType: 2
+  - id: 4
+    title: Simple Edit
+    description: Trim the awkward pauses.
+    price: 26
     sprite: {fileID: 0}
     power: 50
-    calcType: 0
-  - id: 4
-    title: SMC U
-    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
-      \u0432 \u0434\u0432\u0430 \u0440\u0430\u0437\u0430 (x2)"
-    price: 100000
-    sprite: {fileID: 0}
-    power: 2
-    calcType: 1
+    calcType: 2
   - id: 5
-    title: SMC ULTRA
-    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
-      (x3)"
-    price: 100000
+    title: Catchy Title
+    description: Give viewers a reason to tap.
+    price: 30
     sprite: {fileID: 0}
-    power: 96
-    calcType: 0
+    power: 60
+    calcType: 2
   - id: 6
-    title: ULTRA HIGH CLICK
-    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
-      (x2)"
-    price: 300000
+    title: Weekly Upload
+    description: Keep the channel active.
+    price: 35
     sprite: {fileID: 0}
-    power: 192
-    calcType: 0
+    power: 70
+    calcType: 2
   - id: 7
-    title: HLDF QQ
-    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
-      (x1.5)"
-    price: 500000
+    title: Desk Tripod
+    description: Film hands-free.
+    price: 40
     sprite: {fileID: 0}
-    power: 288
-    calcType: 0
+    power: 80
+    calcType: 2
   - id: 8
-    title: NARMALDI
-    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
-      (x1.25)"
-    price: 1000000
+    title: Clip-On Mic
+    description: Record a clear voice.
+    price: 46
     sprite: {fileID: 0}
-    power: 360
-    calcType: 0
+    power: 90
+    calcType: 2
   - id: 9
-    title: Pipiska
-    description: "\u0423\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043A\u043B\u0438\u043A
-      (x1.25)"
-    price: 1000000
+    title: Quick Cuts
+    description: Keep the video moving.
+    price: 53
+    sprite: {fileID: 0}
+    power: 100
+    calcType: 2
+  - id: 10
+    title: Thumbnail Kit
+    description: Make the preview stand out.
+    price: 61
+    sprite: {fileID: 0}
+    power: 110
+    calcType: 2
+  - id: 11
+    title: Better Hooks
+    description: Open with the good part.
+    price: 70
+    sprite: {fileID: 0}
+    power: 120
+    calcType: 2
+  - id: 12
+    title: Episode Notes
+    description: Plan each episode.
+    price: 80
+    sprite: {fileID: 0}
+    power: 130
+    calcType: 2
+  - id: 13
+    title: Upload Routine
+    description: Post on a schedule.
+    price: 92
+    sprite: {fileID: 0}
+    power: 140
+    calcType: 2
+  - id: 14
+    title: Ring Light
+    description: Light your desk setup.
+    price: 106
+    sprite: {fileID: 0}
+    power: 150
+    calcType: 2
+  - id: 15
+    title: Phone Gimbal
+    description: Smooth out moving shots.
+    price: 122
+    sprite: {fileID: 0}
+    power: 160
+    calcType: 2
+  - id: 16
+    title: Sound Check
+    description: Clear up background noise.
+    price: 140
+    sprite: {fileID: 0}
+    power: 170
+    calcType: 2
+  - id: 17
+    title: Color Presets
+    description: Set a look for the channel.
+    price: 161
+    sprite: {fileID: 0}
+    power: 180
+    calcType: 2
+  - id: 18
+    title: Subtitle Pack
+    description: Help viewers follow along.
+    price: 186
+    sprite: {fileID: 0}
+    power: 190
+    calcType: 2
+  - id: 19
+    title: Intro Jingle
+    description: Give the channel a tune.
+    price: 213
+    sprite: {fileID: 0}
+    power: 200
+    calcType: 2
+  - id: 20
+    title: After-School Live
+    description: Go live after class.
+    price: 245
+    sprite: {fileID: 0}
+    power: 210
+    calcType: 2
+  - id: 21
+    title: Desk Backdrop
+    description: Give the frame a cleaner look.
+    price: 282
+    sprite: {fileID: 0}
+    power: 220
+    calcType: 2
+  - id: 22
+    title: Studio Mic
+    description: Record studio-quality audio.
+    price: 325
+    sprite: {fileID: 0}
+    power: 230
+    calcType: 2
+  - id: 23
+    title: Softbox Pair
+    description: Light the whole frame.
+    price: 373
+    sprite: {fileID: 0}
+    power: 240
+    calcType: 2
+  - id: 24
+    title: Cutting Room
+    description: Polish every cut.
+    price: 429
+    sprite: {fileID: 0}
+    power: 250
+    calcType: 2
+  - id: 25
+    title: Reaction Cam
+    description: Capture the reaction.
+    price: 494
+    sprite: {fileID: 0}
+    power: 260
+    calcType: 2
+  - id: 26
+    title: Highlight Reel
+    description: Share the best moments.
+    price: 568
+    sprite: {fileID: 0}
+    power: 270
+    calcType: 2
+  - id: 27
+    title: Premiere Night
+    description: Make each upload an event.
+    price: 653
+    sprite: {fileID: 0}
+    power: 280
+    calcType: 2
+  - id: 28
+    title: Shot List
+    description: Plan the shoot in advance.
+    price: 751
+    sprite: {fileID: 0}
+    power: 290
+    calcType: 2
+  - id: 29
+    title: Storyboards
+    description: Sketch the scene before filming.
+    price: 864
+    sprite: {fileID: 0}
+    power: 300
+    calcType: 2
+  - id: 30
+    title: Dual Cameras
+    description: Switch between angles.
+    price: 993
+    sprite: {fileID: 0}
+    power: 310
+    calcType: 2
+  - id: 31
+    title: Quiet Booth
+    description: Keep the school noise out.
+    price: 1142
+    sprite: {fileID: 0}
+    power: 320
+    calcType: 2
+  - id: 32
+    title: Field Recorder
+    description: Capture sound on location.
+    price: 1313
+    sprite: {fileID: 0}
+    power: 330
+    calcType: 2
+  - id: 33
+    title: Live Switcher
+    description: Cut between cameras live.
+    price: 1510
+    sprite: {fileID: 0}
+    power: 340
+    calcType: 2
+  - id: 34
+    title: School Showcase
+    description: Film the big school event.
+    price: 1737
+    sprite: {fileID: 0}
+    power: 350
+    calcType: 2
+  - id: 35
+    title: Creator Rig
+    description: Speed up your workflow.
+    price: 1998
     sprite: {fileID: 0}
     power: 360
-    calcType: 0
+    calcType: 2
+  - id: 36
+    title: Editing Suite
+    description: Edit longer episodes.
+    price: 2297
+    sprite: {fileID: 0}
+    power: 370
+    calcType: 2
+  - id: 37
+    title: Motion Graphics
+    description: Animate the key moments.
+    price: 2642
+    sprite: {fileID: 0}
+    power: 380
+    calcType: 2
+  - id: 38
+    title: Studio Crew
+    description: Bring in a crew.
+    price: 3038
+    sprite: {fileID: 0}
+    power: 390
+    calcType: 2
+  - id: 39
+    title: News Desk
+    description: Publish school updates.
+    price: 3494
+    sprite: {fileID: 0}
+    power: 400
+    calcType: 2
+  - id: 40
+    title: Channel Trailer
+    description: Show what the channel is about.
+    price: 4018
+    sprite: {fileID: 0}
+    power: 410
+    calcType: 2
+  - id: 41
+    title: Season Premiere
+    description: Make a bigger debut.
+    price: 4621
+    sprite: {fileID: 0}
+    power: 420
+    calcType: 2
+  - id: 42
+    title: Media Lab
+    description: Try new video formats.
+    price: 5314
+    sprite: {fileID: 0}
+    power: 430
+    calcType: 2
+  - id: 43
+    title: Creator Studio
+    description: Build a full studio.
+    price: 6111
+    sprite: {fileID: 0}
+    power: 440
+    calcType: 2
+  - id: 44
+    title: Broadcast Rig
+    description: Step up your live production.
+    price: 7027
+    sprite: {fileID: 0}
+    power: 450
+    calcType: 2
+  - id: 45
+    title: Prime-Time Slot
+    description: Reach viewers at peak hours.
+    price: 8082
+    sprite: {fileID: 0}
+    power: 460
+    calcType: 2
+  - id: 46
+    title: Viral Campaign
+    description: Give the best clips a push.
+    price: 9294
+    sprite: {fileID: 0}
+    power: 470
+    calcType: 2
+  - id: 47
+    title: Creator Network
+    description: Collaborate with creators.
+    price: 10688
+    sprite: {fileID: 0}
+    power: 480
+    calcType: 2
+  - id: 48
+    title: Channel Takeover
+    description: Run the biggest show at school.
+    price: 12291
+    sprite: {fileID: 0}
+    power: 490
+    calcType: 2

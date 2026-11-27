@@ -249,13 +249,13 @@ public class FruitSchoolController : MiniGameBase
         HasEnded = true;
         HideScorePopups();
         // Decimal avoids overflow before clamping to the balance's long representation.
-        decimal factor = (decimal)Mathf.Max(0, powerValue.Value) * Mathf.Max(0, clickMultiplier) +
-                         (incomeValue.Value <= 0 ? 5m : (decimal)incomeValue.Value * Mathf.Max(0, incomeMultiplier));
+        decimal factor = System.Math.Max(0m, powerValue.CoinValue) * Mathf.Max(0, clickMultiplier) +
+                         (incomeValue.Value <= 0 ? 5m : incomeValue.CoinValue * Mathf.Max(0, incomeMultiplier));
         Reward = (long)System.Math.Min(long.MaxValue, Score * factor);
         foreach (var item in items) if (item != null) Destroy(item.gameObject);
         items.Clear();
         UpdateUI();
-        if (resultText != null) resultText.text = $"Score: {Score}\nReward: {Reward}";
+        if (resultText != null) resultText.text = GameText.Results(Score, Reward);
         if (resultScreen != null) resultScreen.SetActive(true);
         PayReward();
         onSessionEnded.Invoke();
@@ -291,8 +291,8 @@ public class FruitSchoolController : MiniGameBase
     private void UpdateUI()
     {
         if (scoreText != null) scoreText.text = Score.ToString();
-        if (timeText != null) timeText.text = $"Time: {Mathf.CeilToInt(RemainingTime)}";
-        if (livesText != null) livesText.text = $"Lives: {Lives}";
+        if (timeText != null) timeText.text = GameText.Choose($"Time: {Mathf.CeilToInt(RemainingTime)}", $"Время: {Mathf.CeilToInt(RemainingTime)}");
+        if (livesText != null) livesText.text = GameText.Choose($"Lives: {Lives}", $"Жизни: {Lives}");
     }
 
     protected override void HandlePause(bool paused)

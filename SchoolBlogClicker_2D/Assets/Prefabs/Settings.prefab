@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 538790494294349315}
   - component: {fileID: 3292100236556491934}
   - component: {fileID: 6528280994419895335}
+  - component: {fileID: 3583224375515511201}
   m_Layer: 5
   m_Name: Ilya
   m_TagString: Untagged
@@ -137,6 +138,22 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3583224375515511201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141586956808946123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: "\u0413\u0435\u0439\u043C\u0434\u0438\u0437\u0430\u0439\u043D \u0438 \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0430:
+    \u0418\u043B\u044C\u044F \u041F\u043E\u043B\u044F\u043A\u043E\u0432"
+  russianFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  russianFontSize: 0
 --- !u!1 &444103953837449905
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +299,7 @@ GameObject:
   - component: {fileID: 2288230067734702553}
   - component: {fileID: 2322744262363778995}
   - component: {fileID: 3672729413284786006}
+  - component: {fileID: 8706928108336940081}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -408,6 +426,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8706928108336940081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642597515644206914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: "\u0412\u044B\u0439\u0442\u0438 \u0438\u0437 \u0438\u0433\u0440\u044B"
+  russianFont: {fileID: 11400000, guid: 29d0971afd7114642b802ee8aecce87e, type: 2}
+  russianFontSize: 0
 --- !u!1 &1226614553309411843
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +608,8 @@ MonoBehaviour:
   sfxSliderGM: {fileID: 6153395294639144216}
   musicValueText: {fileID: 3821109876999183895}
   sfxValueText: {fileID: 305527204967401223}
+  russianButton: {fileID: 4747504780735703196}
+  englishButton: {fileID: 6416145229003281894}
 --- !u!1 &1848116276326026759
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,6 +685,7 @@ GameObject:
   - component: {fileID: 2359521746285892614}
   - component: {fileID: 3619597873258397824}
   - component: {fileID: 5484273462963191305}
+  - component: {fileID: 462189267017980571}
   m_Layer: 5
   m_Name: MusicTitle
   m_TagString: Untagged
@@ -776,6 +812,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &462189267017980571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463167558967146593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: "\u041C\u0443\u0437\u044B\u043A\u0430"
+  russianFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  russianFontSize: 0
 --- !u!1 &2948243499260618538
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,6 +977,7 @@ GameObject:
   - component: {fileID: 7091097577973973876}
   - component: {fileID: 5885653399116435640}
   - component: {fileID: 1924560358346688371}
+  - component: {fileID: 4685683392302619877}
   m_Layer: 5
   m_Name: SfxTitle
   m_TagString: Untagged
@@ -1052,6 +1104,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4685683392302619877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3041681037433900541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: "\u0417\u0432\u0443\u043A\u0438"
+  russianFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  russianFontSize: 0
 --- !u!1 &3087683452013255496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,6 +1280,7 @@ GameObject:
   - component: {fileID: 4626298721322337240}
   - component: {fileID: 1633514868471424018}
   - component: {fileID: 7003945612118032721}
+  - component: {fileID: 4811118867412897511}
   m_Layer: 5
   m_Name: Vasya
   m_TagString: Untagged
@@ -1339,6 +1407,22 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4811118867412897511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3509546557103888987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: "\u0413\u0435\u0439\u043C\u0434\u0438\u0437\u0430\u0439\u043D \u0438 \u0433\u0440\u0430\u0444\u0438\u043A\u0430:
+    \u0412\u0430\u0441\u0438\u043B\u0438\u0439 \u041F\u043B\u0430\u0442\u043E\u043D\u043E\u0432"
+  russianFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  russianFontSize: 0
 --- !u!1 &3638754198846022373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,6 +1704,7 @@ GameObject:
   - component: {fileID: 6444816382413859734}
   - component: {fileID: 5541722584268980249}
   - component: {fileID: 7098592096094629371}
+  - component: {fileID: 7398503619130266523}
   m_Layer: 5
   m_Name: SfxTitle
   m_TagString: Untagged
@@ -1746,6 +1831,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7398503619130266523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4562111642527769017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: "\u042F\u0437\u044B\u043A"
+  russianFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  russianFontSize: 0
 --- !u!1 &4600789746216771263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,6 +1857,7 @@ GameObject:
   - component: {fileID: 8089699306986376744}
   - component: {fileID: 7621896210542524121}
   - component: {fileID: 4884742425239487941}
+  - component: {fileID: 6416145229003281894}
   m_Layer: 5
   m_Name: EuIcon
   m_TagString: Untagged
@@ -1821,6 +1922,62 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6416145229003281894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4600789746216771263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 4884742425239487941}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 280133158479857573}
+        m_TargetAssemblyTypeName: SettingsPanel, Assembly-CSharp
+        m_MethodName: SelectEnglish
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4666089831891491248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2258,6 +2415,7 @@ GameObject:
   - component: {fileID: 8641392058899199035}
   - component: {fileID: 5397985824134404399}
   - component: {fileID: 5366866462577419588}
+  - component: {fileID: 2813066246183773229}
   m_Layer: 5
   m_Name: SfxTitle
   m_TagString: Untagged
@@ -2384,6 +2542,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2813066246183773229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6082022059381832385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: "\u0410\u0432\u0442\u043E\u0440\u044B"
+  russianFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  russianFontSize: 0
 --- !u!1 &6153395294639144216
 GameObject:
   m_ObjectHideFlags: 0
@@ -2497,6 +2670,7 @@ GameObject:
   - component: {fileID: 4528206108737637758}
   - component: {fileID: 7680299258880629240}
   - component: {fileID: 7156169908872726519}
+  - component: {fileID: 4747504780735703196}
   m_Layer: 5
   m_Name: RuIcon
   m_TagString: Untagged
@@ -2561,6 +2735,62 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4747504780735703196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6182135825002185981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 7156169908872726519}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 280133158479857573}
+        m_TargetAssemblyTypeName: SettingsPanel, Assembly-CSharp
+        m_MethodName: SelectRussian
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6187334101233879116
 GameObject:
   m_ObjectHideFlags: 0
@@ -2741,6 +2971,7 @@ GameObject:
   - component: {fileID: 3918525100038181689}
   - component: {fileID: 1430339074510647543}
   - component: {fileID: 7017691620718280151}
+  - component: {fileID: 2088355367749704287}
   m_Layer: 5
   m_Name: TitleSettings
   m_TagString: Untagged
@@ -2867,6 +3098,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2088355367749704287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6449074498024175779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+  russianFont: {fileID: 11400000, guid: 29d0971afd7114642b802ee8aecce87e, type: 2}
+  russianFontSize: 123
 --- !u!1 &6597042764402958911
 GameObject:
   m_ObjectHideFlags: 0

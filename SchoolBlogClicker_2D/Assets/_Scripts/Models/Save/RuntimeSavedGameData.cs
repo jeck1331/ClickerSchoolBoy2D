@@ -6,6 +6,7 @@ namespace _Scripts.Models.Save
     public class RuntimeSavedGameData
     {
         public long Coins;
+        public int CoinRemainder;
 
         public List<SavedUpgradeItem> UpgradeClickTree;
         public List<SavedUpgradeItem> UpgradeIncomeTree;
@@ -28,6 +29,10 @@ namespace _Scripts.Models.Save
             else
             {
                 Coins = gd.Value.Coins;
+                const int legacyScale = 10;
+                int scale = gd.Value.CoinRemainderScale > 0 ? gd.Value.CoinRemainderScale : legacyScale;
+                long remainder = System.Math.Clamp(gd.Value.CoinRemainder, 0, scale - 1);
+                CoinRemainder = (int)(remainder * UIntValue.UnitsPerCoin / scale);
 
                 if (gd.Value.UpgradeClickTree != null) UpgradeClickTree = gd.Value.UpgradeClickTree.ToList();
                 if (gd.Value.UpgradeIncomeTree != null) UpgradeIncomeTree = gd.Value.UpgradeIncomeTree.ToList();

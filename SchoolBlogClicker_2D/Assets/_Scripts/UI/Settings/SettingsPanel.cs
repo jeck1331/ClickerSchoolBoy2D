@@ -12,6 +12,9 @@ public class SettingsPanel : MonoBehaviour
     [SerializeField] private TMP_Text musicValueText;
     [SerializeField] private TMP_Text sfxValueText;
     
+    [SerializeField] private Button russianButton;
+    [SerializeField] private Button englishButton;
+
     private Slider _musicSlider;
     private Slider _sfxSlider;
     private bool _isSyncing;
@@ -29,11 +32,14 @@ public class SettingsPanel : MonoBehaviour
         SubscribeSlider(_musicSlider, nameof(OnMusicChanged), HandleMusicSliderChanged);
         SubscribeSlider(_sfxSlider, nameof(OnSFXChanged), HandleSfxSliderChanged);
         _isSyncing = false;
+        SettingsService.LanguageChanged += RefreshLanguageSelection;
+        RefreshLanguageSelection();
     }
 
     private void OnDisable()
     {
         GameplayPauseService.SetPaused(this, false);
+        SettingsService.LanguageChanged -= RefreshLanguageSelection;
         if (_musicSlider != null) _musicSlider.onValueChanged.RemoveListener(HandleMusicSliderChanged);
         if (_sfxSlider != null) _sfxSlider.onValueChanged.RemoveListener(HandleSfxSliderChanged);
         SettingsService.Save();
@@ -42,6 +48,21 @@ public class SettingsPanel : MonoBehaviour
     private void OnApplicationPause(bool paused)
     {
         if (paused) SettingsService.Save();
+    }
+
+    public void SelectRussian() => SettingsService.Language = GameLanguage.Russian;
+    public void SelectEnglish() => SettingsService.Language = GameLanguage.English;
+
+    private void RefreshLanguageSelection()
+    {
+        SetFlagSelection(russianButton, SettingsService.Language == GameLanguage.Russian);
+        SetFlagSelection(englishButton, SettingsService.Language == GameLanguage.English);
+    }
+
+    private static void SetFlagSelection(Button button, bool selected)
+    {
+        if (button != null && button.targetGraphic != null)
+            button.targetGraphic.color = selected ? Color.white : new Color(0.7f, 0.7f, 0.7f);
     }
 
     public void OpenSettings()

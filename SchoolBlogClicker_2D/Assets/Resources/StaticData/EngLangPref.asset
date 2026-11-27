@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131ee95c51aec3b45afc661c004d80a9, type: 3}
   m_Name: EngLangPref
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.ScriptableObjects.LangPref
-  gameLanguage: 0
+  gameLanguage: 1
   Dictionary:
     Play: Play
     Exit: Exit

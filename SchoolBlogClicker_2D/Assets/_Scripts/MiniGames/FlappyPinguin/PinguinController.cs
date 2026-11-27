@@ -194,11 +194,11 @@ public class PinguinController : MiniGameBase
             return;
         }
 
-        long passiveReward = incomeValue.Value <= 0
-            ? 5L
-            : (long)incomeValue.Value * Mathf.Max(0, incomeMultiplier);
-        long reward = (long)Mathf.Max(0, powerValue.Value) * Mathf.Max(0, clickMultiplier)
-                    + passiveReward;
+        decimal passiveReward = incomeValue.Value <= 0
+            ? 5m
+            : incomeValue.CoinValue * Mathf.Max(0, incomeMultiplier);
+        long reward = System.Convert.ToInt64(
+            powerValue.CoinValue * Mathf.Max(0, clickMultiplier) + passiveReward);
         Score += System.Math.Min(reward, long.MaxValue - Score);
         UpdateScoreText();
     }

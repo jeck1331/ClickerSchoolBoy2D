@@ -2,29 +2,30 @@ namespace _Scripts.Models.Upgrade
 {
     public class UpgradeStateItem
     {
-        private int id;
-        private bool isBought = false;
-        private bool isSecret = true;
-
         public UpgradeStateItem(int id, bool isBought = false, bool isSecret = true)
+            : this(id, isBought ? 1 : 0, isSecret)
         {
-            this.id = id;
-            
-            if (isBought) Buy();
-            if (!isSecret) Unsecret();
         }
-        
-        public bool IsSecret => isSecret;
-        public bool IsBought => isBought;
-        public int Id => id;
-        
-        public void Buy() => isBought = true;
-        public void Unsecret() => isSecret = false;
+
+        public UpgradeStateItem(int id, int count, bool isSecret)
+        {
+            Id = id;
+            Count = count;
+            IsSecret = isSecret;
+        }
+
+        public bool IsSecret { get; private set; }
+        public bool IsBought => Count > 0;
+        public int Count { get; private set; }
+        public int Id { get; }
+
+        public void Buy() => Count++;
+        public void Unsecret() => IsSecret = false;
 
         public void Reset()
         {
-            isBought = false;
-            isSecret = id != 0;
+            Count = 0;
+            IsSecret = Id != 0;
         }
     }
 }

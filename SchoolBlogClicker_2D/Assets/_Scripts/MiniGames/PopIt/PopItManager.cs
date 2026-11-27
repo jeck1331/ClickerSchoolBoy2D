@@ -152,8 +152,8 @@ public class PopItManager : MiniGameBase
         HasEnded = true;
         RemainingTime = 0f;
         foreach (PopItBubble bubble in bubbles) bubble.HidePopup();
-        decimal passive = incomeValue.Value <= 0 ? 1.5m : (decimal)incomeValue.Value * 1.5m;
-        decimal factor = passive + (decimal)Mathf.Max(0, powerValue.Value) * 1.2m;
+        decimal passive = incomeValue.Value <= 0 ? 1.5m : incomeValue.CoinValue * 1.5m;
+        decimal factor = passive + System.Math.Max(0m, powerValue.CoinValue) * 1.2m;
         Reward = (long)Math.Min(long.MaxValue, Math.Ceiling(Score * factor));
         if (Reward > 0)
         {
@@ -161,7 +161,7 @@ public class PopItManager : MiniGameBase
             else scoreValue.Value = new SaveGameSystem().AddCoins(Reward);
         }
         UpdateTimeUI();
-        if (resultText != null) resultText.text = $"Очки: {Score}\nМонеты: {Reward}";
+        if (resultText != null) resultText.text = GameText.Results(Score, Reward);
         if (resultScreen != null) resultScreen.SetActive(true);
     }
 

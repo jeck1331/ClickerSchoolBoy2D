@@ -1,7 +1,24 @@
+using System;
 using UnityEngine;
 
 public static class SettingsService
 {
+    public static event Action LanguageChanged;
+
+    public static GameLanguage Language
+    {
+        get => PlayerPrefs.GetInt(USER_PREFS_SETTINGS_KEYS.Language, (int)GameLanguage.English) == (int)GameLanguage.Russian
+            ? GameLanguage.Russian
+            : GameLanguage.English;
+        set
+        {
+            if (Language == value) return;
+            PlayerPrefs.SetInt(USER_PREFS_SETTINGS_KEYS.Language, (int)value);
+            PlayerPrefs.Save();
+            LanguageChanged?.Invoke();
+        }
+    }
+
     public static float MasterVolume
     {
         get => Mathf.Clamp01(PlayerPrefs.GetFloat(USER_PREFS_SETTINGS_KEYS.MasterVolume, 1f));

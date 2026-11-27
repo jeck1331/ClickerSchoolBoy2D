@@ -2,11 +2,17 @@ using _Scripts.Models.Upgrade;
 
 public static class UpgradeEconomyService
 {
-    public static bool CanBuy(UpgradeBaseField data, UpgradeStateItem state, long score)
+    public static bool CanBuyClickUpgrade(UpgradeClickField data, UpgradeStateItem state, long score)
     {
-        return data != null && !state.IsBought && !state.IsSecret && score >= data.Price;
+        return !state.IsBought && !state.IsSecret && score >= data.Price;
     }
-    
+
+    public static bool CanBuyIncomeUpgrade(UpgradeIncomeField data, UpgradeStateItem state, long score)
+    {
+        var price = data.GetPrice(state.Count);
+        return !state.IsSecret && price.HasValue && score >= price.Value;
+    }
+
     public static bool TryBuyClickUpgrade(
         UpgradeClickField data,
         UpgradeStateItem state,
@@ -14,10 +20,10 @@ public static class UpgradeEconomyService
         UIntValue powerValue,
         UpgradeManager upgradeManager)
     {
-        if (!CanBuy(data, state, scoreValue.Value)) return false;
+        if (!CanBuyClickUpgrade(data, state, scoreValue.Value)) return false;
 
-        scoreValue.Value -= data.Price;
         state.Buy();
+        scoreValue.Value -= data.Price;
         powerValue.Value = upgradeManager.GetPowerValue();
         GameEvents.UpgradePurchased();
         return true;
@@ -30,19 +36,19 @@ public static class UpgradeEconomyService
         UIntValue incomeValue,
         ShopManager shopManager)
     {
-        if (!CanBuy(data, state, scoreValue.Value)) return false;
+        var price = data.GetPrice(state.Count);
+        if (state.IsSecret || !price.HasValue || scoreValue.Value < price.Value) return false;
 
-        scoreValue.Value -= data.Price;
         state.Buy();
+        scoreValue.Value -= price.Value;
         incomeValue.Value = shopManager.GetIncomeValue();
         GameEvents.UpgradePurchased();
         return true;
     }
-    
+
     public static void TryUnlockByPreviousId(UpgradeStateItem state, UpgradeStateItem previousState)
     {
-        if (!state.IsSecret) return;
-        if (previousState == null || previousState.IsBought)
+        if (state.IsSecret && (previousState == null || previousState.IsBought))
             state.Unsecret();
     }
 }

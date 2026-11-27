@@ -4,5 +4,6 @@ namespace _Scripts.Models.Save
     {
         public int Id;
         public bool IsBought;
+        public int Count;
     }
 }

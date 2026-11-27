@@ -6828,9 +6828,21 @@ PrefabInstance:
       value: 0.43921572
       objectReference: {fileID: 0}
     - target: {fileID: 2912645316107313248, guid: ea192f07c02851043a3dc5d4bfb3fbef, type: 3}
+      propertyPath: m_text
+      value: 1 / tap
+      objectReference: {fileID: 0}
+    - target: {fileID: 2912645316107313248, guid: ea192f07c02851043a3dc5d4bfb3fbef, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2912645316107313248, guid: ea192f07c02851043a3dc5d4bfb3fbef, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 4718bdd391305ef449f5f2f136f2400a, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2912645316107313248, guid: ea192f07c02851043a3dc5d4bfb3fbef, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2912645316107313248, guid: ea192f07c02851043a3dc5d4bfb3fbef, type: 3}
       propertyPath: m_fontColor.b
       value: 1
@@ -6844,9 +6856,25 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2912645316107313248, guid: ea192f07c02851043a3dc5d4bfb3fbef, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2912645316107313248, guid: ea192f07c02851043a3dc5d4bfb3fbef, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2912645316107313248, guid: ea192f07c02851043a3dc5d4bfb3fbef, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 5559987926979251615, guid: 4718bdd391305ef449f5f2f136f2400a, type: 2}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2912645316107313248, guid: ea192f07c02851043a3dc5d4bfb3fbef, type: 3}
+      propertyPath: m_TextWrappingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2912645316107313248, guid: ea192f07c02851043a3dc5d4bfb3fbef, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2912645316107313248, guid: ea192f07c02851043a3dc5d4bfb3fbef, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
@@ -13637,6 +13665,7 @@ GameObject:
   - component: {fileID: 1561083545}
   - component: {fileID: 1561083547}
   - component: {fileID: 1561083546}
+  - component: {fileID: 1561083548}
   m_Layer: 5
   m_Name: CPS_Title_Text
   m_TagString: Untagged
@@ -13683,7 +13712,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' /cps'
+  m_text: ' / sec'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4718bdd391305ef449f5f2f136f2400a, type: 2}
   m_sharedMaterial: {fileID: 5559987926979251615, guid: 4718bdd391305ef449f5f2f136f2400a, type: 2}
@@ -13763,6 +13792,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1561083544}
   m_CullTransparentMesh: 1
+--- !u!114 &1561083548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561083544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: " / \u0441\u0435\u043A"
+  russianFont: {fileID: 11400000, guid: 29d0971afd7114642b802ee8aecce87e, type: 2}
+  russianFontSize: 0
 --- !u!1 &1652864776
 GameObject:
   m_ObjectHideFlags: 0

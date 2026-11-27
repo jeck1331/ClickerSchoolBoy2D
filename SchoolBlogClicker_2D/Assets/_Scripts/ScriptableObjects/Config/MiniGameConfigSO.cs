@@ -29,7 +29,7 @@ public class MiniGameConfigSO : ScriptableObject
         Mathf.Max(0.1f, circleLifetime.x), Mathf.Max(0.1f, Mathf.Max(circleLifetime.x, circleLifetime.y)));
     public float WarningAnimationStartNormalized => Mathf.Clamp01(warningAnimationStartNormalized);
 
-    public long CalculateReward(int clickPower, float reactionTime)
+    public long CalculateReward(float clickPower, float reactionTime)
     {
         var normalized = Mathf.Clamp01(reactionTime / CircleLifetime);
         var multiplier = Mathf.Lerp(maxRewardMultiplier, minRewardMultiplier, normalized);

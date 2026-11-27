@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class UpgradeManager: MonoBehaviour
 {
+    public event System.Action UpgradesReset;
+
     private Dictionary<int, UpgradeStateItem> upgradeStates = new();
     [SerializeField] private UpgradeClickItemSO upgradeData;
     [SerializeField] private Scrollbar _scrollbar;
@@ -48,7 +50,7 @@ public class UpgradeManager: MonoBehaviour
         {
             var isBought = savedById.TryGetValue(item.Id, out var saved) && saved.IsBought;
             //Not secret if it's the first upgrade, or the previous one is already bought
-            var isSecret = !previousBought;
+            var isSecret = !previousBought && !isBought;
 
             var sui = new UpgradeStateItem(item.Id, isBought, isSecret);
             upgradeStates.TryAdd(item.Id, sui);
@@ -80,5 +82,7 @@ public class UpgradeManager: MonoBehaviour
         {
             upgradeStateItem.Value.Reset();
         }
+
+        UpgradesReset?.Invoke();
     }
 }

@@ -7,5 +7,6 @@ namespace _Scripts.Models.Enums
     {
         Add,
         Multiply,
+        SetBonus,
     }
 }

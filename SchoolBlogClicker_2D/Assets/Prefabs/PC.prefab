@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 3636166925820647069}
   - component: {fileID: 2387069785852232755}
   - component: {fileID: 3434022675717789371}
+  - component: {fileID: 139912218346102967}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -456,6 +457,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &139912218346102967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4403159190099142642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: "\u041F\u043E\u0439\u043C\u0430\u0439 \u043A\u0440\u043E\u0442\u0430"
+  russianFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
 --- !u!1 &4416742713956706921
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,6 +1235,7 @@ GameObject:
   - component: {fileID: 6816277969382618922}
   - component: {fileID: 2574068993395057724}
   - component: {fileID: 1651114634085233555}
+  - component: {fileID: 6132312685582092968}
   m_Layer: 5
   m_Name: TitlePC
   m_TagString: Untagged
@@ -1346,6 +1362,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6132312685582092968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6904721034055170016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: "\u041A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440"
+  russianFont: {fileID: 11400000, guid: 29d0971afd7114642b802ee8aecce87e, type: 2}
 --- !u!1 &7220877148204115004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,6 +1521,7 @@ GameObject:
   - component: {fileID: 1731380503510055461}
   - component: {fileID: 5013628815623022491}
   - component: {fileID: 1023336448644832549}
+  - component: {fileID: 1273375962842142018}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1617,6 +1648,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1273375962842142018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261327892125158613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: "\u0424\u0440\u0443\u043A\u0442\u043E\u0432\u0430\u044F \u0448\u043A\u043E\u043B\u0430"
+  russianFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
 --- !u!1 &7653120936074832681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,6 +1748,7 @@ GameObject:
   - component: {fileID: 4811415767369092781}
   - component: {fileID: 6343763873560712129}
   - component: {fileID: 3461018047932672985}
+  - component: {fileID: 272792373172009953}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1829,6 +1875,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &272792373172009953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8211526019626051263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: "\u041F\u043E\u043F-\u0438\u0442"
+  russianFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
 --- !u!1 &8952872477304481956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,6 +1900,7 @@ GameObject:
   - component: {fileID: 2664899802568454118}
   - component: {fileID: 5034037463856046513}
   - component: {fileID: 1884092569277832776}
+  - component: {fileID: 5291811080751002923}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1966,3 +2027,17 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5291811080751002923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8952872477304481956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4525367449758a4381b3a82b6e111ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedLabel
+  russian: "\u041B\u0435\u0442\u0443\u0447\u0438\u0439 \u043F\u0438\u043D\u0433\u0432\u0438\u043D"
+  russianFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}

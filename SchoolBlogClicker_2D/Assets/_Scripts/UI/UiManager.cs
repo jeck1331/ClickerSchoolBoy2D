@@ -59,12 +59,19 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
     
     private void UpdatePowerText()
     {
-        powerText.text = clickPower.Value.ToString();
+        powerText.text = $"{GameText.Number(clickPower.CoinValue)}{GameText.Choose(" / tap", " / клик")}";
     }
     
     private void UpdateIncomeText()
     {
-        passiveIncomeText.text = incomePower.Value.ToString();
+        passiveIncomeText.text = GameText.Number(incomePower.CoinValue);
+    }
+
+    private void RefreshLanguage()
+    {
+        coinsText.text = score.Value.ScoreViewFromNumber();
+        UpdatePowerText();
+        UpdateIncomeText();
     }
 
     public void ResetCount()
@@ -79,7 +86,7 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
 
     public void Downgrade()
     {
-        clickPower.Value = clickPower.Value > 1 ? clickPower.Value / 2 : clickPower.Value;
+        clickPower.Value = System.Math.Max(_Scripts.Core.CalcCacheHelper.StartingPower, clickPower.Value / 2);
     }
 
     public void OpenSettings()
@@ -137,6 +144,7 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
     void ISubscribe.Subscribes()
     {
         scoreObserver.OnValueChanged += UpdateTextCoinsText;
+        SettingsService.LanguageChanged += RefreshLanguage;
         clickPowerObserver.OnValueChanged += UpdatePowerText;
         incomePowerObserver.OnValueChanged += UpdateIncomeText;
     }
@@ -144,6 +152,7 @@ public class UiManager : MonoBehaviour, ISubscribe, IInitialize
     void ISubscribe.Unsubscribes()
     {
         scoreObserver.OnValueChanged -= UpdateTextCoinsText;
+        SettingsService.LanguageChanged -= RefreshLanguage;
         clickPowerObserver.OnValueChanged -= UpdatePowerText;
         incomePowerObserver.OnValueChanged -= UpdateIncomeText;
     }

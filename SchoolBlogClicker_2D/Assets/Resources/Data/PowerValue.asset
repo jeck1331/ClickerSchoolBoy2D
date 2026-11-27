@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6258f37c64074cebbc3e509c1642cc15, type: 3}
   m_Name: PowerValue
   m_EditorClassIdentifier: Assembly-CSharp::UIntValue
-  value: 1
+  value: 100
   observers:
   - {fileID: 11400000, guid: c10945c8d75aa964d8cb2a2b6bea7dcf, type: 2}

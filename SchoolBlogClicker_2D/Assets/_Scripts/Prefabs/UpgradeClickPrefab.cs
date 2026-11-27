@@ -1,4 +1,6 @@
+using _Scripts.Core;
 using _Scripts.Models.Upgrade;
+using _Scripts.Models.Enums;
 using TMPro;
 using UnityEngine;
 
@@ -18,40 +20,45 @@ namespace _Scripts.Prefabs
             previousState = previousStateItem;
             manager = upgradeManager;
 
-            titleText.text = data.Title;
-            descriptionText.text = data.Description;
-            powerText.text = data.Power.ToString();
-
-            CheckSecretState();
-            UpdateStateButton();
+            RefreshPurchaseState();
             scoreObserver.OnValueChanged += UpdateStateButton;
-            powerObserver.OnValueChanged += UpdateStateButton;
-            powerObserver.OnValueChanged += CheckSecretState;
+            powerObserver.OnValueChanged += RefreshPurchaseState;
+            SettingsService.LanguageChanged += RefreshPurchaseState;
         }
 
 
         protected override void UpdateStateButton()
         {
-            _button.interactable = UpgradeEconomyService.CanBuy(_data, state, scoreValue.Value);
+            _button.interactable = UpgradeEconomyService.CanBuyClickUpgrade(_data, state, scoreValue.Value);
         }
 
-        private void CheckSecretState()
+        private void RefreshPurchaseState()
         {
             if (state.IsSecret)
                 UpgradeEconomyService.TryUnlockByPreviousId(state, previousState);
 
             UpdateStateTexts();
+            UpdateStateButton();
         }
 
         private void UpdateStateTexts()
         {
             bool isSecret = state.IsSecret;
-            bool isBought = state.IsBought;
-
-            _image.material = isSecret ? matSecretField : null;
-            priceText.text = isSecret ? "???" : isBought ? "Куплено" : _data.Price.ToString();
-            powerText.text = isSecret ? "???" : _data.Power.ToString();
-            descriptionText.text = isSecret ? string.Empty : _data.Description;
+            var localized = GameText.Upgrade(_data.Id, false);
+            titleText.text = localized?.Title ?? _data.Title;
+            priceText.text = isSecret ? GameText.Choose("Locked", "Закрыто") : GameText.Buy(_data.Price.ToString());
+            int current = powerValue.Value;
+            int next = _data.CalcType switch
+            {
+                ClickCalcType.Add => current + _data.Power,
+                ClickCalcType.Multiply => current * _data.Power,
+                _ => CalcCacheHelper.StartingPower + _data.Power
+            };
+            powerText.text = isSecret ? string.Empty
+                : $"{GameText.Number(UIntValue.ToCoins(current))} → {GameText.Number(UIntValue.ToCoins(next))}{GameText.Choose(" / tap", " / клик")}";
+            descriptionText.text = isSecret
+                ? GameText.Choose("Buy the previous upgrade", "Купи предыдущее улучшение")
+                : localized?.Description ?? _data.Description;
         }
 
         // private void OnDestroy()
@@ -64,14 +71,17 @@ namespace _Scripts.Prefabs
         {
             // Debug.Log($"CLICK {name}: Откерпил события");
             scoreObserver.OnValueChanged -= UpdateStateButton;
-            powerObserver.OnValueChanged -= UpdateStateButton;
-            powerObserver.OnValueChanged -= CheckSecretState;
+            powerObserver.OnValueChanged -= RefreshPurchaseState;
+            SettingsService.LanguageChanged -= RefreshPurchaseState;
         }
 
         public override void OnBuyEvent()
         {
-            if (UpgradeEconomyService.TryBuyClickUpgrade(_data, state, scoreValue, powerValue, manager))
-                AudioManager.Instance?.PlaySfx(SfxType.UpgradeBuy);
+            if (!UpgradeEconomyService.TryBuyClickUpgrade(_data, state, scoreValue, powerValue, manager))
+                return;
+
+            gameObject.SetActive(false);
+            AudioManager.Instance?.PlaySfx(SfxType.UpgradeBuy);
         }
     }
 }

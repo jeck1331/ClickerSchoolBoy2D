@@ -223,7 +223,7 @@ public class MiniGameSystem : MonoBehaviour
         _roundHits++;
         // Compare reaction speed against this circle's own, progressively shorter lifetime.
         var reactionTime = (Time.time - circle.SpawnTime) / circle.Lifetime * miniGameConfig.CircleLifetime;
-        var reward = miniGameConfig.CalculateReward(clickPowerValue.Value, reactionTime);
+        var reward = miniGameConfig.CalculateReward((float)clickPowerValue.CoinValue, reactionTime);
         scoreValue.Value += reward;
         if (miniGameHitVfx != null)
         {

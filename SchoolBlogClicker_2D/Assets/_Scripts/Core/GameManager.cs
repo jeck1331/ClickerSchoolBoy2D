@@ -6,7 +6,10 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>, IInitialize
 {
     private SaveGameSystem _saveGameSystem;
-    private bool _isIncomeStarted = false;
+    private int coinRemainder;
+    private int incomeRate;
+    private double lastIncomeTime;
+    private double pendingIncomeUnits;
     [CanBeNull] private Coroutine _autoSaveCoroutine;
     [CanBeNull] private Coroutine _incomeCoroutine;
 
@@ -32,6 +35,7 @@ public class GameManager : Singleton<GameManager>, IInitialize
         shopManager.FillDataFromSave(rgd.UpgradeIncomeTree);
         upgradeManager.FillDataFromSave(rgd.UpgradeClickTree);
         
+        coinRemainder = System.Math.Clamp(rgd.CoinRemainder, 0, UIntValue.UnitsPerCoin - 1);
         scoreValue.Value = rgd.Coins;
         powerValue.Value = upgradeManager.GetPowerValue();
         incomeValue.Value = shopManager.GetIncomeValue();
@@ -40,6 +44,8 @@ public class GameManager : Singleton<GameManager>, IInitialize
     private SavedGameData CurrentGameData() => new SavedGameData
     {
         Coins = scoreValue.Value,
+        CoinRemainder = coinRemainder,
+        CoinRemainderScale = UIntValue.UnitsPerCoin,
         UpgradeClickTree = upgradeManager.GetDataToSave(),
         UpgradeIncomeTree = shopManager.GetDataToSave()
     };
@@ -58,11 +64,11 @@ public class GameManager : Singleton<GameManager>, IInitialize
     
     private IEnumerator Income_Coroutine()
     {
+        var interval = new WaitForSeconds(0.2f);
         while (true)
         {
-            yield return new WaitForSeconds(1);
-        
-            scoreValue.Value += incomeValue.Value;
+            yield return interval;
+            CreditIncomeUntil(Time.timeAsDouble);
         }
     }
 
@@ -81,22 +87,28 @@ public class GameManager : Singleton<GameManager>, IInitialize
 
     private void IncomeUpdate()
     {
-        if (!_isIncomeStarted && incomeValue.Value > 0)
-        {
-            _isIncomeStarted = true;
+        CreditIncomeUntil(Time.timeAsDouble);
+        incomeRate = incomeValue.Value;
+        if (incomeRate > 0 && _incomeCoroutine == null)
             _incomeCoroutine = StartCoroutine(Income_Coroutine());
-        }
-        else if (_isIncomeStarted && incomeValue.Value == 0 && _incomeCoroutine != null)
+        else if (incomeRate == 0 && _incomeCoroutine != null)
         {
             StopCoroutine(_incomeCoroutine);
             _incomeCoroutine = null;
-            _isIncomeStarted = false;
         }
     }
 
-    private void ScoreUpdate()
+    private void CreditIncomeUntil(double now)
     {
-        
+        if (incomeRate > 0)
+            pendingIncomeUnits += incomeRate * (now - lastIncomeTime);
+
+        lastIncomeTime = now;
+        long earnedUnits = (long)pendingIncomeUnits;
+        if (earnedUnits == 0) return;
+
+        pendingIncomeUnits -= earnedUnits;
+        EarnCoinUnits(earnedUnits);
     }
     
     private void OnDisable()
@@ -106,14 +118,32 @@ public class GameManager : Singleton<GameManager>, IInitialize
         if (_autoSaveCoroutine != null)
             StopCoroutine(_autoSaveCoroutine);
         if (_incomeCoroutine != null)
+        {
             StopCoroutine(_incomeCoroutine);
-        _isIncomeStarted = false;
+            _incomeCoroutine = null;
+        }
+
+        CreditIncomeUntil(Time.timeAsDouble);
+        incomeRate = 0;
         
         _saveGameSystem.Save(CurrentGameData());
     }
 
+    public long EarnCoinUnits(long units)
+    {
+        int remainder = coinRemainder + (int)(units % UIntValue.UnitsPerCoin);
+        long coins = units / UIntValue.UnitsPerCoin + remainder / UIntValue.UnitsPerCoin;
+        coinRemainder = remainder % UIntValue.UnitsPerCoin;
+        long credited = System.Math.Min(coins, long.MaxValue - System.Math.Max(0, scoreValue.Value));
+        scoreValue.Value += credited;
+        return credited;
+    }
+
     public void ResetData()
     {
+        incomeRate = 0;
+        pendingIncomeUnits = 0;
+        coinRemainder = 0;
         scoreValue.Value = 0;
         shopManager.Reset();
         upgradeManager.Reset();
